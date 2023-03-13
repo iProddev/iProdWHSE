@@ -666,8 +666,8 @@ namespace iProdWHSE
             {
                 
                 WriteToEventLog(mainForm, "httpGet API: " + APIurl);
-                content = await httpClient.GetAsync(APIurl);
-                resp = await content.Content.ReadAsStringAsync();
+                content = await httpClient.GetAsync(APIurl).ConfigureAwait(false);
+                resp = await content.Content.ReadAsStringAsync().ConfigureAwait(false); ;
                 if (content.StatusCode != isOk)
                 {
 
@@ -4160,16 +4160,18 @@ namespace iProdWHSE
 
         public RowHist(string st)
         {
+            try
+            {
+                var ar = st.Split(';');
 
-            var ar = st.Split(';');
+                DateTime.TryParse(ar[2], out DateTime d);
 
-            DateTime.TryParse(ar[2], out DateTime d);
-
-            idx = UT.ToInt(ar[0]);
-            Tipo = ar[1];
-            Data = d;
-            Dex = ar[3];
-
+                idx = UT.ToInt(ar[0]);
+                Tipo = ar[1];
+                Data = d;
+                Dex = ar[3];
+            }
+            catch { }
         }
 
     }

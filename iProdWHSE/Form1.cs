@@ -687,22 +687,26 @@ namespace iProdWHSE
                 {
                     // li converto in SOAP AMDTypeV01 e li restituisco al chiamante
 
-                    var articles = JsonConvert.DeserializeObject<List<RESTStock>>(ret.response);
-
+                    var articles = JsonConvert.DeserializeObject<warehousedata>(ret.response);
+                    log("Initializing AMDTypeV01");
                     var amd = new List<myNameSpace.AMDTypeV01>();
 
-                    foreach (var art in articles)
+
+                    log("Before Location Article Cycle");
+                    foreach (var art in articles.locationarticle)                    
                     {
                         var e  = new myNameSpace.AMDTypeV01();
-                        e.articleNumber = art.idArticle;
+                        e.articleNumber = art.idArticle.ToString();
                         e.articleName = art.articleNumber;
                         e.inventoryAtStorageLocation = art.availableQuantity.ToString("N3");
                         amd.Add(e);
-
                         log($"{e.articleNumber} {e.articleName} = {e.inventoryAtStorageLocation}", false);
 
                     }
-
+                    if (resp.@return == null)
+                    {
+                        resp.@return = new myNameSpace.RetReadAllAMDV01();
+                    }
                     resp.@return.returnValue = 1;
                     resp.@return.article = amd.ToArray();
 
@@ -717,7 +721,7 @@ namespace iProdWHSE
             catch (Exception ex)
             {
 
-                sm = log($"BAD REQUEST  Rilevata eccezione: {ex.Message}.");
+                sm = log($"BAD REQUEST  Rilevata eccezione: {ex.Message + " " +  ex.StackTrace}.");
                 UT.AddRowHist("STOCK-ERR", sm);
                 return resp;
             }
@@ -1349,7 +1353,7 @@ namespace iProdWHSE
                                     UT.AddRowHist("STOCK", sm);
                                     rigo.balance = LrcQty;
                                     rigo.inventory = true;
-                                    rigo.lastupdate = DateTime.Now.Date;
+                                    rigo.lastupdate = DateTime.UtcNow.Date;
 
                                     saveItem(itm);
                                     continue;

@@ -22,6 +22,7 @@ using Newtonsoft.Json;
 using System.Security.Policy;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Collections;
 //using Newtonsoft.Json;
 
 namespace iProdWHSE
@@ -149,7 +150,7 @@ namespace iProdWHSE
                     WSClient.DefaultRequestHeaders.ConnectionClose = true;
                     WSClient.Timeout = new TimeSpan(0, 0, 15);
                     WSClient.BaseAddress = new Uri(BindingEndPoint);
-
+                    WSClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.ASCIIEncoding.UTF8.GetBytes("iotuser:iotuser")));
                     log($"ConnectToWS->WSClient('{BindingEndPoint}'");
                  
                     UT.WSConnected = true;
@@ -763,20 +764,23 @@ namespace iProdWHSE
 
     public class RESTStock
     {
-        public string idArticle { get; set; }
         public string articleNumber { get; set; }
-        public double availableQuantity { get; set; }
-        public double reservedQuantity { get; set; }
-        public double currentQuantity { get; set; }
-        public double maxQuantit { get; set; }
-        public double reorderQuantity { get; set; }
-        public double criticalQuantity { get; set; }
-        public double warningQuantity { get; set; }
+        public int availableQuantity { get; set; }
+        public int criticalQuantity { get; set; }
+        public int currentQuantity { get; set; }
+        public int idArticle { get; set; }
+        public int maxQuantity { get; set; }
+        public int reorderQuantity { get; set; }
+        public int reservedQuantity { get; set; }
+        public int warningQuantity { get; set; }
 
     }
 
 
-
+    public class warehousedata
+    {
+        public List<RESTStock> locationarticle { get; set; }
+    }
 
     /// <summary>
     /// Oggetto che sta tra la richiesta in arrivo dai tablet e il response che gli dobbiamo restituire. Usato anche per lo stato del Ping MP
