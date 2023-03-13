@@ -1,0 +1,132 @@
+      void checkStockIprod(myNameSpace.AMDTypeV01[] arts)
+        {
+            try
+            {
+                var sm = "";
+                sm = log($"Entering in checkStockiProd(AMDTypeV01[] arts)"); // i {arts.Length} prodotti trovati.");
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return;
+
+                if (arts is null)
+                {
+                    sm = log($"Error: AMDTypeV01[] arts passed as Null. Aborted."); // i {arts.Length} prodotti trovati.");
+                    if (VerboseMax)
+                        if (!UT.Ask(sm)) return;
+                    return;
+                }
+
+                var ora = DateTime.UtcNow;
+                var rigo = new stockdata();
+
+                sm = log($"Dump di {arts.Length} prodotti trovati.");
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return;
+
+                var u = 0;
+                foreach (var e in arts)
+                {
+                    u++;
+                    var LrcQty = Convert.ToDouble(e.inventoryAtStorageLocation);
+                    var itm = iprod_items.FirstOrDefault(a => a.code == e.articleNumber || a.name == e.articleName
+                                                      || a.name == e.articleNumber || a.code == e.articleName);
+                    rigo = null;
+                    if (itm != null)
+                    {
+                        if (itm.stockinformation is null) itm.stockinformation = new List<stockdata>();
+                        var stocks = itm.stockinformation;
+
+                        if (stocks.Count == 0)
+                        {
+                            sm = log($"item n.{u}-{e.articleNumber} è senza movimenti. Aggiunta la prima giacenza di {LrcQty:#00,000} unità");
+                            itm.stockinformation.Add(newStockObj(LrcQty));
+                            saveItem(itm);
+                            continue;
+                        }
+                        else
+                        {
+                            bool equal = false;
+                            bool found = false;
+                            foreach (var stock in stocks)
+                            {
+                                equal = false;
+                                if (stock.date.Date == ora.Date)
+                                {
+                                    rigo = stock;
+                                    equal = true;
+                                    break;
+                                }
+                                if (stock.date.Date > ora.Date)
+                                {
+                                    if (rigo is null) rigo = stock; // c'è un solo stock (rigo null) e successivo ad oggi.
+                                    found = true;
+                                    break; // la data supera oggi, il rigo prec è quello da comparare
+                                }
+                                rigo = stock;
+                            }
+
+                            if (rigo != null)
+                            {
+                                if (equal && LrcQty != rigo.balance)
+                                {
+                                    log($"item n.{u}-{e.articleNumber} da allineare: giacenze iProd={rigo.balance:#00,000} contro le {LrcQty:#00,000} unità su MP");
+                                    rigo.balance = LrcQty;
+                                    rigo.inventory = true;
+                                    rigo.lastupdate = DateTime.Now.Date;
+
+                                    saveItem(itm);
+                                    continue;
+                                }
+
+                                if (found && LrcQty == rigo.balance)
+                                {
+                                    log($"item n.{u}-{e.articleNumber} skipped: le giacenze di MP e di iProd sono allineate ({LrcQty:#00,000} unità)");
+                                    continue; // sono uguali, non deve fare niente 
+                                }
+
+                                if (found && LrcQty != rigo.balance)
+                                {
+                                    log($"item n.{u}-{e.articleNumber} da allineare: giacenze iProd={rigo.balance:#00,000} contro le {LrcQty:#00,000} unità su MP");
+                                    itm.stockinformation.Add(newStockObj(LrcQty)); // aggiunge lo stock ad oggi
+                                    saveItem(itm);
+                                    continue;
+                                }
+                                if (!found) // caso 3: tutte le date sono inferirio ad oggi, deve inserire la giacenza
+                                {
+                                    log($"item n.{u}-{e.articleNumber} da allineare: le giacenze di iProd son retrodatate, aggiungiamo le {LrcQty:#00,000} unità di MP");
+                                    itm.stockinformation.Add(newStockObj(LrcQty)); // aggiunge lo stock ad oggi
+                                    saveItem(itm);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        sm = log($"Attenzione: l'articolo {e.articleNumber} - {e.articleName}  proveniente da MP non fa parte dei prodotti iProd.");
+                        if (VerboseMax)
+                            if (!UT.Ask(sm)) return;
+
+
+                        //itm = new Items
+                        //{
+                        //    //_id = MongoDB.Bson.ObjectId.GenerateNewId().ToString(),
+                        //    //creationDate = DateTime.UtcNow,
+                        //    //lastUpdate = DateTime.UtcNow,
+                        //    code = e.articleNumber,
+                        //    name = e.articleName
+                        //};
+
+                        //itm.stockinformation.Add(newStockObj(LrcQty)); // aggiunge lo stock ad oggi
+                        //saveItem(itm);
+                    }
+
+                }
+
+                log("checkStockiProd completata.");
+            }
+            catch (Exception ex)
+            {
+                var sm = log("Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return;
+            }
+        }

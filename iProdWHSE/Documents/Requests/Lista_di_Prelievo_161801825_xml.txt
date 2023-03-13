@@ -1,0 +1,1 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd"> <soapenv:Header/> <soapenv:Body> <main:sendJobsReqV01> <main:param>	<xsd:job><xsd:jobNumber>Francesco </xsd:jobNumber></xsd:job> </main:param> </main:sendJobsReqV01> </soapenv:Body></soapenv:Envelope>

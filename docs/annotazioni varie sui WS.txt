@@ -1,0 +1,33 @@
+
+readAllAMDV01Request ??
+
+Invio anagrafica
+	sendAPDReqV01
+		CodArt, Dex
+
+Richiesta Giacenze
+	ReadAllAMDReqV01
+
+Risposta
+	ReadAllAMDResV01
+codArt,Dex,numMag,numcassetto,posizX,posizY,dimensione,valorizzazioneFifo,Qta,QtaMinima
+
+
+
+LISTA PRELIEVO
+
+sendJobsReqV01
+	nomeLista,CodArt,TipoMov,QtaRichiesta
+
+Risposta
+sendJobsResV01
+1
+
+
+
+
+
+/mockComSoap11Binding:8088
+
+nome 
+ComSoap11Binding MockService

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="iProdWHSE.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="managermodeName" Type="System.Windows.Forms.ToolStripRenderMode" Scope="User">
+      <Value Profile="(Default)">ManagerRenderMode</Value>
+    </Setting>
+    <Setting Name="nameapp" Type="System.Windows.Forms.ToolStripRenderMode" Scope="Application">
+      <Value Profile="(Default)">ManagerRenderMode</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

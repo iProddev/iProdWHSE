@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+	<ns2:sendJobsResV01 xmlns:ns2="http://main.jws.com.hanel.de">
+		<ns2:return>
+	 		<ns1:returnValue xmlns:ns1="http://main.jws.com.hanel.de/xsd">0</ns1:returnValue>
+		</ns2:return>
+	</ns2:sendJobsResV01>
+   </soapenv:Body>
+</soapenv:Envelope>

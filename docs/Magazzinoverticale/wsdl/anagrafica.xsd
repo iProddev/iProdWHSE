@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+ <soapenv:Header/>
+ <soapenv:Body>
+ <main:sendAPDReqV01>
+ <main:param>
+ <xsd:articlePoolDataRecord>
+ <xsd:articleNumber>ARTICOLO5</xsd:articleNumber> <!--CODICE--> 
+ <xsd:articleName>PLUTO23</xsd:articleName> <!--DESCRIZIONE-->
+ </xsd:articlePoolDataRecord>
+ </main:param>
+ </main:sendAPDReqV01>
+ </soapenv:Body>
+</soapenv:Envelope>

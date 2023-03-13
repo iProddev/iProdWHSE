@@ -1,0 +1,13 @@
+#  Opzioni Lireco salvate il 13/07/2021 13:19:39 
+ 
+#endpoint-iprod;https://iprod-test.azurewebsites.net/api/
+
+endpoint-iprod;https://localhost:44375/api/
+endpoint-lireco;http://localhost:8080/jwscom/services/Com.ComHttpSoap11Endpoint
+pathlog;C:\Xipe2iProdAgent\LirecoDati
+loginatstartup;false
+timerinterval;3600
+timeridle-from;19
+timeridle-to;09
+lastmailsent;07/07/2021 13:19:39
+mailnotifiche;fabio.guerrazzi@iprod.it

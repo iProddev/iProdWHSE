@@ -1,0 +1,141 @@
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <ns2:readAllJobsResV01 xmlns:ns2="http://main.jws.com.hanel.de">
+        <ns2:return>
+        <job xmlns="http://main.jws.com.hanel.de/xsd">
+            <jobNumber>COMM1</jobNumber><!--NUMERO LISTA-->
+            <jobPriority>100</jobPriority><!--PRIORITA’-->
+            <jobStatus>3</jobStatus><!--STATO-->
+            <jobDate>110220</jobDate><!--DATA-->
+            <jobTime>1532</jobTime><!--ORA-->
+            <JobPosition>
+                <articleNumber>?</articleNumber>	<!--CODICE-->
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>	<!--QUANTITA’ RICHIESTA-->
+                <actualQuantity>10</actualQuantity>	<!--QUANTIT’ MOVIMENTATA-->
+                <containerSize>101</containerSize>	<!--DIMENSIONE-->
+                <positionStatus>1</positionStatus>	<!--STATO DELLA POSIZIONE-->
+            </JobPosition>
+        </job>
+        <job xmlns="http://main.jws.com.hanel.de/xsd">
+            <jobNumber>COMM2</jobNumber>
+            <jobPriority>100</jobPriority>
+            <jobStatus>0</jobStatus>
+            <jobDate>110220</jobDate>
+            <jobTime>1404</jobTime>
+            <JobPosition>
+                <articleNumber>ARTICOLO1</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+        </job>
+        <job xmlns="http://main.jws.com.hanel.de/xsd">
+            <jobNumber>COMM3</jobNumber>
+            <jobPriority>100</jobPriority>
+            <jobStatus>0</jobStatus>
+            <jobDate>110220</jobDate>
+            <jobTime>1410</jobTime>
+            <JobPosition>
+                <articleNumber>ARTICOLO1</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+            <JobPosition>
+                <articleNumber>ARTICOLO2</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+        </job>
+        <job xmlns="http://main.jws.com.hanel.de/xsd">
+            <jobNumber>COMM4</jobNumber>
+            <jobPriority>100</jobPriority>
+            <jobStatus>0</jobStatus>
+            <jobDate>110220</jobDate>
+            <jobTime>1411</jobTime>
+            <JobPosition>
+                <articleNumber>ARTICOLO1</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+            <JobPosition>
+                <articleNumber>ARTICOLO2</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+        </job>
+        <job xmlns="http://main.jws.com.hanel.de/xsd">
+            <jobNumber>COMM5</jobNumber>
+            <jobPriority>100</jobPriority>
+            <jobStatus>0</jobStatus>
+            <jobDate>110220</jobDate>
+            <jobTime>1412</jobTime>
+            <JobPosition>
+                <articleNumber>ARTICOLO1</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+            <JobPosition>
+                <articleNumber>ARTICOLO2</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+            <JobPosition>
+                <articleNumber>ARTICOLO3</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+            <JobPosition>
+                <articleNumber>ARTICOLO1</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+            <JobPosition>
+                <articleNumber>ARTICOLO2</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+            <JobPosition>
+                <articleNumber>ARTICOLO3</articleNumber>
+                <operation>+</operation>
+                <nominalQuantity>10</nominalQuantity>
+                <actualQuantity>0</actualQuantity>
+                <containerSize>101</containerSize>
+                <positionStatus>0</positionStatus>
+            </JobPosition>
+        </job>
+        <ns1:returnValue xmlns:ns1="http://main.jws.com.hanel.de/xsd">0</ns1:returnValue>
+        </ns2:return>
+        </ns2:readAllJobsResV01>
+    </soapenv:Body>
+</soapenv:Envelope>

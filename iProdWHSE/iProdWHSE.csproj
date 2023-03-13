@@ -1,0 +1,526 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C5C76165-87C0-4512-B1EA-E03423463DC0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>iProdWHSE</RootNamespace>
+    <AssemblyName>iProdWHSE</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>M%40V_Icon_Black.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.25.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.25.0\lib\net461\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Storage.Blobs, Version=12.14.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Storage.Blobs.12.14.1\lib\netstandard2.0\Azure.Storage.Blobs.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Storage.Common, Version=12.13.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Storage.Common.12.13.0\lib\netstandard2.0\Azure.Storage.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DnsClient, Version=1.6.0.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsClient.1.6.0\lib\net471\DnsClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.15.0\lib\net472\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.15.0\lib\net472\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.15.0\lib\net472\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Libmongocrypt, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Libmongocrypt.1.3.0\lib\net472\MongoDB.Libmongocrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpCompress, Version=0.30.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.30.1\lib\net461\SharpCompress.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.6.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.6.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Hashing, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Hashing.6.0.0\lib\net461\System.IO.Hashing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.6.0.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.5.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.2\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AgentHelper.cs" />
+    <Compile Include="Connected Services\iProdWHSE\Reference.cs" />
+    <Compile Include="Connected Services\iProdWHSE\Reference1.cs" />
+    <Compile Include="Connected Services\iProdWHSE\Reference2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbout.designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAiuto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAiuto.designer.cs">
+      <DependentUpon>frmAiuto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTerms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTerms.designer.cs">
+      <DependentUpon>frmTerms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MockHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Splash.designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="utility.cs" />
+    <Compile Include="WHSEInfo.cs" />
+    <Compile Include="WSDL.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAiuto.resx">
+      <DependentUpon>frmAiuto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTerms.resx">
+      <DependentUpon>frmTerms.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Connected Services\iProdWHSE\com.wsdl" />
+    <None Include="Core\Compression\Snappy\lib\linux\libsnappy64.so" />
+    <None Include="Core\Compression\Snappy\lib\osx\libsnappy64.dylib" />
+    <None Include="Core\Compression\Zstandard\lib\linux\libzstd.so" />
+    <None Include="Core\Compression\Zstandard\lib\osx\libzstd.dylib" />
+    <None Include="Documents\Magazzinoverticale\campi dati full.pdf" />
+    <None Include="Documents\Magazzinoverticale\COMM1+.job" />
+    <None Include="Documents\Magazzinoverticale\COMM1-.job" />
+    <None Include="Documents\Magazzinoverticale\ritorno_liste.job" />
+    <None Include="Documents\Magazzinoverticale\t-Server.it.pdf" />
+    <None Include="Documents\Magazzinoverticale\WEB_SERVICE_ESEMPI.pdf" />
+    <None Include="Documents\Requests\sample_request.wsdl" />
+    <None Include="libmongocrypt.dylib" />
+    <None Include="libmongocrypt.so" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="terms.rtf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Connected Services\iProdWHSE\configuration.svcinfo" />
+    <Content Include="Connected Services\iProdWHSE\configuration91.svcinfo" />
+    <Content Include="Connected Services\iProdWHSE\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference2.cs</LastGenOutput>
+    </Content>
+    <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
+    <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
+    <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
+    <Content Include="Documents\config.txt" />
+    <Content Include="Documents\help-giacenze.txt" />
+    <Content Include="Documents\Magazzinoverticale\mail_a_amedeo.txt" />
+    <Content Include="Documents\Magazzinoverticale\prova_anag_.txt" />
+    <Content Include="Documents\Magazzinoverticale\schemas.xmlsoap.org.xml" />
+    <Content Include="Documents\Requests\Giacenze_102252960_xml.txt" />
+    <Content Include="Documents\Requests\Invio_Anagrafica_115713707.xml" />
+    <Content Include="Documents\Requests\Invio_Anagrafica_115713707_xml.txt" />
+    <Content Include="Documents\Requests\Lista_di_Prelievo_161801825_xml.txt" />
+    <Content Include="Documents\Requests\Lista_di_Prelievo_174257899_xml.txt" />
+    <Content Include="Documents\Requests\Lista_di_Prelievo_174444420_xml.txt" />
+    <Content Include="Documents\Requests\Lista_di_Prelievo_174543418.xml" />
+    <Content Include="Documents\Requests\Lista_di_Prelievo_174543418_xml.txt" />
+    <Content Include="Documents\Responses\sample_giacenze.txt" />
+    <Content Include="Documents\Responses\sample_giacenze.txt_IPROD_2317526.xml" />
+    <Content Include="Documents\Responses\sample_lista_prelievi.txt" />
+    <Content Include="Documents\Responses\sample_ordini_elaborati.txt" />
+    <Content Include="Documents\Responses\sample_tutti_ordini.txt" />
+    <Content Include="Documents\Responses\xml-parser-examples.txt" />
+    <Content Include="Documents\stockInfo_Lireco.txt" />
+    <Content Include="Documents\utenti.txt" />
+    <Content Include="Documents\XmlTemplates\schema_base.txt" />
+    <Content Include="Documents\XmlTemplates\schema_base_giacenze.txt" />
+    <Content Include="Documents\XmlTemplates\schema_base_lista_prelievi.txt" />
+    <Content Include="Documents\XmlTemplates\schema_base_lista_prelievi_singlejob%28NOTUSED%29.txt" />
+    <Content Include="img\Aggiuntive\set-1.png" />
+    <Content Include="img\Aggiuntive\set-2.png" />
+    <Content Include="img\Aggiuntive\set-3.png" />
+    <Content Include="img\Aggiuntive\set-4.png" />
+    <Content Include="img\Aggiuntive\set-5.png" />
+    <Content Include="img\Aggiuntive\set-6.png" />
+    <Content Include="img\btClose.png" />
+    <Content Include="img\btHelp.png" />
+    <Content Include="img\btTerms.png" />
+    <Content Include="img\icons\32 color\disabled32r.png" />
+    <Content Include="img\icons\32 color\edit-find.png" />
+    <Content Include="img\icons\32 color\x-alarm.png" />
+    <Content Include="img\icons\32 color\x-config-48.png" />
+    <Content Include="img\icons\32 color\x-err-32.png" />
+    <Content Include="img\icons\32 color\x-Err.png" />
+    <Content Include="img\icons\32 color\x-err2-32.png" />
+    <Content Include="img\icons\32 color\x-exit-32.png" />
+    <Content Include="img\icons\32 color\x-exit-48.png" />
+    <Content Include="img\icons\32 color\x-help3.png" />
+    <Content Include="img\icons\32 color\x-ok32.png" />
+    <Content Include="img\icons\32 color\x-play.png" />
+    <Content Include="img\icons\32 color\x-ready.png" />
+    <Content Include="img\icons\32 color\x-rec-2-32.png" />
+    <Content Include="img\icons\32 color\x-Receive32.png" />
+    <Content Include="img\icons\32 color\x-recycle.png" />
+    <Content Include="img\icons\32 color\x-refresh32.png" />
+    <Content Include="img\icons\32 color\x-refresh48.png" />
+    <Content Include="img\icons\32 color\x-schedul3.png" />
+    <Content Include="img\icons\32 color\x-schedule-32-3.png" />
+    <Content Include="img\icons\32 color\x-schedule.png" />
+    <Content Include="img\icons\32 color\x-send-32.png" />
+    <Content Include="img\icons\32 color\x-send-blu32.png" />
+    <Content Include="img\icons\32 color\x-settings-32.png" />
+    <Content Include="img\icons\32 color\x-unlock.png" />
+    <Content Include="img\icons\32 color\x-user48.png" />
+    <Content Include="img\icons\32 color\x-warn4.png" />
+    <Content Include="img\icons\32 color\x-warning3.png" />
+    <Content Include="img\icons\32 color\xsettings-32.png" />
+    <Content Include="img\icons\32 color\xsettings-48.png" />
+    <Content Include="img\icons\Black\ART.png" />
+    <Content Include="img\icons\Black\BOM32.png" />
+    <Content Include="img\icons\Black\CLI32.png" />
+    <Content Include="img\icons\Black\connected32.png" />
+    <Content Include="img\icons\Black\disconnected32.png" />
+    <Content Include="img\icons\Black\lock.png" />
+    <Content Include="img\icons\Black\lock2.png" />
+    <Content Include="img\icons\Black\ODL32.png" />
+    <Content Include="img\icons\Black\PHASE32.png" />
+    <Content Include="img\icons\Black\SO32.png" />
+    <Content Include="img\icons\Black\stock16.png" />
+    <Content Include="img\icons\Black\stock32.png" />
+    <Content Include="img\icons\Black\stock48.png" />
+    <Content Include="img\icons\Black\warehouse16.png" />
+    <Content Include="img\icons\Black\warehouse32.png" />
+    <Content Include="img\icons\Black\warehouse48.png" />
+    <Content Include="img\icons\favicons\iprod16.ico" />
+    <Content Include="img\icons\favicons\iprod16.png" />
+    <Content Include="img\icons\favicons\iprod32.ico" />
+    <Content Include="img\icons\favicons\iprod32.png" />
+    <Content Include="img\icons\favicons\iprod48.ico" />
+    <Content Include="img\icons\favicons\iprod48.png" />
+    <Content Include="img\icons\favicons\iprod_favicon.ico" />
+    <Content Include="img\icons\iprod16.ico" />
+    <Content Include="img\icons\iprod16.png" />
+    <Content Include="img\icons\iprod32.ico" />
+    <Content Include="img\icons\iprod32.png" />
+    <Content Include="img\icons\iprod48.ico" />
+    <Content Include="img\icons\iprod48.png" />
+    <Content Include="img\icons\iprod_favicon.ico" />
+    <Content Include="img\icons\leds\360_F_9948775_T1ke7A7JIqKH80uuj034yPbZW1kat7aC.jpg" />
+    <Content Include="img\icons\leds\g-off-16.png" />
+    <Content Include="img\icons\leds\g-off-32.png" />
+    <Content Include="img\icons\leds\g-off-360.png" />
+    <Content Include="img\icons\leds\g-off-48.png" />
+    <Content Include="img\icons\leds\g-on-16.png" />
+    <Content Include="img\icons\leds\g-on-32.png" />
+    <Content Include="img\icons\leds\g-on-360.png" />
+    <Content Include="img\icons\leds\g-on-48.png" />
+    <Content Include="img\icons\leds\png-transparent-red-light-effect-element-red-fresh-light.png" />
+    <Content Include="img\icons\leds\png-transparent-sun-light-red-cool-light.png" />
+    <Content Include="img\icons\leds\r-off-16.png" />
+    <Content Include="img\icons\leds\r-off-32.png" />
+    <Content Include="img\icons\leds\r-off-48.png" />
+    <Content Include="img\icons\leds\r-off-750.png" />
+    <Content Include="img\icons\leds\r-on-16.png" />
+    <Content Include="img\icons\leds\r-on-32.png" />
+    <Content Include="img\icons\leds\r-on-48.png" />
+    <Content Include="img\icons\leds\r-on-750.png" />
+    <Content Include="img\icons\leds\red-off-lights-8092022.jpg" />
+    <Content Include="img\icons\NAVBar\help48.png" />
+    <Content Include="img\icons\NAVBar\home48-2.png" />
+    <Content Include="img\icons\NAVBar\settings-gear-48.png" />
+    <Content Include="img\icons\NAVBar\user-48.png" />
+    <Content Include="img\icons\SENDRECIcons\16\SENDREC16x16.png" />
+    <Content Include="img\icons\SENDRECIcons\16\transfer-REC-16x16.png" />
+    <Content Include="img\icons\SENDRECIcons\16\transfer-SEND-16x16.png" />
+    <Content Include="img\icons\SENDRECIcons\16\transfer-SENDREC-34x16.png" />
+    <Content Include="img\icons\SENDRECIcons\32\REC-Green.png" />
+    <Content Include="img\icons\SENDRECIcons\32\SEND32Green.png" />
+    <Content Include="img\icons\SENDRECIcons\32\SENDREC-Receiving-green.png" />
+    <Content Include="img\icons\SENDRECIcons\32\SENDREC-Sending-green.png" />
+    <Content Include="img\icons\SENDRECIcons\32\transfer-NONE.png" />
+    <Content Include="img\icons\SENDRECIcons\32\transfer-REC.png" />
+    <Content Include="img\icons\SENDRECIcons\32\transfer-REC_OFF.png" />
+    <Content Include="img\icons\SENDRECIcons\32\transfer-SEND.png" />
+    <Content Include="img\icons\SENDRECIcons\32\transfer-SENDREC.png" />
+    <Content Include="img\icons\SENDRECIcons\32\transfer-SEND_OFF.png" />
+    <None Include="img\Ionut2\iProd_M%40V_Black_472x211.png" />
+    <Content Include="M%40V_Icon_Black.ico" />
+    <Content Include="mongocrypt.dll" />
+    <Content Include="Resources\accessories-text-editor.png" />
+    <Content Include="Resources\application-x-executable.png" />
+    <Content Include="Resources\appointment cool.png" />
+    <Content Include="Resources\arrow_circle.png" />
+    <Content Include="Resources\btClose.png" />
+    <Content Include="Resources\btHelp.png" />
+    <Content Include="Resources\btTerms.png" />
+    <Content Include="Resources\control_record.png" />
+    <Content Include="Resources\control_record_small.png" />
+    <Content Include="Resources\cross_circle.png" />
+    <Content Include="Resources\cross_circle_frame.png" />
+    <Content Include="Resources\cross_small.png" />
+    <Content Include="Resources\document-properties.png" />
+    <Content Include="Resources\document-save.png" />
+    <Content Include="Resources\edit-clear.png" />
+    <Content Include="Resources\emblem-symbolic-link.png" />
+    <Content Include="Resources\export to document.png" />
+    <Content Include="Resources\gear.png" />
+    <Content Include="Resources\go-down.png" />
+    <Content Include="Resources\go-next.png" />
+    <Content Include="Resources\help blue button.png" />
+    <Content Include="Resources\help-browser.png" />
+    <Content Include="Resources\help-browser1.png" />
+    <Content Include="Resources\home48-2.png" />
+    <Content Include="Resources\list-add.png" />
+    <Content Include="Resources\list-remove.png" />
+    <Content Include="Resources\lock2.png" />
+    <Content Include="Resources\logo1.png" />
+    <Content Include="Resources\logosimple.png" />
+    <Content Include="Resources\media-playback-start.png" />
+    <Content Include="Resources\minus green button.png" />
+    <Content Include="Resources\new document.png" />
+    <Content Include="Resources\office-calendar.png" />
+    <Content Include="Resources\play all.png" />
+    <Content Include="Resources\play blue button.png" />
+    <Content Include="Resources\play green button.png" />
+    <Content Include="Resources\play.png" />
+    <Content Include="Resources\preferences-desktop-locale.png" />
+    <Content Include="Resources\settings-gear-48.png" />
+    <Content Include="Resources\stop green button.png" />
+    <Content Include="Resources\stop red button.png" />
+    <Content Include="Resources\system-log-out.png" />
+    <Content Include="Resources\system-search.png" />
+    <Content Include="Resources\system-shutdown.png" />
+    <Content Include="Resources\text-html.png" />
+    <Content Include="Resources\text-x-generic.png" />
+    <Content Include="Resources\text-x-script.png" />
+    <Content Include="Resources\tick_circle.png" />
+    <Content Include="Resources\tick_circle_frame.png" />
+    <Content Include="Resources\transfer-REC-16x16.png" />
+    <Content Include="Resources\transfer-REC.png" />
+    <Content Include="Resources\transfer-SEND.png" />
+    <Content Include="Resources\transfer-SENDREC.png" />
+    <Content Include="Resources\transfer.png" />
+    <Content Include="Resources\user-48.png" />
+    <Content Include="Resources\write document.png" />
+    <Content Include="snippets.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\iProd-DataModel\iProd-DataModel\iProd-DataModel.csproj">
+      <Project>{f7515417-a0eb-47ac-970a-7bc484632c53}</Project>
+      <Name>iProd-DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\iProdSync\ImageComboBox\ImageComboBox\ImageComboBox.csproj">
+      <Project>{33d6ff5d-c30c-4976-b35d-98cdf7519ba0}</Project>
+      <Name>ImageComboBox</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MongoDB.Libmongocrypt.1.3.0\build\MongoDB.Libmongocrypt.targets" Condition="Exists('..\packages\MongoDB.Libmongocrypt.1.3.0\build\MongoDB.Libmongocrypt.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Questo progetto fa riferimento a uno o più pacchetti NuGet che non sono presenti in questo computer. Usare lo strumento di ripristino dei pacchetti NuGet per scaricarli. Per altre informazioni, vedere http://go.microsoft.com/fwlink/?LinkID=322105. Il file mancante è {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MongoDB.Libmongocrypt.1.3.0\build\MongoDB.Libmongocrypt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MongoDB.Libmongocrypt.1.3.0\build\MongoDB.Libmongocrypt.targets'))" />
+    <Error Condition="!Exists('..\packages\MongoDB.Driver.Core.2.15.0\build\MongoDB.Driver.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MongoDB.Driver.Core.2.15.0\build\MongoDB.Driver.Core.targets'))" />
+  </Target>
+  <Import Project="..\packages\MongoDB.Driver.Core.2.15.0\build\MongoDB.Driver.Core.targets" Condition="Exists('..\packages\MongoDB.Driver.Core.2.15.0\build\MongoDB.Driver.Core.targets')" />
+</Project>

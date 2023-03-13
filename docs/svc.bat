@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8.1 Tools\svcutil.exe" http://localhost:59408/ComHttpsSoap11Endpoint.svc?wsdl

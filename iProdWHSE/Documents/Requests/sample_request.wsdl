@@ -1,0 +1,125 @@
+?xml version="1.0" encoding="UTF‐8"?>
+<wsdl:definitions targetNamespace="http://main.jws.com.hanel.de"
+xmlns:ns="http://main.jws.com.hanel.de"
+xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+xmlns:ax21="http://main.jws.com.hanel.de/xsd"
+xmlns:xs="http://www.w3.org/2001/XMLSchema"
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+<wsdl:documentation>
+Webservice V 1.0/2 Standard on MP12N‐S / MP100D
+</wsdl:documentation>
+<xs:complexType name="JobPositionTypeV01">         
+           <xs:sequence>
+             <xs:element minOccurs="1" name="articleNumber" nillable="false" type="xs:string"/>
+             <xs:element minOccurs="1" name="operation" nillable="false" type="xs:string"/>
+             <xs:element minOccurs="1" name="nominalQuantity" nillable="false" type="xs:string"/>
+             <xs:element minOccurs="0" name="actualQuantity" nillable="false" type="xs:string"/>
+             <xs:element minOccurs="0" name="containerSize" nillable="false" type="xs:int"/>
+             <xs:element minOccurs="0" name="positionStatus" nillable="false" type="xs:int"/>
+                 <xs:element minOccurs="0" name="property" nillable="false" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u01SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u02SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u03SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u04SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u05SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u06SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u07SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u08SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u09SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u10SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u11SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u12SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u13SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u14SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u15SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u16SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u17SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u18SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u19SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u20SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u21SpecialField" nillable="true" type="xs:string"/>   
+                    <xs:element minOccurs="0" name="u22SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u23SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u24SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="u25SpecialField" nillable="true" type="xs:string"/>
+                  </xs:sequence>
+             </xs:complexType>
+                
+          <xs:complexType name="JobTypeV01">
+                <xs:sequence>
+                  <xs:element minOccurs="1" name="jobNumber" nillable="false" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobPriority" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="jobStatus" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="jobDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="jobTime" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c01SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c02SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c03SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c04SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c05SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c06SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c07SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c08SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c09SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c10SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c11SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c12SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c13SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c14SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c15SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c16SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c17SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c18SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c19SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c20SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c21SpecialField" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="c22SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c23SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c24SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="c25SpecialField" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" name="JobPosition" type="ax21:JobPositionTypeV01"/>
+                 </xs:sequence>
+            </xs:complexType>
+
+<wsdl:message name="sendJobsReqV01">
+    <wsdl:part name="parameters" element="ns:sendJobsReqV01">
+    </wsdl:part>
+  </wsdl:message>
+<wsdl:message name="sendJobsResV01">
+    <wsdl:part name="parameters" element="ns:sendJobsResV01">
+    </wsdl:part>
+  </wsdl:message>
+
+<wsdl:portType name="ComPortType">
+<wsdl:operation name="sendJobsV01">
+<wsdl:documentation>Send jobs</wsdl:documentation>
+      <wsdl:input message="ns:sendJobsReqV01" wsaw:Action="urn:sendJobsReqV01">
+    </wsdl:input>
+      <wsdl:output message="ns:sendJobsResV01" wsaw:Action="urn:sendJobsResV01">
+    </wsdl:output>
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:binding name="ComSoap11Binding" type="ns:ComPortType">
+   <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="sendJobsV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+wsdl:service name="Com">
+<wsdl:documentation>Webservice interface between Haenel MP12N‐S / MP100D controls and Hostsystems</wsdl:documentation>
+    <wsdl:port name="ComHttpSoap11Endpoint" binding="ns:ComSoap11Binding">
+      <soap:address location="http://localhost:8080/JWSCom/services/Com.ComHttpSoap11Endpoint/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

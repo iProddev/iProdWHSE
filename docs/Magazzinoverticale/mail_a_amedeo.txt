@@ -1,0 +1,15 @@
+Buongiorno Sig. Bruni,
+Le inoltro la documentazione riguardante entrambi i metodi di comunicazione.
+Web service e scambio dati via file.
+ 
+In allegato: 
+ 
+COMM1-.job: Esempio tracciato lista di prelievo
+COMM1+.job: Esempio tracciato lista di carico
+Prova anag.txt: Esempio tracciato anagrafica
+Nomefile.amd: Esempio file giacenze
+Ritorno_liste.job: Esempio tracciato export ritorno lista carico/prelievo
+t-server.it.pdf: Manuale interfacciamento completo
+campi dati full.pdf: Spiegazione identificativo campi file giacenze
+WEB_SERVICE_Esempi: Pdf riassuntivo dei comandi web service
+ 

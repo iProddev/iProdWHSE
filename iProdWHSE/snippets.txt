@@ -1,0 +1,45 @@
+|##############################################################################################################################
+|   File di piccoli testi
+|   La funzione che lo usa è loadSnippet(key)
+|
+|    CARATTERI SPECIALI:
+|		- |	 	  pipe : da questo in poi è commento
+|       - §  paragraph : specifica parola chiave. le linee che seguono fino al prossimo § o fine file sono lo snippet richiesto
+|###############################################################################################################################
+
+ 
+|=================================================================== 
+|   config.txt di base
+|=================================================================== 
+
+§default-config
+#  Configurazione prima installazione
+
+iprod-env;prod
+autostart;true
+options;nsktEyjxy3nuwti3ny1678917578576§;0
+mp-active;MP-12N
+mp-ip;192.168.1.254
+mp-port;80
+mp-url;jwscom/services/Com.ComHttpsSoap11Endpoint/
+mp-mock;false
+stock-enabled;true
+timerinterval;900
+timeridle-from;19
+timeridle-to;09
+lastmailsent;01/01/1970 13:19:39
+mailnotifiche;fabio.guerrazzi@iprod.it
+max-hist;150
+
+
+§elenco-modelli
+Movimat
+Stockln
+Surplex
+MachineSeeker
+Vertimag
+Smetar
+ONO
+Automha
+Cema
+Kardex

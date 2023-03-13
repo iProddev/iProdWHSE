@@ -1,0 +1,47 @@
+
+Esistono diversi modelli di magazzino verticale, tra cui:
+Magazzini verticali a colonne: sono costituiti da colonne metalliche alte fino a 15 metri con scaffali verticali all'interno delle colonne. Questi scaffali possono essere ruotati per recuperare il prodotto desiderato.
+Magazzini verticali a elevatori: sono costituiti da una struttura di scaffalature verticali in cui un carrello elevatore sale e scende per prelevare i prodotti. Questi magazzini possono essere dotati di un sistema di trasporto automatico che porta il prodotto alla base del magazzino per il prelievo.
+Magazzini verticali con navette: in questo modello di magazzino, un sistema di navette o piattaforme mobili viaggia lungo le colonne e recupera i prodotti. Questo tipo di magazzino può essere automatizzato e utilizzato per lo stoccaggio di prodotti di grandi dimensioni o pesi elevati.
+Magazzini verticali robotizzati: in questi magazzini, i robot vengono utilizzati per prelevare i prodotti dalle scaffalature verticali. Questi magazzini sono altamente automatizzati e richiedono un'infrastruttura tecnologica avanzata.
+Magazzini verticali con carrelli elevatori: questi magazzini utilizzano carrelli elevatori per recuperare i prodotti dalle scaffalature verticali. Possono essere dotati di un sistema di trasporto automatico per portare i prodotti alla base del magazzino.
+Ci sono molte variazioni di questi modelli di magazzino verticali, e molte aziende creano soluzioni personalizzate per le loro esigenze specifiche di stoccaggio e recupero dei prodotti.
+
+
+C:\Users\FabioGuerrazzi\AppData\Roaming\iPodWHSE\
+
+using System;
+using System.IO.Ports; // librerie per la comunicazione seriale
+using System.Threading;
+
+class MagazzinoVerticale {
+    private SerialPort seriale; // oggetto seriale per comunicazione con il magazzino
+    private int altezza; // altezza del magazzino
+    private int numColonne; // numero di colonne presenti nel magazzino
+
+    public MagazzinoVerticale(string portaSeriale, int altezza, int numColonne) {
+        seriale = new SerialPort(portaSeriale, 9600, Parity.None, 8, StopBits.One);
+        seriale.Open();
+        this.altezza = altezza;
+        this.numColonne = numColonne;
+    }
+
+    public void RuotaColonna(int numeroColonna, int posizione) {
+        // invia comando seriale per far ruotare la colonna a una determinata posizione
+        string comando = "RUOTA_COLONNA," + numeroColonna + "," + posizione + "\n";
+        seriale.Write(comando);
+        Thread.Sleep(500); // aspetta 500 millisecondi per la risposta
+    }
+
+    public void PrendiProdotto(int numeroColonna, int posizione) {
+        // invia comando seriale per far ruotare la colonna alla posizione del prodotto e recuperare il prodotto
+        RuotaColonna(numeroColonna, posizione);
+        string comando = "PRENDI_PRODOTTO\n";
+        seriale.Write(comando);
+        Thread.Sleep(500); // aspetta 500 millisecondi per la risposta
+    }
+}
+
+// esempio di utilizzo
+MagazzinoVerticale magazzino = new MagazzinoVerticale("COM1", 1000, 4); // crea oggetto MagazzinoVerticale con porta seriale COM1, altezza 1000 cm e 4 colonne
+magazzino.PrendiProdotto(2, 10); // ruota la seconda colonna alla posizione 10 e prende il prodotto

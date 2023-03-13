@@ -1,0 +1,71 @@
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Body>
+        <ns2:readAllAMDResV01 xmlns:ns2="http://main.jws.com.hanel.de">
+            <ns2:return>
+                <article xmlns="http://main.jws.com.hanel.de/xsd">
+                    <articleNumber>?</articleNumber>					<!--CODICE-->
+                    <articleName>PIPPO</articleName> 					<!--DESCRIZIONE-->
+                    <liftNumber>1</liftNumber>						<!--NUMERO DI MAGAZZINO-->
+                    <shelfNumber>7</shelfNumber>					<!--NUMERO DI CASSETTO-->
+                    <compartmentNumber>1</compartmentNumber>				<!--POSIZIONE X-->
+                    <compartmentDepthNumber>1</compartmentDepthNumber>			<!--POSIZIONE Y-->
+                    <containerSize>101</containerSize>					<!--DIMENSIONE-->
+                    <fifo>1</fifo>							<!--VALORIZZAZIONE FIFO-->
+                    <inventoryAtStorageLocation>10</inventoryAtStorageLocation>		<!--QUANTITA’-->
+                    <minimumInventory>0</minimumInventory>				<!--QUANTITA’ MINIMA-->
+                </article>
+                <article xmlns="http://main.jws.com.hanel.de/xsd">
+                    <articleNumber>ARTICOLO1</articleNumber>
+                    <articleName>PLUTO23</articleName>
+                    <liftNumber>1</liftNumber>
+                    <shelfNumber>7</shelfNumber>
+                    <compartmentNumber>2</compartmentNumber>
+                    <compartmentDepthNumber>1</compartmentDepthNumber>
+                    <containerSize>101</containerSize>
+                    <fifo>1</fifo>
+                    <inventoryAtStorageLocation>10</inventoryAtStorageLocation>
+                    <minimumInventory>0</minimumInventory>
+                </article>
+                <article xmlns="http://main.jws.com.hanel.de/xsd">
+                    <articleNumber>ARTICOLO3</articleNumber>
+                    <articleName>PLUTO23</articleName>
+                    <liftNumber>0</liftNumber>
+                    <shelfNumber>0</shelfNumber>
+                    <compartmentNumber>0</compartmentNumber>
+                    <compartmentDepthNumber>0</compartmentDepthNumber>
+                    <containerSize>101</containerSize>
+                    <fifo>1</fifo>
+                    <inventoryAtStorageLocation>0</inventoryAtStorageLocation>
+                    <minimumInventory>0</minimumInventory>
+                </article>
+                <article xmlns="http://main.jws.com.hanel.de/xsd">
+                    <articleNumber>ARTICOLO5</articleNumber>
+                    <articleName>PLUTO23</articleName>
+                    <liftNumber>0</liftNumber>
+                    <shelfNumber>0</shelfNumber>
+                    <compartmentNumber>0</compartmentNumber>
+                    <compartmentDepthNumber>0</compartmentDepthNumber>
+                    <containerSize>101</containerSize>
+                    <fifo>1</fifo>
+                    <inventoryAtStorageLocation>0</inventoryAtStorageLocation>
+                    <minimumInventory>0</minimumInventory>
+                </article>
+                <article xmlns="http://main.jws.com.hanel.de/xsd">
+                    <articleNumber>PIPPO</articleNumber>
+                    <articleName>PLUTO</articleName>
+                    <liftNumber>0</liftNumber>
+                    <shelfNumber>0</shelfNumber>
+                    <compartmentNumber>0</compartmentNumber>
+                    <compartmentDepthNumber>0</compartmentDepthNumber>
+                    <containerSize>101</containerSize>
+                    <fifo>1</fifo>
+                    <inventoryAtStorageLocation>0</inventoryAtStorageLocation>
+                    <minimumInventory>0</minimumInventory>
+                </article>
+                <ns1:returnValue xmlns:ns1="http://main.jws.com.hanel.de/xsd">0</ns1:returnValue>
+            </ns2:return>
+        </ns2:readAllAMDResV01>
+    </soapenv:Body>
+</soapenv:Envelope>
+

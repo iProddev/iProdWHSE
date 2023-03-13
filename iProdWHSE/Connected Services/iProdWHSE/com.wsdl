@@ -1,0 +1,1617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ax21="http://main.jws.com.hanel.de/xsd" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://main.jws.com.hanel.de" targetNamespace="http://main.jws.com.hanel.de" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+		Webservice V 2.0/3 Standard on MP12N-S / MP100D
+	</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://main.jws.com.hanel.de/xsd">
+      <xs:complexType name="AMDTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="articleName" type="xs:string" />
+          <xs:element minOccurs="1" name="liftNumber" type="xs:int" />
+          <xs:element minOccurs="1" name="shelfNumber" type="xs:int" />
+          <xs:element minOccurs="1" name="compartmentNumber" type="xs:int" />
+          <xs:element minOccurs="1" name="compartmentDepthNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="containerSize" type="xs:int" />
+          <xs:element minOccurs="1" name="fifo" type="xs:int" />
+          <xs:element minOccurs="1" name="inventoryAtStorageLocation" type="xs:string" />
+          <xs:element minOccurs="0" name="minimumInventory" type="xs:string" />
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="JobSummaryTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="jobNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="jobPriority" type="xs:int" />
+          <xs:element minOccurs="0" name="jobStatus" type="xs:int" />
+          <xs:element minOccurs="0" name="jobDate" type="xs:string" />
+          <xs:element minOccurs="0" name="jobTime" type="xs:string" />
+          <xs:element minOccurs="0" name="c01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="JobPositionTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+          <xs:element minOccurs="1" name="operation" type="xs:string" />
+          <xs:element minOccurs="1" name="nominalQuantity" type="xs:string" />
+          <xs:element minOccurs="0" name="actualQuantity" type="xs:string" />
+          <xs:element minOccurs="0" name="containerSize" type="xs:int" />
+          <xs:element minOccurs="0" name="positionStatus" type="xs:int" />
+          <xs:element minOccurs="0" name="property" type="xs:string" />
+          <xs:element minOccurs="0" name="u01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="JobTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="jobNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="jobPriority" type="xs:int" />
+          <xs:element minOccurs="0" name="jobStatus" type="xs:int" />
+          <xs:element minOccurs="0" name="jobDate" type="xs:string" />
+          <xs:element minOccurs="0" name="jobTime" type="xs:string" />
+          <xs:element minOccurs="0" name="c01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c25SpecialField" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="JobPosition" type="ax21:JobPositionTypeV01" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RequPositionTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+          <xs:element minOccurs="1" name="operation" type="xs:string" />
+          <xs:element minOccurs="1" name="nominalQuantity" type="xs:string" />
+          <xs:element minOccurs="0" name="containerSize" type="xs:int" />
+          <xs:element minOccurs="0" name="positionStatus" type="xs:int" />
+          <xs:element minOccurs="0" name="u01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RequTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="requisitionNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="requisitionStatus" type="xs:int" />
+          <xs:element minOccurs="0" name="c01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c25SpecialField" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="RequisitionPosition" type="ax21:RequPositionTypeV01" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RequSummaryTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="requisitionNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="requisitionStatus" type="xs:int" />
+          <xs:element minOccurs="0" name="c01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="c25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OpjournalPosTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+          <xs:element minOccurs="1" name="operation" type="xs:string" />
+          <xs:element minOccurs="1" name="actualQuantity" type="xs:string" />
+          <xs:element minOccurs="0" name="containerSize" type="xs:int" />
+          <xs:element minOccurs="1" name="status" type="xs:int" />
+          <xs:element minOccurs="0" name="u01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="u25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrdRecomPosTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="articleName" type="xs:string" />
+          <xs:element minOccurs="0" name="totalInventory" type="xs:string" />
+          <xs:element minOccurs="1" name="minimumInventory" type="xs:string" />
+          <xs:element minOccurs="1" name="status" type="xs:int" />
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="APDTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="articleName" type="xs:string" />
+          <xs:element minOccurs="0" name="minimumInventory" type="xs:string" />
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="APDTypeV02">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="articleName" type="xs:string" />
+          <xs:element minOccurs="0" name="minimumInventory" type="xs:string" />
+          <xs:element minOccurs="0" name="containerSize" type="xs:int" />
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="QjournalPosTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+          <xs:element minOccurs="0" name="articleName" type="xs:string" />
+          <xs:element minOccurs="0" name="totalInventory" type="xs:string" />
+          <xs:element minOccurs="0" name="minimumInventory" type="xs:string" />
+          <xs:element minOccurs="1" name="journalIn" type="xs:string" />
+          <xs:element minOccurs="1" name="journalOut" type="xs:string" />
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string" />
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="article" type="ax21:AMDTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="article" type="ax21:AMDTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendAllAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="article" type="ax21:AMDTypeV01" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendAllAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadOpjournalV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="modus" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadOpjournalV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="opjournalPosition" type="ax21:OpjournalPosTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadOrdRecomV02">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="modus" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadOrdRecomV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="orderRecommendationPosition" type="ax21:OrdRecomPosTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadOrdRecomV02">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="orderRecommendationPosition" type="ax21:OrdRecomPosTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="job" type="ax21:JobTypeV01" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadJobV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="jobNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadJobV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="job" type="ax21:JobTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadAllJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="mode" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="job" type="ax21:JobTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParDeleteJobV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="jobNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteJobV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteAllJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadAllJobsSumV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="mode" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllJobsSumV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="job" type="ax21:JobSummaryTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="requisition" type="ax21:RequTypeV01" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="requisitionNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="requisition" type="ax21:RequTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="requisition" type="ax21:RequTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllRequSumV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="requisition" type="ax21:RequSummaryTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParDeleteRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="requisitionNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="requisition" type="ax21:RequTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="articlePoolDataRecord" type="ax21:APDTypeV01" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendAPDV02">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="articlePoolDataRecord" type="ax21:APDTypeV02" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendAPDV02">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteAllAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParDeleteAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadQjournalV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="qjournalPosition" type="ax21:QjournalPosTypeV01" />
+          <xs:element minOccurs="1" name="returnValue" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string" />
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://main.jws.com.hanel.de">
+      <xs:import namespace="http://main.jws.com.hanel.de/xsd" />
+      <xs:element name="readAMDReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadAMDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAMDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAMDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllAMDReqV01">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllAMDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllAMDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAllAMDReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendAllAMDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAllAMDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendAllAMDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOpjournalReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadOpjournalV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOpjournalResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadOpjournalV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOrdRecomReqV01">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOrdRecomReqV02">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadOrdRecomV02" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOrdRecomResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadOrdRecomV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOrdRecomResV02">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadOrdRecomV02" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendJobsReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendJobsV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendJobsResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendJobsV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readJobReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadJobV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readJobResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadJobV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllJobsReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadAllJobsV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllJobsResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllJobsV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllJobsSumReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadAllJobsSumV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllJobsSumResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllJobsSumV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteJobReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParDeleteJobV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteJobResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteJobV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAllJobsReqV01">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAllJobsResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteAllJobsV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendRequReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendRequV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendRequResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendRequV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readRequReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadRequV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readRequResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadRequV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllRequReqV01">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllRequResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllRequV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllRequSumReqV01">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllRequSumResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllRequSumV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAPDReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendAPDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAPDReqV02">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendAPDV02" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteRequReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParDeleteRequV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteRequResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteRequV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAPDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendAPDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAPDResV02">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendAPDV02" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAllAPDReqV01">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAllAPDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteAllAPDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAPDReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParDeleteAPDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAPDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteAPDV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readQjournalReqV01">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readQjournalResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadQjournalV01" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="readRequResV01">
+    <wsdl:part name="parameters" element="ns:readRequResV01" />
+  </wsdl:message>
+  <wsdl:message name="readRequReqV01">
+    <wsdl:part name="parameters" element="ns:readRequReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllRequSumReqV01">
+    <wsdl:part name="parameters" element="ns:readAllRequSumReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readJobResV01">
+    <wsdl:part name="parameters" element="ns:readJobResV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllJobsReqV01">
+    <wsdl:part name="parameters" element="ns:readAllJobsReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllRequSumResV01">
+    <wsdl:part name="parameters" element="ns:readAllRequSumResV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllJobsSumResV01">
+    <wsdl:part name="parameters" element="ns:readAllJobsSumResV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllJobsSumReqV01">
+    <wsdl:part name="parameters" element="ns:readAllJobsSumReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllJobsResV01">
+    <wsdl:part name="parameters" element="ns:readAllJobsResV01" />
+  </wsdl:message>
+  <wsdl:message name="sendAllAMDReqV01">
+    <wsdl:part name="parameters" element="ns:sendAllAMDReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readQjournalResV01">
+    <wsdl:part name="parameters" element="ns:readQjournalResV01" />
+  </wsdl:message>
+  <wsdl:message name="sendRequResV01">
+    <wsdl:part name="parameters" element="ns:sendRequResV01" />
+  </wsdl:message>
+  <wsdl:message name="readQjournalReqV01">
+    <wsdl:part name="parameters" element="ns:readQjournalReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllRequReqV01">
+    <wsdl:part name="parameters" element="ns:readAllRequReqV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteJobResV01">
+    <wsdl:part name="parameters" element="ns:deleteJobResV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteAPDResV01">
+    <wsdl:part name="parameters" element="ns:deleteAPDResV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteJobReqV01">
+    <wsdl:part name="parameters" element="ns:deleteJobReqV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteAPDReqV01">
+    <wsdl:part name="parameters" element="ns:deleteAPDReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readOpjournalResV01">
+    <wsdl:part name="parameters" element="ns:readOpjournalResV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllRequResV01">
+    <wsdl:part name="parameters" element="ns:readAllRequResV01" />
+  </wsdl:message>
+  <wsdl:message name="readOpjournalReqV01">
+    <wsdl:part name="parameters" element="ns:readOpjournalReqV01" />
+  </wsdl:message>
+  <wsdl:message name="sendRequReqV01">
+    <wsdl:part name="parameters" element="ns:sendRequReqV01" />
+  </wsdl:message>
+  <wsdl:message name="sendAllAMDResV01">
+    <wsdl:part name="parameters" element="ns:sendAllAMDResV01" />
+  </wsdl:message>
+  <wsdl:message name="sendAPDReqV02">
+    <wsdl:part name="parameters" element="ns:sendAPDReqV02" />
+  </wsdl:message>
+  <wsdl:message name="sendAPDReqV01">
+    <wsdl:part name="parameters" element="ns:sendAPDReqV01" />
+  </wsdl:message>
+  <wsdl:message name="sendAPDResV01">
+    <wsdl:part name="parameters" element="ns:sendAPDResV01" />
+  </wsdl:message>
+  <wsdl:message name="sendAPDResV02">
+    <wsdl:part name="parameters" element="ns:sendAPDResV02" />
+  </wsdl:message>
+  <wsdl:message name="readAMDReqV01">
+    <wsdl:part name="parameters" element="ns:readAMDReqV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteAllAPDResV01">
+    <wsdl:part name="parameters" element="ns:deleteAllAPDResV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllAMDResV01">
+    <wsdl:part name="parameters" element="ns:readAllAMDResV01" />
+  </wsdl:message>
+  <wsdl:message name="sendJobsResV01">
+    <wsdl:part name="parameters" element="ns:sendJobsResV01" />
+  </wsdl:message>
+  <wsdl:message name="sendJobsReqV01">
+    <wsdl:part name="parameters" element="ns:sendJobsReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readAMDResV01">
+    <wsdl:part name="parameters" element="ns:readAMDResV01" />
+  </wsdl:message>
+  <wsdl:message name="readJobReqV01">
+    <wsdl:part name="parameters" element="ns:readJobReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readAllAMDReqV01">
+    <wsdl:part name="parameters" element="ns:readAllAMDReqV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteRequResV01">
+    <wsdl:part name="parameters" element="ns:deleteRequResV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteRequReqV01">
+    <wsdl:part name="parameters" element="ns:deleteRequReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readOrdRecomResV02">
+    <wsdl:part name="parameters" element="ns:readOrdRecomResV02" />
+  </wsdl:message>
+  <wsdl:message name="readOrdRecomResV01">
+    <wsdl:part name="parameters" element="ns:readOrdRecomResV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteAllJobsResV01">
+    <wsdl:part name="parameters" element="ns:deleteAllJobsResV01" />
+  </wsdl:message>
+  <wsdl:message name="readOrdRecomReqV01">
+    <wsdl:part name="parameters" element="ns:readOrdRecomReqV01" />
+  </wsdl:message>
+  <wsdl:message name="deleteAllAPDReqV01">
+    <wsdl:part name="parameters" element="ns:deleteAllAPDReqV01" />
+  </wsdl:message>
+  <wsdl:message name="readOrdRecomReqV02">
+    <wsdl:part name="parameters" element="ns:readOrdRecomReqV02" />
+  </wsdl:message>
+  <wsdl:message name="deleteAllJobsReqV01">
+    <wsdl:part name="parameters" element="ns:deleteAllJobsReqV01" />
+  </wsdl:message>
+  <wsdl:portType name="ComPortType">
+    <wsdl:operation name="readAMDV01">
+      <wsdl:documentation>Read article master data from a defined article</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAMDReqV01" message="ns:readAMDReqV01" />
+      <wsdl:output wsaw:Action="urn:readAMDResV01" message="ns:readAMDResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readAllAMDV01">
+      <wsdl:documentation>Read all article master data (backup)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllAMDReqV01" message="ns:readAllAMDReqV01" />
+      <wsdl:output wsaw:Action="urn:readAllAMDResV01" message="ns:readAllAMDResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="sendAllAMDV01">
+      <wsdl:documentation>Send all article master data (to a empty MP storage)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendAllAMDReqV01" message="ns:sendAllAMDReqV01" />
+      <wsdl:output wsaw:Action="urn:sendAllAMDResV01" message="ns:sendAllAMDResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readOpjournalV01">
+      <wsdl:documentation>Read operation journal information</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readOpjournalReqV01" message="ns:readOpjournalReqV01" />
+      <wsdl:output wsaw:Action="urn:readOpjournalResV01" message="ns:readOpjournalResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV01">
+      <wsdl:documentation>Read order recommendation information</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readOrdRecomReqV01" message="ns:readOrdRecomReqV01" />
+      <wsdl:output wsaw:Action="urn:readOrdRecomResV01" message="ns:readOrdRecomResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV02">
+      <wsdl:documentation>Read order recommendation information V02</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readOrdRecomReqV02" message="ns:readOrdRecomReqV02" />
+      <wsdl:output wsaw:Action="urn:readOrdRecomResV02" message="ns:readOrdRecomResV02" />
+    </wsdl:operation>
+    <wsdl:operation name="sendJobsV01">
+      <wsdl:documentation>Send jobs</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendJobsReqV01" message="ns:sendJobsReqV01" />
+      <wsdl:output wsaw:Action="urn:sendJobsResV01" message="ns:sendJobsResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readJobV01">
+      <wsdl:documentation>Read a defined job</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readJobReqV01" message="ns:readJobReqV01" />
+      <wsdl:output wsaw:Action="urn:readJobResV01" message="ns:readJobResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsV01">
+      <wsdl:documentation>Read all jobs (mode = 0 -&gt; all, mode = 1 -&gt; processed)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllJobsReqV01" message="ns:readAllJobsReqV01" />
+      <wsdl:output wsaw:Action="urn:readAllJobsResV01" message="ns:readAllJobsResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsSumV01">
+      <wsdl:documentation>Read all jobs - summary (mode = 0 -&gt; all, mode = 1 -&gt; processed)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllJobsSumReqV01" message="ns:readAllJobsSumReqV01" />
+      <wsdl:output wsaw:Action="urn:readAllJobsSumResV01" message="ns:readAllJobsSumResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteJobV01">
+      <wsdl:documentation>Delete a defined job</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteJobReqV01" message="ns:deleteJobReqV01" />
+      <wsdl:output wsaw:Action="urn:deleteJobResV01" message="ns:deleteJobResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllJobsV01">
+      <wsdl:documentation>Delete all jobs</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteAllJobsReqV01" message="ns:deleteAllJobsReqV01" />
+      <wsdl:output wsaw:Action="urn:deleteAllJobsResV01" message="ns:deleteAllJobsResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="sendRequV01">
+      <wsdl:documentation>Send requisitions</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendRequReqV01" message="ns:sendRequReqV01" />
+      <wsdl:output wsaw:Action="urn:sendRequResV01" message="ns:sendRequResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readRequV01">
+      <wsdl:documentation>Read a defined requisition</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readRequReqV01" message="ns:readRequReqV01" />
+      <wsdl:output wsaw:Action="urn:readRequResV01" message="ns:readRequResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequV01">
+      <wsdl:documentation>Read all requisitions</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllRequReqV01" message="ns:readAllRequReqV01" />
+      <wsdl:output wsaw:Action="urn:readAllRequResV01" message="ns:readAllRequResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequSumV01">
+      <wsdl:documentation>Read all requisitions - summary</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllRequSumReqV01" message="ns:readAllRequSumReqV01" />
+      <wsdl:output wsaw:Action="urn:readAllRequSumResV01" message="ns:readAllRequSumResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequV01">
+      <wsdl:documentation>Delete a defined requisition</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteRequReqV01" message="ns:deleteRequReqV01" />
+      <wsdl:output wsaw:Action="urn:deleteRequResV01" message="ns:deleteRequResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV01">
+      <wsdl:documentation>Send article pool data records</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendAPDReqV01" message="ns:sendAPDReqV01" />
+      <wsdl:output wsaw:Action="urn:sendAPDResV01" message="ns:sendAPDResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV02">
+      <wsdl:documentation>Send article pool data records</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendAPDReqV02" message="ns:sendAPDReqV02" />
+      <wsdl:output wsaw:Action="urn:sendAPDResV02" message="ns:sendAPDResV02" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllAPDV01">
+      <wsdl:documentation>Delete all article pool data</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteAllAPDReqV01" message="ns:deleteAllAPDReqV01" />
+      <wsdl:output wsaw:Action="urn:deleteAllAPDResV01" message="ns:deleteAllAPDResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteAPDV01">
+      <wsdl:documentation>Delete article pool data</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteAPDReqV01" message="ns:deleteAPDReqV01" />
+      <wsdl:output wsaw:Action="urn:deleteAPDResV01" message="ns:deleteAPDResV01" />
+    </wsdl:operation>
+    <wsdl:operation name="readQjournalV01">
+      <wsdl:documentation>Read quantity journal information</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readQjournalReqV01" message="ns:readQjournalReqV01" />
+      <wsdl:output wsaw:Action="urn:readQjournalResV01" message="ns:readQjournalResV01" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ComSoap11Binding" type="ns:ComPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="readAMDV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllAMDV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAllAMDV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOpjournalV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV02">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendJobsV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readJobV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsSumV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteJobV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllJobsV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendRequV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readRequV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequSumV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV02">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllAPDV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAPDV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readQjournalV01">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ComHttpBinding" type="ns:ComPortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="readAMDV01">
+      <http:operation location="readAMDV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllAMDV01">
+      <http:operation location="readAllAMDV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAllAMDV01">
+      <http:operation location="setAllAMDV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOpjournalV01">
+      <http:operation location="readOpjournalV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV01">
+      <http:operation location="readOrdRecomV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV02">
+      <http:operation location="readOrdRecomV02" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readJobV01">
+      <http:operation location="readJobV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsV01">
+      <http:operation location="readAllJobsV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsSumV01">
+      <http:operation location="readAllJobsSumV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteJobV01">
+      <http:operation location="deleteJobV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllJobsV01">
+      <http:operation location="deleteAllJobsV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV01">
+      <http:operation location="sendAPDV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendRequV01">
+      <http:operation location="setRequV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequV01">
+      <http:operation location="readAllRequV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequSumV01">
+      <http:operation location="readAllRequSumV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readRequV01">
+      <http:operation location="readRequV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequV01">
+      <http:operation location="deleteRequV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllAPDV01">
+      <http:operation location="deleteAllAPDV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAPDV01">
+      <http:operation location="deleteAPDV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readQjournalV01">
+      <http:operation location="readQjournalV01" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Com">
+    <wsdl:documentation>Webservice interface between Haenel MP12N-S / MP100D controls and Hostsystems</wsdl:documentation>
+    <wsdl:port name="ComHttpsSoap11Endpoint" binding="ns:ComSoap11Binding">
+      <soap:address location="https://192.168.1.254/jwscom/services/Com.ComHttpsSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="ComHttpSoap11Endpoint" binding="ns:ComSoap11Binding">
+      <soap:address location="http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

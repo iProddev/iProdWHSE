@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+ <soapenv:Header/>
+ <soapenv:Body>
+ <main:%method_name%>
+ <main:param>
+%body%
+ </main:param>
+ </main:%method_name%>
+ </soapenv:Body>
+</soapenv:Envelope>

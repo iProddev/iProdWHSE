@@ -1,0 +1,38 @@
+Data della miniguida		: 25/08/2021
+Tipo richiesta			: Giacenze
+Identificativo Job Lireco	: readAllAMDReqV01
+
+
+dopo aver selezionato la richiesta premi 'Esegui'. Viene eseguito il test connessione a SOAP e iProd
+dopodichè scarica gli items da iprod. Se non riesce a connettersi fallisce ed esce.
+
+Se fallisce la connessione a SOAP il sistema cerca di lavorare Offline caricando dei files su 
+disco trattandoli come se fosse il response di SOAP (serve solo per lo sviluppo e test, il file è
+\Responses\sample_giacenze.txt)
+
+per le giacenze non è necessario predisporre altro poichè ci interessa il response, la richiesta è qualcosa tipo
+"dammi le giacenze", niente di piu.
+
+Dopo aver inviato la richiesta l'Agent elabora il response che consiste di più records ed ogni record è un prodotto
+
+Schema di esempio;
+	..
+                <article xmlns="http://main.jws.com.hanel.de/xsd">
+                    <articleNumber>?</articleNumber>					<!--CODICE-->
+                    <articleName>PIPPO</articleName> 					<!--DESCRIZIONE-->
+                    <liftNumber>1</liftNumber>						<!--NUMERO DI MAGAZZINO-->
+                    <shelfNumber>7</shelfNumber>					<!--NUMERO DI CASSETTO-->
+                    <compartmentNumber>1</compartmentNumber>				<!--POSIZIONE X-->
+                    <compartmentDepthNumber>1</compartmentDepthNumber>			<!--POSIZIONE Y-->
+                    <containerSize>101</containerSize>					<!--DIMENSIONE-->
+                    <fifo>1</fifo>							<!--VALORIZZAZIONE FIFO-->
+                    <inventoryAtStorageLocation>10</inventoryAtStorageLocation>		<!--QUANTITA’-->
+                    <minimumInventory>0</minimumInventory>				<!--QUANTITA’ MINIMA-->
+                </article>
+	..
+
+Inoltre sul file di log, che si trova nella cartella dell'applicazione, è possibile estrapolare facilmente 
+i dati in formato CSV
+
+Al termine, ANCORA DA DEFINIRE, i dati restituiti andranno a popolare i Prodotti e giacenze iProd.
+ 

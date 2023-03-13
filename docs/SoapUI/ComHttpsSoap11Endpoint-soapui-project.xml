@@ -1,0 +1,3291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="6927110e-0b23-4f6a-a036-53b66ed52032" activeEnvironment="Default" name="ComHttpsSoap11Endpoint" resourceRoot="" soapui-version="5.7.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="7421e75d-19f3-49d0-8a26-75019322be68" wsaVersion="NONE" name="ComSoap11Binding" type="wsdl" bindingName="{http://main.jws.com.hanel.de}ComSoap11Binding" soapVersion="1_1" anonymous="optional" definition="file:/C:/0/iProd/src/iProdWHSE/iProdWHSE/Connected%20Services/iProdWHSE/com.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\0\iProd\src\iProdWHSE\iProdWHSE\Connected%20Services\iProdWHSE\com.wsdl"><con:part><con:url>file:\C:\0\iProd\src\iProdWHSE\iProdWHSE\Connected%20Services\iProdWHSE\com.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://main.jws.com.hanel.de" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ax21="http://main.jws.com.hanel.de/xsd" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://main.jws.com.hanel.de" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>Webservice V 2.0/3 Standard on MP12N-S / MP100D</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://main.jws.com.hanel.de/xsd">
+      <xs:complexType name="AMDTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="articleName" type="xs:string"/>
+          <xs:element minOccurs="1" name="liftNumber" type="xs:int"/>
+          <xs:element minOccurs="1" name="shelfNumber" type="xs:int"/>
+          <xs:element minOccurs="1" name="compartmentNumber" type="xs:int"/>
+          <xs:element minOccurs="1" name="compartmentDepthNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="containerSize" type="xs:int"/>
+          <xs:element minOccurs="1" name="fifo" type="xs:int"/>
+          <xs:element minOccurs="1" name="inventoryAtStorageLocation" type="xs:string"/>
+          <xs:element minOccurs="0" name="minimumInventory" type="xs:string"/>
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="JobSummaryTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="jobNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="jobPriority" type="xs:int"/>
+          <xs:element minOccurs="0" name="jobStatus" type="xs:int"/>
+          <xs:element minOccurs="0" name="jobDate" type="xs:string"/>
+          <xs:element minOccurs="0" name="jobTime" type="xs:string"/>
+          <xs:element minOccurs="0" name="c01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="JobPositionTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+          <xs:element minOccurs="1" name="operation" type="xs:string"/>
+          <xs:element minOccurs="1" name="nominalQuantity" type="xs:string"/>
+          <xs:element minOccurs="0" name="actualQuantity" type="xs:string"/>
+          <xs:element minOccurs="0" name="containerSize" type="xs:int"/>
+          <xs:element minOccurs="0" name="positionStatus" type="xs:int"/>
+          <xs:element minOccurs="0" name="property" type="xs:string"/>
+          <xs:element minOccurs="0" name="u01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="JobTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="jobNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="jobPriority" type="xs:int"/>
+          <xs:element minOccurs="0" name="jobStatus" type="xs:int"/>
+          <xs:element minOccurs="0" name="jobDate" type="xs:string"/>
+          <xs:element minOccurs="0" name="jobTime" type="xs:string"/>
+          <xs:element minOccurs="0" name="c01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c25SpecialField" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="JobPosition" type="ax21:JobPositionTypeV01"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RequPositionTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+          <xs:element minOccurs="1" name="operation" type="xs:string"/>
+          <xs:element minOccurs="1" name="nominalQuantity" type="xs:string"/>
+          <xs:element minOccurs="0" name="containerSize" type="xs:int"/>
+          <xs:element minOccurs="0" name="positionStatus" type="xs:int"/>
+          <xs:element minOccurs="0" name="u01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RequTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="requisitionNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="requisitionStatus" type="xs:int"/>
+          <xs:element minOccurs="0" name="c01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c25SpecialField" type="xs:string"/>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="RequisitionPosition" type="ax21:RequPositionTypeV01"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RequSummaryTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="requisitionNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="requisitionStatus" type="xs:int"/>
+          <xs:element minOccurs="0" name="c01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="c25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OpjournalPosTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+          <xs:element minOccurs="1" name="operation" type="xs:string"/>
+          <xs:element minOccurs="1" name="actualQuantity" type="xs:string"/>
+          <xs:element minOccurs="0" name="containerSize" type="xs:int"/>
+          <xs:element minOccurs="1" name="status" type="xs:int"/>
+          <xs:element minOccurs="0" name="u01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="u25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrdRecomPosTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="articleName" type="xs:string"/>
+          <xs:element minOccurs="0" name="totalInventory" type="xs:string"/>
+          <xs:element minOccurs="1" name="minimumInventory" type="xs:string"/>
+          <xs:element minOccurs="1" name="status" type="xs:int"/>
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="APDTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="articleName" type="xs:string"/>
+          <xs:element minOccurs="0" name="minimumInventory" type="xs:string"/>
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="APDTypeV02">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="articleName" type="xs:string"/>
+          <xs:element minOccurs="0" name="minimumInventory" type="xs:string"/>
+          <xs:element minOccurs="0" name="containerSize" type="xs:int"/>
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="QjournalPosTypeV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="articleName" type="xs:string"/>
+          <xs:element minOccurs="0" name="totalInventory" type="xs:string"/>
+          <xs:element minOccurs="0" name="minimumInventory" type="xs:string"/>
+          <xs:element minOccurs="1" name="journalIn" type="xs:string"/>
+          <xs:element minOccurs="1" name="journalOut" type="xs:string"/>
+          <xs:element minOccurs="0" name="h01SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h02SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h03SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h04SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h05SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h06SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h07SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h08SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h09SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h10SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h11SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h12SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h13SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h14SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h15SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h16SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h17SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h18SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h19SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h20SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h21SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h22SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h23SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h24SpecialField" type="xs:string"/>
+          <xs:element minOccurs="0" name="h25SpecialField" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="article" type="ax21:AMDTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="article" type="ax21:AMDTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendAllAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="article" type="ax21:AMDTypeV01"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendAllAMDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadOpjournalV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="modus" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadOpjournalV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="opjournalPosition" type="ax21:OpjournalPosTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadOrdRecomV02">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="modus" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadOrdRecomV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="orderRecommendationPosition" type="ax21:OrdRecomPosTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadOrdRecomV02">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="orderRecommendationPosition" type="ax21:OrdRecomPosTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="job" type="ax21:JobTypeV01"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadJobV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="jobNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadJobV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="job" type="ax21:JobTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadAllJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="mode" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="job" type="ax21:JobTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParDeleteJobV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="jobNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteJobV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteAllJobsV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadAllJobsSumV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="mode" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllJobsSumV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="job" type="ax21:JobSummaryTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="requisition" type="ax21:RequTypeV01"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParReadRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="requisitionNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="requisition" type="ax21:RequTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="requisition" type="ax21:RequTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadAllRequSumV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="requisition" type="ax21:RequSummaryTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParDeleteRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="requisitionNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteRequV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="requisition" type="ax21:RequTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="articlePoolDataRecord" type="ax21:APDTypeV01"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParSendAPDV02">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="articlePoolDataRecord" type="ax21:APDTypeV02"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetSendAPDV02">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteAllAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParDeleteAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="articleNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetDeleteAPDV01">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RetReadQjournalV01">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="qjournalPosition" type="ax21:QjournalPosTypeV01"/>
+          <xs:element minOccurs="1" name="returnValue" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorNumber" type="xs:int"/>
+          <xs:element minOccurs="0" name="returnErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="returnErrorIndex" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://main.jws.com.hanel.de">
+      <xs:import namespace="http://main.jws.com.hanel.de/xsd"/>
+      <xs:element name="readAMDReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadAMDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAMDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAMDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllAMDReqV01">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllAMDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllAMDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAllAMDReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendAllAMDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAllAMDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendAllAMDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOpjournalReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadOpjournalV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOpjournalResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadOpjournalV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOrdRecomReqV01">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOrdRecomReqV02">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadOrdRecomV02"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOrdRecomResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadOrdRecomV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readOrdRecomResV02">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadOrdRecomV02"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendJobsReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendJobsV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendJobsResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendJobsV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readJobReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadJobV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readJobResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadJobV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllJobsReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadAllJobsV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllJobsResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllJobsV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllJobsSumReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadAllJobsSumV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllJobsSumResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllJobsSumV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteJobReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParDeleteJobV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteJobResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteJobV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAllJobsReqV01">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAllJobsResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteAllJobsV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendRequReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendRequV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendRequResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendRequV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readRequReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParReadRequV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readRequResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadRequV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllRequReqV01">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllRequResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllRequV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllRequSumReqV01">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readAllRequSumResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadAllRequSumV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAPDReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendAPDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAPDReqV02">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParSendAPDV02"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteRequReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParDeleteRequV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteRequResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteRequV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAPDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendAPDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendAPDResV02">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetSendAPDV02"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAllAPDReqV01">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAllAPDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteAllAPDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAPDReqV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="param" type="ax21:ParDeleteAPDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteAPDResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetDeleteAPDV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readQjournalReqV01">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="readQjournalResV01">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" name="return" type="ax21:RetReadQjournalV01"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="readRequResV01">
+    <wsdl:part name="parameters" element="ns:readRequResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readRequReqV01">
+    <wsdl:part name="parameters" element="ns:readRequReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllRequSumReqV01">
+    <wsdl:part name="parameters" element="ns:readAllRequSumReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readJobResV01">
+    <wsdl:part name="parameters" element="ns:readJobResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllJobsReqV01">
+    <wsdl:part name="parameters" element="ns:readAllJobsReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllRequSumResV01">
+    <wsdl:part name="parameters" element="ns:readAllRequSumResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllJobsSumResV01">
+    <wsdl:part name="parameters" element="ns:readAllJobsSumResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllJobsSumReqV01">
+    <wsdl:part name="parameters" element="ns:readAllJobsSumReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllJobsResV01">
+    <wsdl:part name="parameters" element="ns:readAllJobsResV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendAllAMDReqV01">
+    <wsdl:part name="parameters" element="ns:sendAllAMDReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readQjournalResV01">
+    <wsdl:part name="parameters" element="ns:readQjournalResV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendRequResV01">
+    <wsdl:part name="parameters" element="ns:sendRequResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readQjournalReqV01">
+    <wsdl:part name="parameters" element="ns:readQjournalReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllRequReqV01">
+    <wsdl:part name="parameters" element="ns:readAllRequReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteJobResV01">
+    <wsdl:part name="parameters" element="ns:deleteJobResV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteAPDResV01">
+    <wsdl:part name="parameters" element="ns:deleteAPDResV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteJobReqV01">
+    <wsdl:part name="parameters" element="ns:deleteJobReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteAPDReqV01">
+    <wsdl:part name="parameters" element="ns:deleteAPDReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readOpjournalResV01">
+    <wsdl:part name="parameters" element="ns:readOpjournalResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllRequResV01">
+    <wsdl:part name="parameters" element="ns:readAllRequResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readOpjournalReqV01">
+    <wsdl:part name="parameters" element="ns:readOpjournalReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendRequReqV01">
+    <wsdl:part name="parameters" element="ns:sendRequReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendAllAMDResV01">
+    <wsdl:part name="parameters" element="ns:sendAllAMDResV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendAPDReqV02">
+    <wsdl:part name="parameters" element="ns:sendAPDReqV02"/>
+  </wsdl:message>
+  <wsdl:message name="sendAPDReqV01">
+    <wsdl:part name="parameters" element="ns:sendAPDReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendAPDResV01">
+    <wsdl:part name="parameters" element="ns:sendAPDResV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendAPDResV02">
+    <wsdl:part name="parameters" element="ns:sendAPDResV02"/>
+  </wsdl:message>
+  <wsdl:message name="readAMDReqV01">
+    <wsdl:part name="parameters" element="ns:readAMDReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteAllAPDResV01">
+    <wsdl:part name="parameters" element="ns:deleteAllAPDResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllAMDResV01">
+    <wsdl:part name="parameters" element="ns:readAllAMDResV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendJobsResV01">
+    <wsdl:part name="parameters" element="ns:sendJobsResV01"/>
+  </wsdl:message>
+  <wsdl:message name="sendJobsReqV01">
+    <wsdl:part name="parameters" element="ns:sendJobsReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAMDResV01">
+    <wsdl:part name="parameters" element="ns:readAMDResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readJobReqV01">
+    <wsdl:part name="parameters" element="ns:readJobReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readAllAMDReqV01">
+    <wsdl:part name="parameters" element="ns:readAllAMDReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteRequResV01">
+    <wsdl:part name="parameters" element="ns:deleteRequResV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteRequReqV01">
+    <wsdl:part name="parameters" element="ns:deleteRequReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readOrdRecomResV02">
+    <wsdl:part name="parameters" element="ns:readOrdRecomResV02"/>
+  </wsdl:message>
+  <wsdl:message name="readOrdRecomResV01">
+    <wsdl:part name="parameters" element="ns:readOrdRecomResV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteAllJobsResV01">
+    <wsdl:part name="parameters" element="ns:deleteAllJobsResV01"/>
+  </wsdl:message>
+  <wsdl:message name="readOrdRecomReqV01">
+    <wsdl:part name="parameters" element="ns:readOrdRecomReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="deleteAllAPDReqV01">
+    <wsdl:part name="parameters" element="ns:deleteAllAPDReqV01"/>
+  </wsdl:message>
+  <wsdl:message name="readOrdRecomReqV02">
+    <wsdl:part name="parameters" element="ns:readOrdRecomReqV02"/>
+  </wsdl:message>
+  <wsdl:message name="deleteAllJobsReqV01">
+    <wsdl:part name="parameters" element="ns:deleteAllJobsReqV01"/>
+  </wsdl:message>
+  <wsdl:portType name="ComPortType">
+    <wsdl:operation name="readAMDV01">
+      <wsdl:documentation>Read article master data from a defined article</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAMDReqV01" message="ns:readAMDReqV01"/>
+      <wsdl:output wsaw:Action="urn:readAMDResV01" message="ns:readAMDResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readAllAMDV01">
+      <wsdl:documentation>Read all article master data (backup)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllAMDReqV01" message="ns:readAllAMDReqV01"/>
+      <wsdl:output wsaw:Action="urn:readAllAMDResV01" message="ns:readAllAMDResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendAllAMDV01">
+      <wsdl:documentation>Send all article master data (to a empty MP storage)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendAllAMDReqV01" message="ns:sendAllAMDReqV01"/>
+      <wsdl:output wsaw:Action="urn:sendAllAMDResV01" message="ns:sendAllAMDResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readOpjournalV01">
+      <wsdl:documentation>Read operation journal information</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readOpjournalReqV01" message="ns:readOpjournalReqV01"/>
+      <wsdl:output wsaw:Action="urn:readOpjournalResV01" message="ns:readOpjournalResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV01">
+      <wsdl:documentation>Read order recommendation information</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readOrdRecomReqV01" message="ns:readOrdRecomReqV01"/>
+      <wsdl:output wsaw:Action="urn:readOrdRecomResV01" message="ns:readOrdRecomResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV02">
+      <wsdl:documentation>Read order recommendation information V02</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readOrdRecomReqV02" message="ns:readOrdRecomReqV02"/>
+      <wsdl:output wsaw:Action="urn:readOrdRecomResV02" message="ns:readOrdRecomResV02"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendJobsV01">
+      <wsdl:documentation>Send jobs</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendJobsReqV01" message="ns:sendJobsReqV01"/>
+      <wsdl:output wsaw:Action="urn:sendJobsResV01" message="ns:sendJobsResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readJobV01">
+      <wsdl:documentation>Read a defined job</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readJobReqV01" message="ns:readJobReqV01"/>
+      <wsdl:output wsaw:Action="urn:readJobResV01" message="ns:readJobResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsV01">
+      <wsdl:documentation>Read all jobs (mode = 0 -> all, mode = 1 -> processed)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllJobsReqV01" message="ns:readAllJobsReqV01"/>
+      <wsdl:output wsaw:Action="urn:readAllJobsResV01" message="ns:readAllJobsResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsSumV01">
+      <wsdl:documentation>Read all jobs - summary (mode = 0 -> all, mode = 1 -> processed)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllJobsSumReqV01" message="ns:readAllJobsSumReqV01"/>
+      <wsdl:output wsaw:Action="urn:readAllJobsSumResV01" message="ns:readAllJobsSumResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteJobV01">
+      <wsdl:documentation>Delete a defined job</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteJobReqV01" message="ns:deleteJobReqV01"/>
+      <wsdl:output wsaw:Action="urn:deleteJobResV01" message="ns:deleteJobResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllJobsV01">
+      <wsdl:documentation>Delete all jobs</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteAllJobsReqV01" message="ns:deleteAllJobsReqV01"/>
+      <wsdl:output wsaw:Action="urn:deleteAllJobsResV01" message="ns:deleteAllJobsResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendRequV01">
+      <wsdl:documentation>Send requisitions</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendRequReqV01" message="ns:sendRequReqV01"/>
+      <wsdl:output wsaw:Action="urn:sendRequResV01" message="ns:sendRequResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readRequV01">
+      <wsdl:documentation>Read a defined requisition</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readRequReqV01" message="ns:readRequReqV01"/>
+      <wsdl:output wsaw:Action="urn:readRequResV01" message="ns:readRequResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequV01">
+      <wsdl:documentation>Read all requisitions</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllRequReqV01" message="ns:readAllRequReqV01"/>
+      <wsdl:output wsaw:Action="urn:readAllRequResV01" message="ns:readAllRequResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequSumV01">
+      <wsdl:documentation>Read all requisitions - summary</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readAllRequSumReqV01" message="ns:readAllRequSumReqV01"/>
+      <wsdl:output wsaw:Action="urn:readAllRequSumResV01" message="ns:readAllRequSumResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequV01">
+      <wsdl:documentation>Delete a defined requisition</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteRequReqV01" message="ns:deleteRequReqV01"/>
+      <wsdl:output wsaw:Action="urn:deleteRequResV01" message="ns:deleteRequResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV01">
+      <wsdl:documentation>Send article pool data records</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendAPDReqV01" message="ns:sendAPDReqV01"/>
+      <wsdl:output wsaw:Action="urn:sendAPDResV01" message="ns:sendAPDResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV02">
+      <wsdl:documentation>Send article pool data records</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:sendAPDReqV02" message="ns:sendAPDReqV02"/>
+      <wsdl:output wsaw:Action="urn:sendAPDResV02" message="ns:sendAPDResV02"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllAPDV01">
+      <wsdl:documentation>Delete all article pool data</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteAllAPDReqV01" message="ns:deleteAllAPDReqV01"/>
+      <wsdl:output wsaw:Action="urn:deleteAllAPDResV01" message="ns:deleteAllAPDResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAPDV01">
+      <wsdl:documentation>Delete article pool data</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:deleteAPDReqV01" message="ns:deleteAPDReqV01"/>
+      <wsdl:output wsaw:Action="urn:deleteAPDResV01" message="ns:deleteAPDResV01"/>
+    </wsdl:operation>
+    <wsdl:operation name="readQjournalV01">
+      <wsdl:documentation>Read quantity journal information</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:readQjournalReqV01" message="ns:readQjournalReqV01"/>
+      <wsdl:output wsaw:Action="urn:readQjournalResV01" message="ns:readQjournalResV01"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ComSoap11Binding" type="ns:ComPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="readAMDV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllAMDV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAllAMDV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOpjournalV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV02">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendJobsV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readJobV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsSumV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteJobV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllJobsV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendRequV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readRequV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequSumV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV02">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllAPDV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAPDV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readQjournalV01">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ComHttpBinding" type="ns:ComPortType">
+    <http:binding verb="POST"/>
+    <wsdl:operation name="readAMDV01">
+      <http:operation location="readAMDV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllAMDV01">
+      <http:operation location="readAllAMDV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAllAMDV01">
+      <http:operation location="setAllAMDV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOpjournalV01">
+      <http:operation location="readOpjournalV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV01">
+      <http:operation location="readOrdRecomV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readOrdRecomV02">
+      <http:operation location="readOrdRecomV02"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readJobV01">
+      <http:operation location="readJobV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsV01">
+      <http:operation location="readAllJobsV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllJobsSumV01">
+      <http:operation location="readAllJobsSumV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteJobV01">
+      <http:operation location="deleteJobV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllJobsV01">
+      <http:operation location="deleteAllJobsV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendAPDV01">
+      <http:operation location="sendAPDV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendRequV01">
+      <http:operation location="setRequV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequV01">
+      <http:operation location="readAllRequV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readAllRequSumV01">
+      <http:operation location="readAllRequSumV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readRequV01">
+      <http:operation location="readRequV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRequV01">
+      <http:operation location="deleteRequV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllAPDV01">
+      <http:operation location="deleteAllAPDV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAPDV01">
+      <http:operation location="deleteAPDV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="readQjournalV01">
+      <http:operation location="readQjournalV01"/>
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Com">
+    <wsdl:documentation>Webservice interface between Haenel MP12N-S / MP100D controls and Hostsystems</wsdl:documentation>
+    <wsdl:port name="ComHttpsSoap11Endpoint" binding="ns:ComSoap11Binding">
+      <soap:address location="https://192.168.1.254/jwscom/services/Com.ComHttpsSoap11Endpoint/"/>
+    </wsdl:port>
+    <wsdl:port name="ComHttpSoap11Endpoint" binding="ns:ComSoap11Binding">
+      <soap:address location="http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:endpoint>http://DESKTOP-1L64NN6:8088/mockComSoap11Binding</con:endpoint><con:endpoint>https://192.168.1.254/jwscom/services/Com.ComHttpsSoap11Endpoint/</con:endpoint></con:endpoints><con:operation id="0aeeebd0-71a8-4509-84a9-ec8330a3cf3d" isOneWay="false" action="" name="deleteAllAPDV01" bindingOperationName="deleteAllAPDV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="72c3598e-5ed3-43a4-ab67-c7d0bc1d1fff" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:deleteAllAPDReqV01/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteAllAPDReqV01"/></con:call></con:operation><con:operation id="ee86c9e2-965d-49d0-a3ab-4f79425bebe2" isOneWay="false" action="" name="deleteAllJobsV01" bindingOperationName="deleteAllJobsV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="92e697e9-ba15-415e-9e65-609e6b41bbfb" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:deleteAllJobsReqV01/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteAllJobsReqV01"/></con:call></con:operation><con:operation id="6f879d97-ed72-43f6-a423-5ec57bf8212b" isOneWay="false" action="" name="deleteAPDV01" bindingOperationName="deleteAPDV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1baa2642-8c23-4a69-bb89-86c1c451b05c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:deleteAPDReqV01>\r
+         <main:param>\r
+            <xsd:articleNumber>?</xsd:articleNumber>\r
+         </main:param>\r
+      </main:deleteAPDReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteAPDReqV01"/></con:call></con:operation><con:operation id="45722bf0-a07f-4eaf-ae0f-b512432f3434" isOneWay="false" action="" name="deleteJobV01" bindingOperationName="deleteJobV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6eab4f08-a8a4-463d-b530-298785dc8241" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:deleteJobReqV01>\r
+         <main:param>\r
+            <xsd:jobNumber>?</xsd:jobNumber>\r
+         </main:param>\r
+      </main:deleteJobReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteJobReqV01"/></con:call></con:operation><con:operation id="9d719b6a-191a-4f2d-b536-449d08a6d70c" isOneWay="false" action="" name="deleteRequV01" bindingOperationName="deleteRequV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b7d72f30-41eb-4887-8617-f49832299cf1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:deleteRequReqV01>\r
+         <main:param>\r
+            <xsd:requisitionNumber>?</xsd:requisitionNumber>\r
+         </main:param>\r
+      </main:deleteRequReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteRequReqV01"/></con:call></con:operation><con:operation id="97b2762a-6c67-4788-ada4-2c69a09a9d04" isOneWay="false" action="" name="readAllAMDV01" bindingOperationName="readAllAMDV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b25aa44f-49d4-405c-bf81-8ab76f75816b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-1L64NN6:8088/mockComSoap11Binding</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readAllAMDReqV01/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllAMDReqV01"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="cfed1019-b762-449f-9dc5-579aae4611b6" isOneWay="false" action="" name="readAllJobsSumV01" bindingOperationName="readAllJobsSumV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="dac2f702-a775-4f46-8835-27f1977ebc4b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readAllJobsSumReqV01>\r
+         <main:param>\r
+            <xsd:mode>?</xsd:mode>\r
+         </main:param>\r
+      </main:readAllJobsSumReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllJobsSumReqV01"/></con:call></con:operation><con:operation id="ed411b9f-0e0e-4809-a47e-dce380c1d036" isOneWay="false" action="" name="readAllJobsV01" bindingOperationName="readAllJobsV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="85b49e98-f890-4322-9abf-88a98dcbc060" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readAllJobsReqV01>\r
+         <main:param>\r
+            <xsd:mode>?</xsd:mode>\r
+         </main:param>\r
+      </main:readAllJobsReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllJobsReqV01"/></con:call></con:operation><con:operation id="5377c88d-7531-4eac-ae73-c40c76c46b93" isOneWay="false" action="" name="readAllRequSumV01" bindingOperationName="readAllRequSumV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a0afa455-ef5e-4dc4-9fd4-16b92106a715" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readAllRequSumReqV01/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllRequSumReqV01"/></con:call></con:operation><con:operation id="1abe7669-12c1-4d18-a7e5-9c962400918c" isOneWay="false" action="" name="readAllRequV01" bindingOperationName="readAllRequV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="274a6811-b105-4ab9-8478-22cff95e8cd1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readAllRequReqV01/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllRequReqV01"/></con:call></con:operation><con:operation id="9e4dd281-3982-4cf9-8314-6621f9ac31d1" isOneWay="false" action="" name="readAMDV01" bindingOperationName="readAMDV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="265373a0-1775-4353-9d16-0eafae90235c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readAMDReqV01>\r
+         <main:param>\r
+            <xsd:articleNumber>?</xsd:articleNumber>\r
+         </main:param>\r
+      </main:readAMDReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAMDReqV01"/></con:call></con:operation><con:operation id="25ccd876-a598-4afe-862b-0f7c9e11ab49" isOneWay="false" action="" name="readJobV01" bindingOperationName="readJobV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1310de7c-2d3c-4f75-99ff-d5828ef194e4" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readJobReqV01>\r
+         <main:param>\r
+            <xsd:jobNumber>?</xsd:jobNumber>\r
+         </main:param>\r
+      </main:readJobReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readJobReqV01"/></con:call></con:operation><con:operation id="fd4b59a5-7263-4b71-8268-5c6a1557ff4f" isOneWay="false" action="" name="readOpjournalV01" bindingOperationName="readOpjournalV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="cacb6221-ad9c-4e26-8ccd-13ea0eb8dfeb" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readOpjournalReqV01>\r
+         <main:param>\r
+            <xsd:modus>?</xsd:modus>\r
+         </main:param>\r
+      </main:readOpjournalReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readOpjournalReqV01"/></con:call></con:operation><con:operation id="9b6eee32-e3ca-468e-a0d4-704a5938d303" isOneWay="false" action="" name="readOrdRecomV01" bindingOperationName="readOrdRecomV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2f9b6135-308a-4826-bac3-9281f188361c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readOrdRecomReqV01/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readOrdRecomReqV01"/></con:call></con:operation><con:operation id="02c27efe-3e4e-4e34-bbab-8d69fd9c3070" isOneWay="false" action="" name="readOrdRecomV02" bindingOperationName="readOrdRecomV02" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="baa8a7a4-3805-4df9-a285-0b98fe4e1ee8" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readOrdRecomReqV02>\r
+         <main:param>\r
+            <xsd:modus>?</xsd:modus>\r
+         </main:param>\r
+      </main:readOrdRecomReqV02>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readOrdRecomReqV02"/></con:call></con:operation><con:operation id="55d6d3c8-7217-49c2-811b-6d1e556cd9e4" isOneWay="false" action="" name="readQjournalV01" bindingOperationName="readQjournalV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="61e059ec-e03a-4263-82d1-cff380572374" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readQjournalReqV01/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readQjournalReqV01"/></con:call></con:operation><con:operation id="08252c4b-ca3a-478a-82e7-65ab46676555" isOneWay="false" action="" name="readRequV01" bindingOperationName="readRequV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6ab463cd-e15f-4726-9e28-7afd961eec8f" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readRequReqV01>\r
+         <main:param>\r
+            <xsd:requisitionNumber>?</xsd:requisitionNumber>\r
+         </main:param>\r
+      </main:readRequReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readRequReqV01"/></con:call></con:operation><con:operation id="b7ad0167-8a9e-433d-b4ff-3d9a2e2f9b91" isOneWay="false" action="" name="sendAllAMDV01" bindingOperationName="sendAllAMDV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fcce17f3-fbb0-4b70-a0d1-6fa8e4c14571" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:sendAllAMDReqV01>\r
+         <main:param>\r
+            <!--1 or more repetitions:-->\r
+            <xsd:article>\r
+               <xsd:articleNumber>?</xsd:articleNumber>\r
+               <!--Optional:-->\r
+               <xsd:articleName>?</xsd:articleName>\r
+               <xsd:liftNumber>?</xsd:liftNumber>\r
+               <xsd:shelfNumber>?</xsd:shelfNumber>\r
+               <xsd:compartmentNumber>?</xsd:compartmentNumber>\r
+               <xsd:compartmentDepthNumber>?</xsd:compartmentDepthNumber>\r
+               <!--Optional:-->\r
+               <xsd:containerSize>?</xsd:containerSize>\r
+               <xsd:fifo>?</xsd:fifo>\r
+               <xsd:inventoryAtStorageLocation>?</xsd:inventoryAtStorageLocation>\r
+               <!--Optional:-->\r
+               <xsd:minimumInventory>?</xsd:minimumInventory>\r
+               <!--Optional:-->\r
+               <xsd:h01SpecialField>?</xsd:h01SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h02SpecialField>?</xsd:h02SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h03SpecialField>?</xsd:h03SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h04SpecialField>?</xsd:h04SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h05SpecialField>?</xsd:h05SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h06SpecialField>?</xsd:h06SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h07SpecialField>?</xsd:h07SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h08SpecialField>?</xsd:h08SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h09SpecialField>?</xsd:h09SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h10SpecialField>?</xsd:h10SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h11SpecialField>?</xsd:h11SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h12SpecialField>?</xsd:h12SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h13SpecialField>?</xsd:h13SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h14SpecialField>?</xsd:h14SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h15SpecialField>?</xsd:h15SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h16SpecialField>?</xsd:h16SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h17SpecialField>?</xsd:h17SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h18SpecialField>?</xsd:h18SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h19SpecialField>?</xsd:h19SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h20SpecialField>?</xsd:h20SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h21SpecialField>?</xsd:h21SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h22SpecialField>?</xsd:h22SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h23SpecialField>?</xsd:h23SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h24SpecialField>?</xsd:h24SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h25SpecialField>?</xsd:h25SpecialField>\r
+            </xsd:article>\r
+         </main:param>\r
+      </main:sendAllAMDReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendAllAMDReqV01"/></con:call></con:operation><con:operation id="5850ad92-b7d3-46b0-a1cd-a4edb4817d1c" isOneWay="false" action="" name="sendAPDV01" bindingOperationName="sendAPDV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="43e2fd83-af26-4876-9068-ed9c35f2d18c" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:sendAPDReqV01>\r
+         <main:param>\r
+            <!--1 or more repetitions:-->\r
+            <xsd:articlePoolDataRecord>\r
+               <xsd:articleNumber>?</xsd:articleNumber>\r
+               <!--Optional:-->\r
+               <xsd:articleName>?</xsd:articleName>\r
+               <!--Optional:-->\r
+               <xsd:minimumInventory>?</xsd:minimumInventory>\r
+               <!--Optional:-->\r
+               <xsd:h01SpecialField>?</xsd:h01SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h02SpecialField>?</xsd:h02SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h03SpecialField>?</xsd:h03SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h04SpecialField>?</xsd:h04SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h05SpecialField>?</xsd:h05SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h06SpecialField>?</xsd:h06SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h07SpecialField>?</xsd:h07SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h08SpecialField>?</xsd:h08SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h09SpecialField>?</xsd:h09SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h10SpecialField>?</xsd:h10SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h11SpecialField>?</xsd:h11SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h12SpecialField>?</xsd:h12SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h13SpecialField>?</xsd:h13SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h14SpecialField>?</xsd:h14SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h15SpecialField>?</xsd:h15SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h16SpecialField>?</xsd:h16SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h17SpecialField>?</xsd:h17SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h18SpecialField>?</xsd:h18SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h19SpecialField>?</xsd:h19SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h20SpecialField>?</xsd:h20SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h21SpecialField>?</xsd:h21SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h22SpecialField>?</xsd:h22SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h23SpecialField>?</xsd:h23SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h24SpecialField>?</xsd:h24SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h25SpecialField>?</xsd:h25SpecialField>\r
+            </xsd:articlePoolDataRecord>\r
+         </main:param>\r
+      </main:sendAPDReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendAPDReqV01"/></con:call></con:operation><con:operation id="ff226a9a-ba3a-45e9-9012-a27e8f7b28dd" isOneWay="false" action="" name="sendAPDV02" bindingOperationName="sendAPDV02" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="33627c9f-b303-45b7-a6cd-3d5d0b998772" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:sendAPDReqV02>\r
+         <main:param>\r
+            <!--1 or more repetitions:-->\r
+            <xsd:articlePoolDataRecord>\r
+               <xsd:articleNumber>?</xsd:articleNumber>\r
+               <!--Optional:-->\r
+               <xsd:articleName>?</xsd:articleName>\r
+               <!--Optional:-->\r
+               <xsd:minimumInventory>?</xsd:minimumInventory>\r
+               <!--Optional:-->\r
+               <xsd:containerSize>?</xsd:containerSize>\r
+               <!--Optional:-->\r
+               <xsd:h01SpecialField>?</xsd:h01SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h02SpecialField>?</xsd:h02SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h03SpecialField>?</xsd:h03SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h04SpecialField>?</xsd:h04SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h05SpecialField>?</xsd:h05SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h06SpecialField>?</xsd:h06SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h07SpecialField>?</xsd:h07SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h08SpecialField>?</xsd:h08SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h09SpecialField>?</xsd:h09SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h10SpecialField>?</xsd:h10SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h11SpecialField>?</xsd:h11SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h12SpecialField>?</xsd:h12SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h13SpecialField>?</xsd:h13SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h14SpecialField>?</xsd:h14SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h15SpecialField>?</xsd:h15SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h16SpecialField>?</xsd:h16SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h17SpecialField>?</xsd:h17SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h18SpecialField>?</xsd:h18SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h19SpecialField>?</xsd:h19SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h20SpecialField>?</xsd:h20SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h21SpecialField>?</xsd:h21SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h22SpecialField>?</xsd:h22SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h23SpecialField>?</xsd:h23SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h24SpecialField>?</xsd:h24SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:h25SpecialField>?</xsd:h25SpecialField>\r
+            </xsd:articlePoolDataRecord>\r
+         </main:param>\r
+      </main:sendAPDReqV02>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendAPDReqV02"/></con:call></con:operation><con:operation id="c74bf65e-300a-42a7-9e91-8bde09ded4c6" isOneWay="false" action="" name="sendJobsV01" bindingOperationName="sendJobsV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="472f6487-64d8-42a7-ab1e-eedcde050511" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:sendJobsReqV01>\r
+         <main:param>\r
+            <!--1 or more repetitions:-->\r
+            <xsd:job>\r
+               <xsd:jobNumber>?</xsd:jobNumber>\r
+               <!--Optional:-->\r
+               <xsd:jobPriority>?</xsd:jobPriority>\r
+               <!--Optional:-->\r
+               <xsd:jobStatus>?</xsd:jobStatus>\r
+               <!--Optional:-->\r
+               <xsd:jobDate>?</xsd:jobDate>\r
+               <!--Optional:-->\r
+               <xsd:jobTime>?</xsd:jobTime>\r
+               <!--Optional:-->\r
+               <xsd:c01SpecialField>?</xsd:c01SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c02SpecialField>?</xsd:c02SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c03SpecialField>?</xsd:c03SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c04SpecialField>?</xsd:c04SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c05SpecialField>?</xsd:c05SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c06SpecialField>?</xsd:c06SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c07SpecialField>?</xsd:c07SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c08SpecialField>?</xsd:c08SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c09SpecialField>?</xsd:c09SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c10SpecialField>?</xsd:c10SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c11SpecialField>?</xsd:c11SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c12SpecialField>?</xsd:c12SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c13SpecialField>?</xsd:c13SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c14SpecialField>?</xsd:c14SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c15SpecialField>?</xsd:c15SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c16SpecialField>?</xsd:c16SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c17SpecialField>?</xsd:c17SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c18SpecialField>?</xsd:c18SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c19SpecialField>?</xsd:c19SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c20SpecialField>?</xsd:c20SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c21SpecialField>?</xsd:c21SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c22SpecialField>?</xsd:c22SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c23SpecialField>?</xsd:c23SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c24SpecialField>?</xsd:c24SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c25SpecialField>?</xsd:c25SpecialField>\r
+               <!--1 or more repetitions:-->\r
+               <xsd:JobPosition>\r
+                  <xsd:articleNumber>?</xsd:articleNumber>\r
+                  <xsd:operation>?</xsd:operation>\r
+                  <xsd:nominalQuantity>?</xsd:nominalQuantity>\r
+                  <!--Optional:-->\r
+                  <xsd:actualQuantity>?</xsd:actualQuantity>\r
+                  <!--Optional:-->\r
+                  <xsd:containerSize>?</xsd:containerSize>\r
+                  <!--Optional:-->\r
+                  <xsd:positionStatus>?</xsd:positionStatus>\r
+                  <!--Optional:-->\r
+                  <xsd:property>?</xsd:property>\r
+                  <!--Optional:-->\r
+                  <xsd:u01SpecialField>?</xsd:u01SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u02SpecialField>?</xsd:u02SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u03SpecialField>?</xsd:u03SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u04SpecialField>?</xsd:u04SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u05SpecialField>?</xsd:u05SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u06SpecialField>?</xsd:u06SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u07SpecialField>?</xsd:u07SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u08SpecialField>?</xsd:u08SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u09SpecialField>?</xsd:u09SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u10SpecialField>?</xsd:u10SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u11SpecialField>?</xsd:u11SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u12SpecialField>?</xsd:u12SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u13SpecialField>?</xsd:u13SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u14SpecialField>?</xsd:u14SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u15SpecialField>?</xsd:u15SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u16SpecialField>?</xsd:u16SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u17SpecialField>?</xsd:u17SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u18SpecialField>?</xsd:u18SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u19SpecialField>?</xsd:u19SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u20SpecialField>?</xsd:u20SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u21SpecialField>?</xsd:u21SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u22SpecialField>?</xsd:u22SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u23SpecialField>?</xsd:u23SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u24SpecialField>?</xsd:u24SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u25SpecialField>?</xsd:u25SpecialField>\r
+               </xsd:JobPosition>\r
+            </xsd:job>\r
+         </main:param>\r
+      </main:sendJobsReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendJobsReqV01"/></con:call></con:operation><con:operation id="2fa4699d-b8f4-4c8c-ba55-c73d719f1eb6" isOneWay="false" action="" name="sendRequV01" bindingOperationName="sendRequV01" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="545b64d3-a2d3-448a-8af0-1007fc81cf93" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.254/jwscom/services/Com.ComHttpSoap11Endpoint/</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:sendRequReqV01>\r
+         <main:param>\r
+            <!--1 or more repetitions:-->\r
+            <xsd:requisition>\r
+               <xsd:requisitionNumber>?</xsd:requisitionNumber>\r
+               <!--Optional:-->\r
+               <xsd:requisitionStatus>?</xsd:requisitionStatus>\r
+               <!--Optional:-->\r
+               <xsd:c01SpecialField>?</xsd:c01SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c02SpecialField>?</xsd:c02SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c03SpecialField>?</xsd:c03SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c04SpecialField>?</xsd:c04SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c05SpecialField>?</xsd:c05SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c06SpecialField>?</xsd:c06SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c07SpecialField>?</xsd:c07SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c08SpecialField>?</xsd:c08SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c09SpecialField>?</xsd:c09SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c10SpecialField>?</xsd:c10SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c11SpecialField>?</xsd:c11SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c12SpecialField>?</xsd:c12SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c13SpecialField>?</xsd:c13SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c14SpecialField>?</xsd:c14SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c15SpecialField>?</xsd:c15SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c16SpecialField>?</xsd:c16SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c17SpecialField>?</xsd:c17SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c18SpecialField>?</xsd:c18SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c19SpecialField>?</xsd:c19SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c20SpecialField>?</xsd:c20SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c21SpecialField>?</xsd:c21SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c22SpecialField>?</xsd:c22SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c23SpecialField>?</xsd:c23SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c24SpecialField>?</xsd:c24SpecialField>\r
+               <!--Optional:-->\r
+               <xsd:c25SpecialField>?</xsd:c25SpecialField>\r
+               <!--1 or more repetitions:-->\r
+               <xsd:RequisitionPosition>\r
+                  <xsd:articleNumber>?</xsd:articleNumber>\r
+                  <xsd:operation>?</xsd:operation>\r
+                  <xsd:nominalQuantity>?</xsd:nominalQuantity>\r
+                  <!--Optional:-->\r
+                  <xsd:containerSize>?</xsd:containerSize>\r
+                  <!--Optional:-->\r
+                  <xsd:positionStatus>?</xsd:positionStatus>\r
+                  <!--Optional:-->\r
+                  <xsd:u01SpecialField>?</xsd:u01SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u02SpecialField>?</xsd:u02SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u03SpecialField>?</xsd:u03SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u04SpecialField>?</xsd:u04SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u05SpecialField>?</xsd:u05SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u06SpecialField>?</xsd:u06SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u07SpecialField>?</xsd:u07SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u08SpecialField>?</xsd:u08SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u09SpecialField>?</xsd:u09SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u10SpecialField>?</xsd:u10SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u11SpecialField>?</xsd:u11SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u12SpecialField>?</xsd:u12SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u13SpecialField>?</xsd:u13SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u14SpecialField>?</xsd:u14SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u15SpecialField>?</xsd:u15SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u16SpecialField>?</xsd:u16SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u17SpecialField>?</xsd:u17SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u18SpecialField>?</xsd:u18SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u19SpecialField>?</xsd:u19SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u20SpecialField>?</xsd:u20SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u21SpecialField>?</xsd:u21SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u22SpecialField>?</xsd:u22SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u23SpecialField>?</xsd:u23SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u24SpecialField>?</xsd:u24SpecialField>\r
+                  <!--Optional:-->\r
+                  <xsd:u25SpecialField>?</xsd:u25SpecialField>\r
+               </xsd:RequisitionPosition>\r
+            </xsd:requisition>\r
+         </main:param>\r
+      </main:sendRequReqV01>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendRequReqV01"/></con:call></con:operation></con:interface><con:testSuite id="9265f331-315a-45ab-9bd5-6e35bc93d412" name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="51d2a6c1-e90e-4777-9fb9-7b3c1ae2e5cd" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="request" id="14a2de45-6e3a-4952-a0c1-a71a65dc2952" name="readAllAMDV01 - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ComSoap11Binding</con:interface><con:operation>readAllAMDV01</con:operation><con:request name="readAllAMDV01 - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="02a4dc73-c3e7-47b3-8527-42b0e5338305"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://DESKTOP-1L64NN6:8088/mockComSoap11Binding</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <main:readAllAMDReqV01/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="577d5297-e079-4a32-b6ed-2cb63d99d47c" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllAMDReqV01"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService id="7723d029-6e8f-4d00-a1cd-85c2ac85f563" port="8088" path="/mockComSoap11Binding" host="DESKTOP-1L64NN6" name="ComSoap11Binding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:properties/><con:mockOperation name="readAllAMDV01" id="faa10579-0a2f-4860-a158-8fdf4597f710" interface="ComSoap11Binding" operation="readAllAMDV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="5aeb2ebf-b734-47eb-b4d4-57cbfc19a7d3" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readAllAMDResV01>
+         <main:return>
+            <!--Zero or more repetitions:-->
+            <xsd:article>
+               <xsd:articleNumber>CL0101</xsd:articleNumber>
+               <!--Optional:-->
+               <xsd:articleName>MOCK TRANSPONDER</xsd:articleName>
+               <xsd:liftNumber>1</xsd:liftNumber>
+               <xsd:shelfNumber>2</xsd:shelfNumber>
+               <xsd:compartmentNumber>4</xsd:compartmentNumber>
+               <xsd:compartmentDepthNumber>1</xsd:compartmentDepthNumber>
+               <!--Optional:-->
+               <xsd:containerSize>26</xsd:containerSize>
+               <xsd:fifo>0</xsd:fifo>
+               <xsd:inventoryAtStorageLocation>0</xsd:inventoryAtStorageLocation>
+               <!--Optional:-->
+               <xsd:minimumInventory>0</xsd:minimumInventory>
+               <!--Optional:-->
+               <xsd:h01SpecialField></xsd:h01SpecialField>
+               <!--Optional:-->
+               <xsd:h02SpecialField></xsd:h02SpecialField>
+               <!--Optional:-->
+               <xsd:h03SpecialField></xsd:h03SpecialField>
+               <!--Optional:-->
+               <xsd:h04SpecialField></xsd:h04SpecialField>
+               <!--Optional:-->
+               <xsd:h05SpecialField></xsd:h05SpecialField>
+               <!--Optional:-->
+               <xsd:h06SpecialField></xsd:h06SpecialField>
+               <!--Optional:-->
+               <xsd:h07SpecialField></xsd:h07SpecialField>
+               <!--Optional:-->
+               <xsd:h08SpecialField></xsd:h08SpecialField>
+               <!--Optional:-->
+               <xsd:h09SpecialField></xsd:h09SpecialField>
+               <!--Optional:-->
+               <xsd:h10SpecialField></xsd:h10SpecialField>
+               <!--Optional:-->
+               <xsd:h11SpecialField></xsd:h11SpecialField>
+               <!--Optional:-->
+               <xsd:h12SpecialField></xsd:h12SpecialField>
+               <!--Optional:-->
+               <xsd:h13SpecialField></xsd:h13SpecialField>
+               <!--Optional:-->
+               <xsd:h14SpecialField></xsd:h14SpecialField>
+               <!--Optional:-->
+               <xsd:h15SpecialField></xsd:h15SpecialField>
+               <!--Optional:-->
+               <xsd:h16SpecialField></xsd:h16SpecialField>
+               <!--Optional:-->
+               <xsd:h17SpecialField></xsd:h17SpecialField>
+               <!--Optional:-->
+               <xsd:h18SpecialField></xsd:h18SpecialField>
+               <!--Optional:-->
+               <xsd:h19SpecialField></xsd:h19SpecialField>
+               <!--Optional:-->
+               <xsd:h20SpecialField></xsd:h20SpecialField>
+               <!--Optional:-->
+               <xsd:h21SpecialField></xsd:h21SpecialField>
+               <!--Optional:-->
+               <xsd:h22SpecialField></xsd:h22SpecialField>
+               <!--Optional:-->
+               <xsd:h23SpecialField></xsd:h23SpecialField>
+               <!--Optional:-->
+               <xsd:h24SpecialField></xsd:h24SpecialField>
+               <!--Optional:-->
+               <xsd:h25SpecialField></xsd:h25SpecialField>
+            </xsd:article>
+            <xsd:returnValue>1</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber></xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage></xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex></xsd:returnErrorIndex>
+         </main:return>
+      </main:readAllAMDResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllAMDResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readAllJobsSumV01" id="46b83cea-d021-4941-a283-32f2e60f54d8" interface="ComSoap11Binding" operation="readAllJobsSumV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="0b58726c-be67-407c-b4e9-e966d99c94d8" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readAllJobsSumResV01>
+         <main:return>
+            <!--Zero or more repetitions:-->
+            <xsd:job>
+               <xsd:jobNumber>?</xsd:jobNumber>
+               <!--Optional:-->
+               <xsd:jobPriority>?</xsd:jobPriority>
+               <!--Optional:-->
+               <xsd:jobStatus>?</xsd:jobStatus>
+               <!--Optional:-->
+               <xsd:jobDate>?</xsd:jobDate>
+               <!--Optional:-->
+               <xsd:jobTime>?</xsd:jobTime>
+               <!--Optional:-->
+               <xsd:c01SpecialField>?</xsd:c01SpecialField>
+               <!--Optional:-->
+               <xsd:c02SpecialField>?</xsd:c02SpecialField>
+               <!--Optional:-->
+               <xsd:c03SpecialField>?</xsd:c03SpecialField>
+               <!--Optional:-->
+               <xsd:c04SpecialField>?</xsd:c04SpecialField>
+               <!--Optional:-->
+               <xsd:c05SpecialField>?</xsd:c05SpecialField>
+               <!--Optional:-->
+               <xsd:c06SpecialField>?</xsd:c06SpecialField>
+               <!--Optional:-->
+               <xsd:c07SpecialField>?</xsd:c07SpecialField>
+               <!--Optional:-->
+               <xsd:c08SpecialField>?</xsd:c08SpecialField>
+               <!--Optional:-->
+               <xsd:c09SpecialField>?</xsd:c09SpecialField>
+               <!--Optional:-->
+               <xsd:c10SpecialField>?</xsd:c10SpecialField>
+               <!--Optional:-->
+               <xsd:c11SpecialField>?</xsd:c11SpecialField>
+               <!--Optional:-->
+               <xsd:c12SpecialField>?</xsd:c12SpecialField>
+               <!--Optional:-->
+               <xsd:c13SpecialField>?</xsd:c13SpecialField>
+               <!--Optional:-->
+               <xsd:c14SpecialField>?</xsd:c14SpecialField>
+               <!--Optional:-->
+               <xsd:c15SpecialField>?</xsd:c15SpecialField>
+               <!--Optional:-->
+               <xsd:c16SpecialField>?</xsd:c16SpecialField>
+               <!--Optional:-->
+               <xsd:c17SpecialField>?</xsd:c17SpecialField>
+               <!--Optional:-->
+               <xsd:c18SpecialField>?</xsd:c18SpecialField>
+               <!--Optional:-->
+               <xsd:c19SpecialField>?</xsd:c19SpecialField>
+               <!--Optional:-->
+               <xsd:c20SpecialField>?</xsd:c20SpecialField>
+               <!--Optional:-->
+               <xsd:c21SpecialField>?</xsd:c21SpecialField>
+               <!--Optional:-->
+               <xsd:c22SpecialField>?</xsd:c22SpecialField>
+               <!--Optional:-->
+               <xsd:c23SpecialField>?</xsd:c23SpecialField>
+               <!--Optional:-->
+               <xsd:c24SpecialField>?</xsd:c24SpecialField>
+               <!--Optional:-->
+               <xsd:c25SpecialField>?</xsd:c25SpecialField>
+            </xsd:job>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readAllJobsSumResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllJobsSumResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readAllJobsV01" id="8dd2e5ed-be3a-449a-bfb1-7b86add257fa" interface="ComSoap11Binding" operation="readAllJobsV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="3a8b7069-6309-483f-becf-f64fbc5a5993" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readAllJobsResV01>
+         <main:return>
+            <!--Zero or more repetitions:-->
+            <xsd:job>
+               <xsd:jobNumber>?</xsd:jobNumber>
+               <!--Optional:-->
+               <xsd:jobPriority>?</xsd:jobPriority>
+               <!--Optional:-->
+               <xsd:jobStatus>?</xsd:jobStatus>
+               <!--Optional:-->
+               <xsd:jobDate>?</xsd:jobDate>
+               <!--Optional:-->
+               <xsd:jobTime>?</xsd:jobTime>
+               <!--Optional:-->
+               <xsd:c01SpecialField>?</xsd:c01SpecialField>
+               <!--Optional:-->
+               <xsd:c02SpecialField>?</xsd:c02SpecialField>
+               <!--Optional:-->
+               <xsd:c03SpecialField>?</xsd:c03SpecialField>
+               <!--Optional:-->
+               <xsd:c04SpecialField>?</xsd:c04SpecialField>
+               <!--Optional:-->
+               <xsd:c05SpecialField>?</xsd:c05SpecialField>
+               <!--Optional:-->
+               <xsd:c06SpecialField>?</xsd:c06SpecialField>
+               <!--Optional:-->
+               <xsd:c07SpecialField>?</xsd:c07SpecialField>
+               <!--Optional:-->
+               <xsd:c08SpecialField>?</xsd:c08SpecialField>
+               <!--Optional:-->
+               <xsd:c09SpecialField>?</xsd:c09SpecialField>
+               <!--Optional:-->
+               <xsd:c10SpecialField>?</xsd:c10SpecialField>
+               <!--Optional:-->
+               <xsd:c11SpecialField>?</xsd:c11SpecialField>
+               <!--Optional:-->
+               <xsd:c12SpecialField>?</xsd:c12SpecialField>
+               <!--Optional:-->
+               <xsd:c13SpecialField>?</xsd:c13SpecialField>
+               <!--Optional:-->
+               <xsd:c14SpecialField>?</xsd:c14SpecialField>
+               <!--Optional:-->
+               <xsd:c15SpecialField>?</xsd:c15SpecialField>
+               <!--Optional:-->
+               <xsd:c16SpecialField>?</xsd:c16SpecialField>
+               <!--Optional:-->
+               <xsd:c17SpecialField>?</xsd:c17SpecialField>
+               <!--Optional:-->
+               <xsd:c18SpecialField>?</xsd:c18SpecialField>
+               <!--Optional:-->
+               <xsd:c19SpecialField>?</xsd:c19SpecialField>
+               <!--Optional:-->
+               <xsd:c20SpecialField>?</xsd:c20SpecialField>
+               <!--Optional:-->
+               <xsd:c21SpecialField>?</xsd:c21SpecialField>
+               <!--Optional:-->
+               <xsd:c22SpecialField>?</xsd:c22SpecialField>
+               <!--Optional:-->
+               <xsd:c23SpecialField>?</xsd:c23SpecialField>
+               <!--Optional:-->
+               <xsd:c24SpecialField>?</xsd:c24SpecialField>
+               <!--Optional:-->
+               <xsd:c25SpecialField>?</xsd:c25SpecialField>
+               <!--1 or more repetitions:-->
+               <xsd:JobPosition>
+                  <xsd:articleNumber>?</xsd:articleNumber>
+                  <xsd:operation>?</xsd:operation>
+                  <xsd:nominalQuantity>?</xsd:nominalQuantity>
+                  <!--Optional:-->
+                  <xsd:actualQuantity>?</xsd:actualQuantity>
+                  <!--Optional:-->
+                  <xsd:containerSize>?</xsd:containerSize>
+                  <!--Optional:-->
+                  <xsd:positionStatus>?</xsd:positionStatus>
+                  <!--Optional:-->
+                  <xsd:property>?</xsd:property>
+                  <!--Optional:-->
+                  <xsd:u01SpecialField>?</xsd:u01SpecialField>
+                  <!--Optional:-->
+                  <xsd:u02SpecialField>?</xsd:u02SpecialField>
+                  <!--Optional:-->
+                  <xsd:u03SpecialField>?</xsd:u03SpecialField>
+                  <!--Optional:-->
+                  <xsd:u04SpecialField>?</xsd:u04SpecialField>
+                  <!--Optional:-->
+                  <xsd:u05SpecialField>?</xsd:u05SpecialField>
+                  <!--Optional:-->
+                  <xsd:u06SpecialField>?</xsd:u06SpecialField>
+                  <!--Optional:-->
+                  <xsd:u07SpecialField>?</xsd:u07SpecialField>
+                  <!--Optional:-->
+                  <xsd:u08SpecialField>?</xsd:u08SpecialField>
+                  <!--Optional:-->
+                  <xsd:u09SpecialField>?</xsd:u09SpecialField>
+                  <!--Optional:-->
+                  <xsd:u10SpecialField>?</xsd:u10SpecialField>
+                  <!--Optional:-->
+                  <xsd:u11SpecialField>?</xsd:u11SpecialField>
+                  <!--Optional:-->
+                  <xsd:u12SpecialField>?</xsd:u12SpecialField>
+                  <!--Optional:-->
+                  <xsd:u13SpecialField>?</xsd:u13SpecialField>
+                  <!--Optional:-->
+                  <xsd:u14SpecialField>?</xsd:u14SpecialField>
+                  <!--Optional:-->
+                  <xsd:u15SpecialField>?</xsd:u15SpecialField>
+                  <!--Optional:-->
+                  <xsd:u16SpecialField>?</xsd:u16SpecialField>
+                  <!--Optional:-->
+                  <xsd:u17SpecialField>?</xsd:u17SpecialField>
+                  <!--Optional:-->
+                  <xsd:u18SpecialField>?</xsd:u18SpecialField>
+                  <!--Optional:-->
+                  <xsd:u19SpecialField>?</xsd:u19SpecialField>
+                  <!--Optional:-->
+                  <xsd:u20SpecialField>?</xsd:u20SpecialField>
+                  <!--Optional:-->
+                  <xsd:u21SpecialField>?</xsd:u21SpecialField>
+                  <!--Optional:-->
+                  <xsd:u22SpecialField>?</xsd:u22SpecialField>
+                  <!--Optional:-->
+                  <xsd:u23SpecialField>?</xsd:u23SpecialField>
+                  <!--Optional:-->
+                  <xsd:u24SpecialField>?</xsd:u24SpecialField>
+                  <!--Optional:-->
+                  <xsd:u25SpecialField>?</xsd:u25SpecialField>
+               </xsd:JobPosition>
+            </xsd:job>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readAllJobsResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllJobsResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readAllRequSumV01" id="d5167a46-a752-4f7a-afc6-82f44f88192a" interface="ComSoap11Binding" operation="readAllRequSumV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="b6a1f5f5-da69-495d-bda2-89128943e96d" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readAllRequSumResV01>
+         <main:return>
+            <!--Zero or more repetitions:-->
+            <xsd:requisition>
+               <xsd:requisitionNumber>?</xsd:requisitionNumber>
+               <!--Optional:-->
+               <xsd:requisitionStatus>?</xsd:requisitionStatus>
+               <!--Optional:-->
+               <xsd:c01SpecialField>?</xsd:c01SpecialField>
+               <!--Optional:-->
+               <xsd:c02SpecialField>?</xsd:c02SpecialField>
+               <!--Optional:-->
+               <xsd:c03SpecialField>?</xsd:c03SpecialField>
+               <!--Optional:-->
+               <xsd:c04SpecialField>?</xsd:c04SpecialField>
+               <!--Optional:-->
+               <xsd:c05SpecialField>?</xsd:c05SpecialField>
+               <!--Optional:-->
+               <xsd:c06SpecialField>?</xsd:c06SpecialField>
+               <!--Optional:-->
+               <xsd:c07SpecialField>?</xsd:c07SpecialField>
+               <!--Optional:-->
+               <xsd:c08SpecialField>?</xsd:c08SpecialField>
+               <!--Optional:-->
+               <xsd:c09SpecialField>?</xsd:c09SpecialField>
+               <!--Optional:-->
+               <xsd:c10SpecialField>?</xsd:c10SpecialField>
+               <!--Optional:-->
+               <xsd:c11SpecialField>?</xsd:c11SpecialField>
+               <!--Optional:-->
+               <xsd:c12SpecialField>?</xsd:c12SpecialField>
+               <!--Optional:-->
+               <xsd:c13SpecialField>?</xsd:c13SpecialField>
+               <!--Optional:-->
+               <xsd:c14SpecialField>?</xsd:c14SpecialField>
+               <!--Optional:-->
+               <xsd:c15SpecialField>?</xsd:c15SpecialField>
+               <!--Optional:-->
+               <xsd:c16SpecialField>?</xsd:c16SpecialField>
+               <!--Optional:-->
+               <xsd:c17SpecialField>?</xsd:c17SpecialField>
+               <!--Optional:-->
+               <xsd:c18SpecialField>?</xsd:c18SpecialField>
+               <!--Optional:-->
+               <xsd:c19SpecialField>?</xsd:c19SpecialField>
+               <!--Optional:-->
+               <xsd:c20SpecialField>?</xsd:c20SpecialField>
+               <!--Optional:-->
+               <xsd:c21SpecialField>?</xsd:c21SpecialField>
+               <!--Optional:-->
+               <xsd:c22SpecialField>?</xsd:c22SpecialField>
+               <!--Optional:-->
+               <xsd:c23SpecialField>?</xsd:c23SpecialField>
+               <!--Optional:-->
+               <xsd:c24SpecialField>?</xsd:c24SpecialField>
+               <!--Optional:-->
+               <xsd:c25SpecialField>?</xsd:c25SpecialField>
+            </xsd:requisition>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readAllRequSumResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllRequSumResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readAllRequV01" id="0e5c599b-6347-49b4-8ea1-698aa6e05a51" interface="ComSoap11Binding" operation="readAllRequV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="63a33041-8eb5-465d-b1ca-e692a1e110d1" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readAllRequResV01>
+         <main:return>
+            <!--Zero or more repetitions:-->
+            <xsd:requisition>
+               <xsd:requisitionNumber>?</xsd:requisitionNumber>
+               <!--Optional:-->
+               <xsd:requisitionStatus>?</xsd:requisitionStatus>
+               <!--Optional:-->
+               <xsd:c01SpecialField>?</xsd:c01SpecialField>
+               <!--Optional:-->
+               <xsd:c02SpecialField>?</xsd:c02SpecialField>
+               <!--Optional:-->
+               <xsd:c03SpecialField>?</xsd:c03SpecialField>
+               <!--Optional:-->
+               <xsd:c04SpecialField>?</xsd:c04SpecialField>
+               <!--Optional:-->
+               <xsd:c05SpecialField>?</xsd:c05SpecialField>
+               <!--Optional:-->
+               <xsd:c06SpecialField>?</xsd:c06SpecialField>
+               <!--Optional:-->
+               <xsd:c07SpecialField>?</xsd:c07SpecialField>
+               <!--Optional:-->
+               <xsd:c08SpecialField>?</xsd:c08SpecialField>
+               <!--Optional:-->
+               <xsd:c09SpecialField>?</xsd:c09SpecialField>
+               <!--Optional:-->
+               <xsd:c10SpecialField>?</xsd:c10SpecialField>
+               <!--Optional:-->
+               <xsd:c11SpecialField>?</xsd:c11SpecialField>
+               <!--Optional:-->
+               <xsd:c12SpecialField>?</xsd:c12SpecialField>
+               <!--Optional:-->
+               <xsd:c13SpecialField>?</xsd:c13SpecialField>
+               <!--Optional:-->
+               <xsd:c14SpecialField>?</xsd:c14SpecialField>
+               <!--Optional:-->
+               <xsd:c15SpecialField>?</xsd:c15SpecialField>
+               <!--Optional:-->
+               <xsd:c16SpecialField>?</xsd:c16SpecialField>
+               <!--Optional:-->
+               <xsd:c17SpecialField>?</xsd:c17SpecialField>
+               <!--Optional:-->
+               <xsd:c18SpecialField>?</xsd:c18SpecialField>
+               <!--Optional:-->
+               <xsd:c19SpecialField>?</xsd:c19SpecialField>
+               <!--Optional:-->
+               <xsd:c20SpecialField>?</xsd:c20SpecialField>
+               <!--Optional:-->
+               <xsd:c21SpecialField>?</xsd:c21SpecialField>
+               <!--Optional:-->
+               <xsd:c22SpecialField>?</xsd:c22SpecialField>
+               <!--Optional:-->
+               <xsd:c23SpecialField>?</xsd:c23SpecialField>
+               <!--Optional:-->
+               <xsd:c24SpecialField>?</xsd:c24SpecialField>
+               <!--Optional:-->
+               <xsd:c25SpecialField>?</xsd:c25SpecialField>
+               <!--1 or more repetitions:-->
+               <xsd:RequisitionPosition>
+                  <xsd:articleNumber>?</xsd:articleNumber>
+                  <xsd:operation>?</xsd:operation>
+                  <xsd:nominalQuantity>?</xsd:nominalQuantity>
+                  <!--Optional:-->
+                  <xsd:containerSize>?</xsd:containerSize>
+                  <!--Optional:-->
+                  <xsd:positionStatus>?</xsd:positionStatus>
+                  <!--Optional:-->
+                  <xsd:u01SpecialField>?</xsd:u01SpecialField>
+                  <!--Optional:-->
+                  <xsd:u02SpecialField>?</xsd:u02SpecialField>
+                  <!--Optional:-->
+                  <xsd:u03SpecialField>?</xsd:u03SpecialField>
+                  <!--Optional:-->
+                  <xsd:u04SpecialField>?</xsd:u04SpecialField>
+                  <!--Optional:-->
+                  <xsd:u05SpecialField>?</xsd:u05SpecialField>
+                  <!--Optional:-->
+                  <xsd:u06SpecialField>?</xsd:u06SpecialField>
+                  <!--Optional:-->
+                  <xsd:u07SpecialField>?</xsd:u07SpecialField>
+                  <!--Optional:-->
+                  <xsd:u08SpecialField>?</xsd:u08SpecialField>
+                  <!--Optional:-->
+                  <xsd:u09SpecialField>?</xsd:u09SpecialField>
+                  <!--Optional:-->
+                  <xsd:u10SpecialField>?</xsd:u10SpecialField>
+                  <!--Optional:-->
+                  <xsd:u11SpecialField>?</xsd:u11SpecialField>
+                  <!--Optional:-->
+                  <xsd:u12SpecialField>?</xsd:u12SpecialField>
+                  <!--Optional:-->
+                  <xsd:u13SpecialField>?</xsd:u13SpecialField>
+                  <!--Optional:-->
+                  <xsd:u14SpecialField>?</xsd:u14SpecialField>
+                  <!--Optional:-->
+                  <xsd:u15SpecialField>?</xsd:u15SpecialField>
+                  <!--Optional:-->
+                  <xsd:u16SpecialField>?</xsd:u16SpecialField>
+                  <!--Optional:-->
+                  <xsd:u17SpecialField>?</xsd:u17SpecialField>
+                  <!--Optional:-->
+                  <xsd:u18SpecialField>?</xsd:u18SpecialField>
+                  <!--Optional:-->
+                  <xsd:u19SpecialField>?</xsd:u19SpecialField>
+                  <!--Optional:-->
+                  <xsd:u20SpecialField>?</xsd:u20SpecialField>
+                  <!--Optional:-->
+                  <xsd:u21SpecialField>?</xsd:u21SpecialField>
+                  <!--Optional:-->
+                  <xsd:u22SpecialField>?</xsd:u22SpecialField>
+                  <!--Optional:-->
+                  <xsd:u23SpecialField>?</xsd:u23SpecialField>
+                  <!--Optional:-->
+                  <xsd:u24SpecialField>?</xsd:u24SpecialField>
+                  <!--Optional:-->
+                  <xsd:u25SpecialField>?</xsd:u25SpecialField>
+               </xsd:RequisitionPosition>
+            </xsd:requisition>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readAllRequResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAllRequResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readAMDV01" id="0b056c8d-77d5-41ee-8a45-f2b26a047aed" interface="ComSoap11Binding" operation="readAMDV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="79ebafb7-c7e6-4035-8076-c37cbcad0c02" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readAMDResV01>
+         <main:return>
+            <!--Zero or more repetitions:-->
+            <xsd:article>
+               <xsd:articleNumber>?</xsd:articleNumber>
+               <!--Optional:-->
+               <xsd:articleName>?</xsd:articleName>
+               <xsd:liftNumber>?</xsd:liftNumber>
+               <xsd:shelfNumber>?</xsd:shelfNumber>
+               <xsd:compartmentNumber>?</xsd:compartmentNumber>
+               <xsd:compartmentDepthNumber>?</xsd:compartmentDepthNumber>
+               <!--Optional:-->
+               <xsd:containerSize>?</xsd:containerSize>
+               <xsd:fifo>?</xsd:fifo>
+               <xsd:inventoryAtStorageLocation>?</xsd:inventoryAtStorageLocation>
+               <!--Optional:-->
+               <xsd:minimumInventory>?</xsd:minimumInventory>
+               <!--Optional:-->
+               <xsd:h01SpecialField>?</xsd:h01SpecialField>
+               <!--Optional:-->
+               <xsd:h02SpecialField>?</xsd:h02SpecialField>
+               <!--Optional:-->
+               <xsd:h03SpecialField>?</xsd:h03SpecialField>
+               <!--Optional:-->
+               <xsd:h04SpecialField>?</xsd:h04SpecialField>
+               <!--Optional:-->
+               <xsd:h05SpecialField>?</xsd:h05SpecialField>
+               <!--Optional:-->
+               <xsd:h06SpecialField>?</xsd:h06SpecialField>
+               <!--Optional:-->
+               <xsd:h07SpecialField>?</xsd:h07SpecialField>
+               <!--Optional:-->
+               <xsd:h08SpecialField>?</xsd:h08SpecialField>
+               <!--Optional:-->
+               <xsd:h09SpecialField>?</xsd:h09SpecialField>
+               <!--Optional:-->
+               <xsd:h10SpecialField>?</xsd:h10SpecialField>
+               <!--Optional:-->
+               <xsd:h11SpecialField>?</xsd:h11SpecialField>
+               <!--Optional:-->
+               <xsd:h12SpecialField>?</xsd:h12SpecialField>
+               <!--Optional:-->
+               <xsd:h13SpecialField>?</xsd:h13SpecialField>
+               <!--Optional:-->
+               <xsd:h14SpecialField>?</xsd:h14SpecialField>
+               <!--Optional:-->
+               <xsd:h15SpecialField>?</xsd:h15SpecialField>
+               <!--Optional:-->
+               <xsd:h16SpecialField>?</xsd:h16SpecialField>
+               <!--Optional:-->
+               <xsd:h17SpecialField>?</xsd:h17SpecialField>
+               <!--Optional:-->
+               <xsd:h18SpecialField>?</xsd:h18SpecialField>
+               <!--Optional:-->
+               <xsd:h19SpecialField>?</xsd:h19SpecialField>
+               <!--Optional:-->
+               <xsd:h20SpecialField>?</xsd:h20SpecialField>
+               <!--Optional:-->
+               <xsd:h21SpecialField>?</xsd:h21SpecialField>
+               <!--Optional:-->
+               <xsd:h22SpecialField>?</xsd:h22SpecialField>
+               <!--Optional:-->
+               <xsd:h23SpecialField>?</xsd:h23SpecialField>
+               <!--Optional:-->
+               <xsd:h24SpecialField>?</xsd:h24SpecialField>
+               <!--Optional:-->
+               <xsd:h25SpecialField>?</xsd:h25SpecialField>
+            </xsd:article>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readAMDResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readAMDResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readJobV01" id="bc659019-9868-440b-845b-22e6d5607df7" interface="ComSoap11Binding" operation="readJobV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="dbf3fd8d-fbd3-4be6-a028-0bd86f04b682" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readJobResV01>
+         <main:return>
+            <!--Optional:-->
+            <xsd:job>
+               <xsd:jobNumber>?</xsd:jobNumber>
+               <!--Optional:-->
+               <xsd:jobPriority>?</xsd:jobPriority>
+               <!--Optional:-->
+               <xsd:jobStatus>?</xsd:jobStatus>
+               <!--Optional:-->
+               <xsd:jobDate>?</xsd:jobDate>
+               <!--Optional:-->
+               <xsd:jobTime>?</xsd:jobTime>
+               <!--Optional:-->
+               <xsd:c01SpecialField>?</xsd:c01SpecialField>
+               <!--Optional:-->
+               <xsd:c02SpecialField>?</xsd:c02SpecialField>
+               <!--Optional:-->
+               <xsd:c03SpecialField>?</xsd:c03SpecialField>
+               <!--Optional:-->
+               <xsd:c04SpecialField>?</xsd:c04SpecialField>
+               <!--Optional:-->
+               <xsd:c05SpecialField>?</xsd:c05SpecialField>
+               <!--Optional:-->
+               <xsd:c06SpecialField>?</xsd:c06SpecialField>
+               <!--Optional:-->
+               <xsd:c07SpecialField>?</xsd:c07SpecialField>
+               <!--Optional:-->
+               <xsd:c08SpecialField>?</xsd:c08SpecialField>
+               <!--Optional:-->
+               <xsd:c09SpecialField>?</xsd:c09SpecialField>
+               <!--Optional:-->
+               <xsd:c10SpecialField>?</xsd:c10SpecialField>
+               <!--Optional:-->
+               <xsd:c11SpecialField>?</xsd:c11SpecialField>
+               <!--Optional:-->
+               <xsd:c12SpecialField>?</xsd:c12SpecialField>
+               <!--Optional:-->
+               <xsd:c13SpecialField>?</xsd:c13SpecialField>
+               <!--Optional:-->
+               <xsd:c14SpecialField>?</xsd:c14SpecialField>
+               <!--Optional:-->
+               <xsd:c15SpecialField>?</xsd:c15SpecialField>
+               <!--Optional:-->
+               <xsd:c16SpecialField>?</xsd:c16SpecialField>
+               <!--Optional:-->
+               <xsd:c17SpecialField>?</xsd:c17SpecialField>
+               <!--Optional:-->
+               <xsd:c18SpecialField>?</xsd:c18SpecialField>
+               <!--Optional:-->
+               <xsd:c19SpecialField>?</xsd:c19SpecialField>
+               <!--Optional:-->
+               <xsd:c20SpecialField>?</xsd:c20SpecialField>
+               <!--Optional:-->
+               <xsd:c21SpecialField>?</xsd:c21SpecialField>
+               <!--Optional:-->
+               <xsd:c22SpecialField>?</xsd:c22SpecialField>
+               <!--Optional:-->
+               <xsd:c23SpecialField>?</xsd:c23SpecialField>
+               <!--Optional:-->
+               <xsd:c24SpecialField>?</xsd:c24SpecialField>
+               <!--Optional:-->
+               <xsd:c25SpecialField>?</xsd:c25SpecialField>
+               <!--1 or more repetitions:-->
+               <xsd:JobPosition>
+                  <xsd:articleNumber>?</xsd:articleNumber>
+                  <xsd:operation>?</xsd:operation>
+                  <xsd:nominalQuantity>?</xsd:nominalQuantity>
+                  <!--Optional:-->
+                  <xsd:actualQuantity>?</xsd:actualQuantity>
+                  <!--Optional:-->
+                  <xsd:containerSize>?</xsd:containerSize>
+                  <!--Optional:-->
+                  <xsd:positionStatus>?</xsd:positionStatus>
+                  <!--Optional:-->
+                  <xsd:property>?</xsd:property>
+                  <!--Optional:-->
+                  <xsd:u01SpecialField>?</xsd:u01SpecialField>
+                  <!--Optional:-->
+                  <xsd:u02SpecialField>?</xsd:u02SpecialField>
+                  <!--Optional:-->
+                  <xsd:u03SpecialField>?</xsd:u03SpecialField>
+                  <!--Optional:-->
+                  <xsd:u04SpecialField>?</xsd:u04SpecialField>
+                  <!--Optional:-->
+                  <xsd:u05SpecialField>?</xsd:u05SpecialField>
+                  <!--Optional:-->
+                  <xsd:u06SpecialField>?</xsd:u06SpecialField>
+                  <!--Optional:-->
+                  <xsd:u07SpecialField>?</xsd:u07SpecialField>
+                  <!--Optional:-->
+                  <xsd:u08SpecialField>?</xsd:u08SpecialField>
+                  <!--Optional:-->
+                  <xsd:u09SpecialField>?</xsd:u09SpecialField>
+                  <!--Optional:-->
+                  <xsd:u10SpecialField>?</xsd:u10SpecialField>
+                  <!--Optional:-->
+                  <xsd:u11SpecialField>?</xsd:u11SpecialField>
+                  <!--Optional:-->
+                  <xsd:u12SpecialField>?</xsd:u12SpecialField>
+                  <!--Optional:-->
+                  <xsd:u13SpecialField>?</xsd:u13SpecialField>
+                  <!--Optional:-->
+                  <xsd:u14SpecialField>?</xsd:u14SpecialField>
+                  <!--Optional:-->
+                  <xsd:u15SpecialField>?</xsd:u15SpecialField>
+                  <!--Optional:-->
+                  <xsd:u16SpecialField>?</xsd:u16SpecialField>
+                  <!--Optional:-->
+                  <xsd:u17SpecialField>?</xsd:u17SpecialField>
+                  <!--Optional:-->
+                  <xsd:u18SpecialField>?</xsd:u18SpecialField>
+                  <!--Optional:-->
+                  <xsd:u19SpecialField>?</xsd:u19SpecialField>
+                  <!--Optional:-->
+                  <xsd:u20SpecialField>?</xsd:u20SpecialField>
+                  <!--Optional:-->
+                  <xsd:u21SpecialField>?</xsd:u21SpecialField>
+                  <!--Optional:-->
+                  <xsd:u22SpecialField>?</xsd:u22SpecialField>
+                  <!--Optional:-->
+                  <xsd:u23SpecialField>?</xsd:u23SpecialField>
+                  <!--Optional:-->
+                  <xsd:u24SpecialField>?</xsd:u24SpecialField>
+                  <!--Optional:-->
+                  <xsd:u25SpecialField>?</xsd:u25SpecialField>
+               </xsd:JobPosition>
+            </xsd:job>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readJobResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readJobResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readOpjournalV01" id="cb3ea118-2dfa-43e5-b724-bcd4511eeadb" interface="ComSoap11Binding" operation="readOpjournalV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="891dc087-95fa-4aa3-9c32-b14b06c87eb6" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readOpjournalResV01>
+         <main:return>
+            <!--Zero or more repetitions:-->
+            <xsd:opjournalPosition>
+               <xsd:articleNumber>?</xsd:articleNumber>
+               <xsd:operation>?</xsd:operation>
+               <xsd:actualQuantity>?</xsd:actualQuantity>
+               <!--Optional:-->
+               <xsd:containerSize>?</xsd:containerSize>
+               <xsd:status>?</xsd:status>
+               <!--Optional:-->
+               <xsd:u01SpecialField>?</xsd:u01SpecialField>
+               <!--Optional:-->
+               <xsd:u02SpecialField>?</xsd:u02SpecialField>
+               <!--Optional:-->
+               <xsd:u03SpecialField>?</xsd:u03SpecialField>
+               <!--Optional:-->
+               <xsd:u04SpecialField>?</xsd:u04SpecialField>
+               <!--Optional:-->
+               <xsd:u05SpecialField>?</xsd:u05SpecialField>
+               <!--Optional:-->
+               <xsd:u06SpecialField>?</xsd:u06SpecialField>
+               <!--Optional:-->
+               <xsd:u07SpecialField>?</xsd:u07SpecialField>
+               <!--Optional:-->
+               <xsd:u08SpecialField>?</xsd:u08SpecialField>
+               <!--Optional:-->
+               <xsd:u09SpecialField>?</xsd:u09SpecialField>
+               <!--Optional:-->
+               <xsd:u10SpecialField>?</xsd:u10SpecialField>
+               <!--Optional:-->
+               <xsd:u11SpecialField>?</xsd:u11SpecialField>
+               <!--Optional:-->
+               <xsd:u12SpecialField>?</xsd:u12SpecialField>
+               <!--Optional:-->
+               <xsd:u13SpecialField>?</xsd:u13SpecialField>
+               <!--Optional:-->
+               <xsd:u14SpecialField>?</xsd:u14SpecialField>
+               <!--Optional:-->
+               <xsd:u15SpecialField>?</xsd:u15SpecialField>
+               <!--Optional:-->
+               <xsd:u16SpecialField>?</xsd:u16SpecialField>
+               <!--Optional:-->
+               <xsd:u17SpecialField>?</xsd:u17SpecialField>
+               <!--Optional:-->
+               <xsd:u18SpecialField>?</xsd:u18SpecialField>
+               <!--Optional:-->
+               <xsd:u19SpecialField>?</xsd:u19SpecialField>
+               <!--Optional:-->
+               <xsd:u20SpecialField>?</xsd:u20SpecialField>
+               <!--Optional:-->
+               <xsd:u21SpecialField>?</xsd:u21SpecialField>
+               <!--Optional:-->
+               <xsd:u22SpecialField>?</xsd:u22SpecialField>
+               <!--Optional:-->
+               <xsd:u23SpecialField>?</xsd:u23SpecialField>
+               <!--Optional:-->
+               <xsd:u24SpecialField>?</xsd:u24SpecialField>
+               <!--Optional:-->
+               <xsd:u25SpecialField>?</xsd:u25SpecialField>
+            </xsd:opjournalPosition>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readOpjournalResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readOpjournalResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readQjournalV01" id="1d083bcb-f3f6-4c9d-b4f4-a7203f76963a" interface="ComSoap11Binding" operation="readQjournalV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="8cc6ea94-a460-4094-a79c-844798b67261" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readQjournalResV01>
+         <main:return>
+            <!--Zero or more repetitions:-->
+            <xsd:qjournalPosition>
+               <xsd:articleNumber>?</xsd:articleNumber>
+               <!--Optional:-->
+               <xsd:articleName>?</xsd:articleName>
+               <!--Optional:-->
+               <xsd:totalInventory>?</xsd:totalInventory>
+               <!--Optional:-->
+               <xsd:minimumInventory>?</xsd:minimumInventory>
+               <xsd:journalIn>?</xsd:journalIn>
+               <xsd:journalOut>?</xsd:journalOut>
+               <!--Optional:-->
+               <xsd:h01SpecialField>?</xsd:h01SpecialField>
+               <!--Optional:-->
+               <xsd:h02SpecialField>?</xsd:h02SpecialField>
+               <!--Optional:-->
+               <xsd:h03SpecialField>?</xsd:h03SpecialField>
+               <!--Optional:-->
+               <xsd:h04SpecialField>?</xsd:h04SpecialField>
+               <!--Optional:-->
+               <xsd:h05SpecialField>?</xsd:h05SpecialField>
+               <!--Optional:-->
+               <xsd:h06SpecialField>?</xsd:h06SpecialField>
+               <!--Optional:-->
+               <xsd:h07SpecialField>?</xsd:h07SpecialField>
+               <!--Optional:-->
+               <xsd:h08SpecialField>?</xsd:h08SpecialField>
+               <!--Optional:-->
+               <xsd:h09SpecialField>?</xsd:h09SpecialField>
+               <!--Optional:-->
+               <xsd:h10SpecialField>?</xsd:h10SpecialField>
+               <!--Optional:-->
+               <xsd:h11SpecialField>?</xsd:h11SpecialField>
+               <!--Optional:-->
+               <xsd:h12SpecialField>?</xsd:h12SpecialField>
+               <!--Optional:-->
+               <xsd:h13SpecialField>?</xsd:h13SpecialField>
+               <!--Optional:-->
+               <xsd:h14SpecialField>?</xsd:h14SpecialField>
+               <!--Optional:-->
+               <xsd:h15SpecialField>?</xsd:h15SpecialField>
+               <!--Optional:-->
+               <xsd:h16SpecialField>?</xsd:h16SpecialField>
+               <!--Optional:-->
+               <xsd:h17SpecialField>?</xsd:h17SpecialField>
+               <!--Optional:-->
+               <xsd:h18SpecialField>?</xsd:h18SpecialField>
+               <!--Optional:-->
+               <xsd:h19SpecialField>?</xsd:h19SpecialField>
+               <!--Optional:-->
+               <xsd:h20SpecialField>?</xsd:h20SpecialField>
+               <!--Optional:-->
+               <xsd:h21SpecialField>?</xsd:h21SpecialField>
+               <!--Optional:-->
+               <xsd:h22SpecialField>?</xsd:h22SpecialField>
+               <!--Optional:-->
+               <xsd:h23SpecialField>?</xsd:h23SpecialField>
+               <!--Optional:-->
+               <xsd:h24SpecialField>?</xsd:h24SpecialField>
+               <!--Optional:-->
+               <xsd:h25SpecialField>?</xsd:h25SpecialField>
+            </xsd:qjournalPosition>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readQjournalResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readQjournalResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="readRequV01" id="9799fc58-1a60-4ace-9fc4-6b5c9509fa8e" interface="ComSoap11Binding" operation="readRequV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="2bf9e8cc-d622-4492-b001-719cb5e7feec" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:readRequResV01>
+         <main:return>
+            <!--Optional:-->
+            <xsd:requisition>
+               <xsd:requisitionNumber>?</xsd:requisitionNumber>
+               <!--Optional:-->
+               <xsd:requisitionStatus>?</xsd:requisitionStatus>
+               <!--Optional:-->
+               <xsd:c01SpecialField>?</xsd:c01SpecialField>
+               <!--Optional:-->
+               <xsd:c02SpecialField>?</xsd:c02SpecialField>
+               <!--Optional:-->
+               <xsd:c03SpecialField>?</xsd:c03SpecialField>
+               <!--Optional:-->
+               <xsd:c04SpecialField>?</xsd:c04SpecialField>
+               <!--Optional:-->
+               <xsd:c05SpecialField>?</xsd:c05SpecialField>
+               <!--Optional:-->
+               <xsd:c06SpecialField>?</xsd:c06SpecialField>
+               <!--Optional:-->
+               <xsd:c07SpecialField>?</xsd:c07SpecialField>
+               <!--Optional:-->
+               <xsd:c08SpecialField>?</xsd:c08SpecialField>
+               <!--Optional:-->
+               <xsd:c09SpecialField>?</xsd:c09SpecialField>
+               <!--Optional:-->
+               <xsd:c10SpecialField>?</xsd:c10SpecialField>
+               <!--Optional:-->
+               <xsd:c11SpecialField>?</xsd:c11SpecialField>
+               <!--Optional:-->
+               <xsd:c12SpecialField>?</xsd:c12SpecialField>
+               <!--Optional:-->
+               <xsd:c13SpecialField>?</xsd:c13SpecialField>
+               <!--Optional:-->
+               <xsd:c14SpecialField>?</xsd:c14SpecialField>
+               <!--Optional:-->
+               <xsd:c15SpecialField>?</xsd:c15SpecialField>
+               <!--Optional:-->
+               <xsd:c16SpecialField>?</xsd:c16SpecialField>
+               <!--Optional:-->
+               <xsd:c17SpecialField>?</xsd:c17SpecialField>
+               <!--Optional:-->
+               <xsd:c18SpecialField>?</xsd:c18SpecialField>
+               <!--Optional:-->
+               <xsd:c19SpecialField>?</xsd:c19SpecialField>
+               <!--Optional:-->
+               <xsd:c20SpecialField>?</xsd:c20SpecialField>
+               <!--Optional:-->
+               <xsd:c21SpecialField>?</xsd:c21SpecialField>
+               <!--Optional:-->
+               <xsd:c22SpecialField>?</xsd:c22SpecialField>
+               <!--Optional:-->
+               <xsd:c23SpecialField>?</xsd:c23SpecialField>
+               <!--Optional:-->
+               <xsd:c24SpecialField>?</xsd:c24SpecialField>
+               <!--Optional:-->
+               <xsd:c25SpecialField>?</xsd:c25SpecialField>
+               <!--1 or more repetitions:-->
+               <xsd:RequisitionPosition>
+                  <xsd:articleNumber>?</xsd:articleNumber>
+                  <xsd:operation>?</xsd:operation>
+                  <xsd:nominalQuantity>?</xsd:nominalQuantity>
+                  <!--Optional:-->
+                  <xsd:containerSize>?</xsd:containerSize>
+                  <!--Optional:-->
+                  <xsd:positionStatus>?</xsd:positionStatus>
+                  <!--Optional:-->
+                  <xsd:u01SpecialField>?</xsd:u01SpecialField>
+                  <!--Optional:-->
+                  <xsd:u02SpecialField>?</xsd:u02SpecialField>
+                  <!--Optional:-->
+                  <xsd:u03SpecialField>?</xsd:u03SpecialField>
+                  <!--Optional:-->
+                  <xsd:u04SpecialField>?</xsd:u04SpecialField>
+                  <!--Optional:-->
+                  <xsd:u05SpecialField>?</xsd:u05SpecialField>
+                  <!--Optional:-->
+                  <xsd:u06SpecialField>?</xsd:u06SpecialField>
+                  <!--Optional:-->
+                  <xsd:u07SpecialField>?</xsd:u07SpecialField>
+                  <!--Optional:-->
+                  <xsd:u08SpecialField>?</xsd:u08SpecialField>
+                  <!--Optional:-->
+                  <xsd:u09SpecialField>?</xsd:u09SpecialField>
+                  <!--Optional:-->
+                  <xsd:u10SpecialField>?</xsd:u10SpecialField>
+                  <!--Optional:-->
+                  <xsd:u11SpecialField>?</xsd:u11SpecialField>
+                  <!--Optional:-->
+                  <xsd:u12SpecialField>?</xsd:u12SpecialField>
+                  <!--Optional:-->
+                  <xsd:u13SpecialField>?</xsd:u13SpecialField>
+                  <!--Optional:-->
+                  <xsd:u14SpecialField>?</xsd:u14SpecialField>
+                  <!--Optional:-->
+                  <xsd:u15SpecialField>?</xsd:u15SpecialField>
+                  <!--Optional:-->
+                  <xsd:u16SpecialField>?</xsd:u16SpecialField>
+                  <!--Optional:-->
+                  <xsd:u17SpecialField>?</xsd:u17SpecialField>
+                  <!--Optional:-->
+                  <xsd:u18SpecialField>?</xsd:u18SpecialField>
+                  <!--Optional:-->
+                  <xsd:u19SpecialField>?</xsd:u19SpecialField>
+                  <!--Optional:-->
+                  <xsd:u20SpecialField>?</xsd:u20SpecialField>
+                  <!--Optional:-->
+                  <xsd:u21SpecialField>?</xsd:u21SpecialField>
+                  <!--Optional:-->
+                  <xsd:u22SpecialField>?</xsd:u22SpecialField>
+                  <!--Optional:-->
+                  <xsd:u23SpecialField>?</xsd:u23SpecialField>
+                  <!--Optional:-->
+                  <xsd:u24SpecialField>?</xsd:u24SpecialField>
+                  <!--Optional:-->
+                  <xsd:u25SpecialField>?</xsd:u25SpecialField>
+               </xsd:RequisitionPosition>
+            </xsd:requisition>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:readRequResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:readRequResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="sendAllAMDV01" id="100c6288-ca43-4c7c-97fb-8be91cbb989a" interface="ComSoap11Binding" operation="sendAllAMDV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="b823cdef-431c-4e39-82a6-ff7aa88d83ad" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:sendAllAMDResV01>
+         <main:return>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:sendAllAMDResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendAllAMDResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="sendAPDV01" id="bd0e4837-9d38-4302-adb8-ac373257ba72" interface="ComSoap11Binding" operation="sendAPDV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="56f376e1-775a-4a11-8847-97ef1357d79a" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:sendAPDResV01>
+         <main:return>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:sendAPDResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendAPDResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="sendAPDV02" id="087d524c-29a1-4301-b18e-f18cb3b8a4d4" interface="ComSoap11Binding" operation="sendAPDV02"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="42a8b5d8-9880-4f0d-a6de-242fbd5af9c6" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:sendAPDResV02>
+         <main:return>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:sendAPDResV02>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendAPDResV02"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="sendJobsV01" id="38b7f974-554d-4308-8aa6-2c6682b5ea87" interface="ComSoap11Binding" operation="sendJobsV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="1454a617-4292-4b9c-8be4-85e7c52e1add" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:sendJobsResV01>
+         <main:return>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:sendJobsResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendJobsResV01"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="sendRequV01" id="99adde38-5f99-472d-b29a-cd1ff4396e5b" interface="ComSoap11Binding" operation="sendRequV01"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:response name="Response 1" id="33bb3cf5-1e10-46fc-9fd4-34c40490b597" httpResponseStatus="200" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <main:sendRequResV01>
+         <main:return>
+            <xsd:returnValue>?</xsd:returnValue>
+            <!--Optional:-->
+            <xsd:returnErrorNumber>?</xsd:returnErrorNumber>
+            <!--Optional:-->
+            <xsd:returnErrorMessage>?</xsd:returnErrorMessage>
+            <!--Optional:-->
+            <xsd:returnErrorIndex>?</xsd:returnErrorIndex>
+         </main:return>
+      </main:sendRequResV01>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:sendRequResV01"/></con:response><con:dispatchConfig/></con:mockOperation></con:mockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
