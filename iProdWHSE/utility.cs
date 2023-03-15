@@ -42,7 +42,7 @@ namespace iProdWHSE
         #region DICHIARAZIONI
 
 
-        public static string Versione { get; set; } = "4.1.13@9.3.23"; // versione iprod @ data
+        public static string Versione { get; set; } = "4.1.14@15.3.23"; // versione iprod @ data
         // note relative al commit e/o modifiche rilevanti
         public static string Versione_Commit { get; set; } = "";
 
@@ -503,7 +503,6 @@ namespace iProdWHSE
             // lettura configurazione e settings
             // inizializzazioni varie
 
-            int y = 0;
             string fn = cfgFile;
             string cfg = fn;
             
@@ -587,7 +586,7 @@ namespace iProdWHSE
             catch (PingException ex)
             {
                 // Discard PingExceptions and return false;
-
+                UT.IOLog($"Errore in PingWithHttp Eccezione '{ex.Message}'");
                 return false;
 
             }
@@ -609,7 +608,8 @@ namespace iProdWHSE
             catch (PingException ex)
             {
                 // Discard PingExceptions and return false;
-                
+                UT.IOLog($"Errore in PingHost Eccezione '{ex.Message}'");
+
                 if (pinger != null) pinger.Dispose();
                 return false;
 
@@ -637,6 +637,7 @@ namespace iProdWHSE
             catch (PingException ex)
             {
                 // Discard PingExceptions and return false;
+                UT.IOLog($"Errore in PingHostAsync Eccezione '{ex.Message}'");
 
                 if (pinger != null) pinger.Dispose();
                 return false;
@@ -2001,7 +2002,7 @@ namespace iProdWHSE
             string controller = "controller;";
             var items = new List<string>();
             int cnt = 0;
-            bool isA = false;
+         
             bool isC = false;
 
 
@@ -2033,7 +2034,7 @@ namespace iProdWHSE
                             controller += ar[1];
 
                         }
-                        if (ar[0] == "agent") isA = true;
+                      
 
                     }
                 }
@@ -2132,10 +2133,10 @@ namespace iProdWHSE
             int err = 0;
             int cnt = 0;
             string Eccezione = "";
-            bool isA = false;
+            
             bool isC = false;
             DateTime dNew;
-            bool checkPassed = false;
+          
 
             try
             {
@@ -2171,13 +2172,12 @@ namespace iProdWHSE
 
                                 if ((DateTime.Now - dNew).TotalMinutes > MaxDelayInMinutes)
                                     err = 2;  // Ecceduto il tempo limite che il controller non logga piu, sicuro è spento o bloccato in errore
-                                else
-                                    checkPassed = true;
+                               
                             }
                             // ci rimette quello che c'era perche non è roba nostra
                             controller += ar[1];
                         }
-                        if (ar[0] == "agent") isA = true;
+                       
                     }
                 }
 
@@ -2221,7 +2221,7 @@ namespace iProdWHSE
             string sub = $"MONITOR  ALERT da {meNome}, ha rilevato anomalie a carico del Controller {luiNome}";
             string body = "";
 
-            string lui1 = "Il controller";
+          
             string lui2 = "il controller";
             string lui3 = "del controller";
 
@@ -2896,7 +2896,7 @@ namespace iProdWHSE
             {
                 int c = from;
                 int cs = c;
-                string tg = "";
+           
                 string ct = ""; // chiusura tag
 
                 if (tag == "input")
@@ -3413,7 +3413,7 @@ namespace iProdWHSE
 
 
                 int aa, mm;
-                string _a, _m, _g, _h, _mn, _s, _ms, _aa, _mm;
+                string _a, _m, _g, _h, _mn, _s;
 
 
 
@@ -3441,11 +3441,10 @@ namespace iProdWHSE
                 _g = "";
                 _mn = "";
                 _s = "";
-                _ms = "";
+               
                 _h = "";
-                _aa = "";
-                _mm = "";
-                var _op = ""; // output completo
+                
+              
                 aa = 0;
                 mm = 0;
 
@@ -3457,20 +3456,20 @@ namespace iProdWHSE
                 double td = 0;
                 double th = 0;
                 double tM = 0;
-                double ts = 0;
+              
 
                 double ca = 0;
                 double cm = 0;
                 double cd = 0;
                 double ch = 0;
                 double cM = 0;
-                double cs = 0;
+               
 
                 double se = t.TotalSeconds;
 
                 // individuazione soglia
 
-                ts = 1;
+                 
                 tM = 60;
                 th = tM * 60;
                 td = th * 24;
@@ -3538,7 +3537,7 @@ namespace iProdWHSE
                 var sFormattato = $"{aa}/{mm}/{dd}/ {h}:{m}:{s}";
 
 
-                bool aaS = false;
+          
                 bool mmS = false;
                 bool ddS = false;
                 bool hhS = false;
@@ -3549,7 +3548,7 @@ namespace iProdWHSE
 
                 if (aa > 0)
                 {
-                    aaS = true;
+                
                     string anni = "anni";
                     if (aa == 1) anni = "anno";
 
@@ -3731,6 +3730,8 @@ namespace iProdWHSE
             }
             catch (Exception Ex)
             {
+                UT.IOLog($"Errore in WriteEventToLog Eccezione '{Ex.Message}'");
+
                 //if (forma != null)
                 //{
                 //    IOLog(Entry);
@@ -3973,9 +3974,6 @@ namespace iProdWHSE
         public WordyFormatProvider() : this(CultureInfo.CurrentCulture) { }
         public WordyFormatProvider(IFormatProvider parent)
         {
-            DateTimeOffset d = new DateTimeOffset();
-            string s = XmlConvert.ToString(true);
-
             _parent = parent;
         }
 

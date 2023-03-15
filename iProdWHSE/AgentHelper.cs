@@ -882,8 +882,7 @@ namespace iProdWHSE
         string dataparameter;
         string customerdata;
 
-        string username = "";
-        string password = "";
+  
         #endregion
 
 
@@ -1159,7 +1158,6 @@ namespace iProdWHSE
             string suffix = "PICK -";
             UT.Contatore CC = null;
             VerboseMax = UT.VerboseMax;
-            string sm = " ";
             log($"{suffix} Executeprocess('{taskName}')");
 
            
@@ -1967,7 +1965,7 @@ namespace iProdWHSE
         {
             var ret = new List<itemToGet>();
 
-            double qta = 0;
+            
             foreach (var s in n.sons)
             {
                 if (s.type == 1 || s.type == 5 || s.type == 6)

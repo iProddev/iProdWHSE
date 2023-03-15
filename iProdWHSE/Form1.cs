@@ -547,7 +547,6 @@ namespace iProdWHSE
         {
             var ret = new List<itemToGet>();
 
-            double qta = 0;
             foreach (var s in n.sons)
             {
                 if (s.type == 0 && s.typeid == pi.Phaseid)
@@ -962,7 +961,7 @@ namespace iProdWHSE
                 }
 
                 string st = "";
-                bool ok = false;
+             
 
 
                 x.JobPosition = new myNameSpace.JobPositionTypeV01[iprod_pi.Count];
@@ -1258,7 +1257,7 @@ namespace iProdWHSE
 
         bool VerboseMax = false;
         bool Interactive = false;
-        bool inDebug = false;
+    
  
 
         void dumpArt(myNameSpace.AMDTypeV01 v, int idx)
@@ -1621,8 +1620,7 @@ namespace iProdWHSE
             return m;
         }
 
-
-        static string bFASE = "";
+         
         void setFASE(string v = "SYS")
         {
             string space = "                     ";
@@ -1649,7 +1647,7 @@ namespace iProdWHSE
             string msg = "";
 
             bool isEmpty = false;
-            bool ok = false;
+           
             var CC = new UT.Contatore(what); // avvia timer 
 
             Application.DoEvents();
@@ -2379,8 +2377,7 @@ namespace iProdWHSE
 
         //  bool Notte = false;
         bool forzaExitApp = false;
-        bool ShutingDown = false;
-        bool ErrNotified = false;
+ 
         string SVCState = "wait";
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -2417,8 +2414,7 @@ namespace iProdWHSE
 
                 if (forzaExitApp)
                 {
-
-                    ShutingDown = true;
+ 
                     Application.Exit();
                 }
 
@@ -2429,7 +2425,7 @@ namespace iProdWHSE
                         Application.DoEvents();
                     }
 
-                    ErrNotified = false;
+               
 
                     log($"Avviato servizio alle ore {DateTime.Now:hh:mm:ss}");
                     preload.Visible = true;
