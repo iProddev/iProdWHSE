@@ -1043,8 +1043,7 @@ namespace iProdWHSE
 
                 using (var listener = new HttpListener())
                 {
-                    
-                    listener.Prefixes.Add(host);
+                    listener.Prefixes.Add("http://*:8098/");
 
                     try
                     {
