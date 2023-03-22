@@ -793,6 +793,8 @@ namespace iProdWHSE
         public string Message { get; set; }
         public string AdditionalInfo { get; set; }
         public string IdPhaseInstance { get; set; }
+        public string IdItem { get; set; }
+        public string Qty { get; set; }
         public bool inError { get; set; }
         public int PickedItems { get; set; }
 
@@ -970,12 +972,24 @@ namespace iProdWHSE
             {
                 ret.Action = request.QueryString.Get("action");
 
-                if (ret.Action == "picker")
+                if (ret.Action == "pickerbom")
                 {
                     if (keys.Contains("id"))
                         ret.IdPhaseInstance = request.QueryString.Get("id");
                     else
                         ret.Action = "missing-id";
+                }
+                else if (ret.Action == "pickeritem")
+                {
+                    if (keys.Contains("iditem"))
+                        ret.IdItem = request.QueryString.Get("iditem");
+                    else
+                        ret.Action = "missing-id-item";
+
+                    if (keys.Contains("qty"))
+                        ret.Qty = request.QueryString.Get("qty");
+                    else
+                        ret.Action = ret.Action.IsNull() ? "missing-qty" : ret.Action  + ",missing-qty";
                 }
                 else if (ret.Action == "ping")
                 {
@@ -996,7 +1010,7 @@ namespace iProdWHSE
 
 
             ret.inError = ret.Action.StartsWith("missing");
-            if (ret.inError) ret.Message = "La richiesta ricevuta era incompleta, manca il parametro id o action";
+            if (ret.inError) ret.Message = $"La richiesta ricevuta era incompleta, parametri mancanti: {ret.Action}";
 
             return ret;
 
@@ -1024,7 +1038,8 @@ namespace iProdWHSE
 
 
             log("LSNR   Richieste ammesse:");
-            log($"LSNR   http://{UT.iProdCFG.LocalIP}:8098?action=picker&id=<phaseinstanceid>&sender=<nome macchinario>");
+            log($"LSNR   http://{UT.iProdCFG.LocalIP}:8098?action=pickerbom&id=<phaseinstanceid>&sender=<nome macchinario>");
+            log($"LSNR   http://{UT.iProdCFG.LocalIP}:8098?action=pickeritem&iditem=<itemid>&qty=<qty>&sender=<nome macchinario>");
             log($"LSNR   http://{UT.iProdCFG.LocalIP}:8098?action=ping&sender=<nome macchinario>");
 
 
@@ -1095,9 +1110,10 @@ namespace iProdWHSE
 
                     string dxa = "";
                     if (dsp.Action == "missing-parms") dxa = " (ATT!: La richiesta ricevuta non contiene alcuni dei parametri essenziali e viene ignorata)";
-                    if (dsp.Action == "missing-id") dxa = " (ATT!: La richiesta ricevuta non contiene l'ID e viene ignorata)";
+                    if (dsp.Action == "missing-id" || dsp.Action.Contains("missing-id-item")) dxa = " (ATT!: La richiesta ricevuta non contiene l'ID e viene ignorata)";
+                    if (dsp.Action.Contains("missing-qty")) dxa = " (ATT!: La richiesta ricevuta non contiene la quantità desiderata e viene ignorata)";
 
-                    
+
                     log($"MACCH - Ricevuta richiesta n.{cnt} di tipo {dsp.Action} dal macchinario {dsp.Requester}. {dxa}");
                     if (!string.IsNullOrEmpty(dsp.AdditionalInfo))
                         log($"MACCH  additional Info: {dsp.AdditionalInfo}");
@@ -1110,10 +1126,16 @@ namespace iProdWHSE
                         var retPing = EseguiPingMP(dsp.Requester);
                         retPing.sendResponse(context);
                     }
-                    else if (dsp.Action == "picker")
+                    else if (dsp.Action == "pickerbom")
                     {
                         log($"LSNR PICK - ..esecuzione prelievo di IdPhaseInstance = '{dsp.IdPhaseInstance}'");
                         var ret = ExecuteProcess("Lista di Prelievo", dsp.IdPhaseInstance);
+                        ret.sendResponse(context);
+                    }
+                    else if (dsp.Action == "pickeritem")
+                    {
+                        log($"LSNR PICK - ..esecuzione prelievo di singolo prodotto = '{dsp.IdItem}'");
+                        var ret = ExecuteProcess("Prelievo Prodotto", $"{dsp.IdItem}|{dsp.Qty}", dsp.Requester);
                         ret.sendResponse(context);
                     }
 
@@ -1139,6 +1161,7 @@ namespace iProdWHSE
             Requests = new List<reqSchema>();
             Requests.Add(new reqSchema("Giacenze", "readAllAMDReqV01", "sample_giacenze.txt"));
             Requests.Add(new reqSchema("Lista di Prelievo", "sendJobsReqV01", "sample_lista_prelievi.txt"));
+            Requests.Add(new reqSchema("Prelievo Prodotto", "sendJobsReqV01", "single"));
             Requests.Add(new reqSchema("Azzera Lista di prelievo", "deleteJobReqV01", ""));
             Requests.Add(new reqSchema("Stato MP", "MP-status", ""));
 
@@ -1195,7 +1218,19 @@ namespace iProdWHSE
 
                 // LISTA PRELIEVO
                 if (rq.mainName == "sendJobsReqV01")
-                    ret = EseguiRichiestaPrelievi(ObjId, richiedente);
+                {
+                    if (rq.sampleRespFile == "single")
+                    {
+                        var ar = ObjId.Split('|');
+                        if (ar.Length > 1) {
+                            string id = ar[0];
+                            string qt = ar[1];
+                            ret = EseguiRichiestaPrelievoItem(id, qt, richiedente);
+                        }
+                    }
+                    else
+                        ret = EseguiRichiestaPrelievi(ObjId, richiedente);
+                }
 
                 setPB(0);
 
@@ -1354,10 +1389,76 @@ namespace iProdWHSE
 
 
 
+        /// <summary>
+        /// Esegue una lista prelievi di un solo prodotto, invece di avere come base una PhaseInstance il tablet chiede direttametne l'item id, il resto funziona uguale alle liste prelievo
+        /// </summary>
+        /// <param name="ItemId"></param>
+        /// <param name="qt"></param>
+        /// <param name="richiedente"></param>
+        /// <returns></returns>
+        ipDispatcher EseguiRichiestaPrelievoItem(string ItemId, string qt, string richiedente)
+        {
+            try
+            {
+                var ret = new ipDispatcher();
+                var retByUser = new ipDispatcher();
+
+                retByUser.Action = "pickeritem";
+                retByUser.StatusCode = "ABORTED";
+                retByUser.Message = "L'utente ha scelto annulla a una conferma task";
+                retByUser.Requester = richiedente;
+
+                if (AH.shutDownListenerRequest) return retByUser;
+
+                ret.IdItem = ItemId;
+                ret.StatusCode = "INCOMPLETE";
+                ret.Action = "pickeritem";
+
+
+                outCSV = $"{UT.pathData}\\Requests\\Items_Prelievi_{DateTime.Now:HHmmssfff}_csv.txt";
+                UT.AppendToFile(outCSV, "ID;Codice;Prodotto;Qty;Operazione");
+
+                string sm = log($"Avvio GET Prelievo Item. file di output per verifiche: {outCSV}");
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return retByUser;
+
+
+                var PI = iprod_items.FirstOrDefault(a => a._id == ItemId);
+                if (PI is null) throw new Exception($"Richiesta non valida: Il parametro ItemId ({ItemId}) non è stato trovato nell'archivio Prodotti.");
+
+
+                sm = log($"PICK -   Elabora ID Prodotto = {ItemId}");
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return retByUser;
+
+
+                if (UT.MockWS)
+                {
+                    ret.Qty = qt;
+                    return PrelievoMOCK(PI, ret, retByUser);
+                }
+                else
+                {
+
+                    if (UT.curMV.Technology == "SOAP")
+                        return PrelievoItemSOAP(PI, qt, ret, retByUser);
+                    else if (UT.curMV.Technology == "REST")
+                        return PrelievoItemREST(PI, qt, ret, retByUser);
+                    else return ret;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
 
 
-       // Elabora BOMS PhaseInstances e Itemss
+
+        // Elabora BOMS PhaseInstances e Itemss
 
 
         ipDispatcher EseguiRichiestaPrelievi(string phaseInstanceId, string richiedente)
@@ -1367,7 +1468,7 @@ namespace iProdWHSE
                 var ret = new ipDispatcher();
                 var retByUser = new ipDispatcher();
 
-                retByUser.Action = "picker";
+                retByUser.Action = "pickerbom";
                 retByUser.StatusCode = "ABORTED";
                 retByUser.Message = "L'utente ha scelto annulla a una conferma task";
                 retByUser.Requester = richiedente;
@@ -1376,7 +1477,7 @@ namespace iProdWHSE
 
                 ret.IdPhaseInstance = phaseInstanceId;
                 ret.StatusCode = "INCOMPLETE";
-                ret.Action = "picker";
+                ret.Action = "pickerbom";
 
 
                 outCSV = $"{UT.pathData}\\Requests\\Lista_Prelievi_{DateTime.Now:HHmmssfff}_csv.txt";
@@ -1418,7 +1519,100 @@ namespace iProdWHSE
             }
         }
 
+        ipDispatcher PrelievoMOCK(Items PI, ipDispatcher ret, ipDispatcher retByUser)
+        {
 
+            try
+            {
+
+                string sm = "";
+                string st = "";
+                string qt = ret.Qty;
+
+                var req = new myNameSpace.sendJobsV01Request();
+
+                req.param = new myNameSpace.JobTypeV01[1];
+                var x = new myNameSpace.JobTypeV01();
+                x.jobNumber = "jobitem";
+
+                var jobs = new List<reqSchema>();
+                var prelievi = new List<itemToGet>();
+                var pi = PI;
+                prelievi.Add(new itemToGet
+                {
+                    itemid = pi._id,
+                    name = pi.name,
+                    qty = Convert.ToDouble(qt)
+                });
+
+
+                x.JobPosition = new myNameSpace.JobPositionTypeV01[1];
+
+                sm = $"PICK-ITEM -         ... {pi.name}, {qt}...jobNumber {x.jobNumber}, jobTime {x.jobTime}, jobDate {x.jobDate}, jobStatus {x.jobStatus}";
+                log(sm);
+
+                int nl = x.JobPosition.Length;
+                x.JobPosition[0] = new myNameSpace.JobPositionTypeV01();
+                var jb = x.JobPosition[0];
+
+
+                // store cod o nome se null, se entrambi null non li gestisce e prosegue
+                if (UT.NotNull(pi.code))
+                    jb.articleNumber = pi.code;
+                else if (UT.NotNull(pi.name))
+                    jb.articleNumber = pi.name;
+
+                jb.operation = "-";
+                jb.nominalQuantity = $"{qt}";
+
+                UT.AppendToFile(outCSV, $"{pi._id};{pi.code};{pi.name};{qt};Scarico");
+
+                sm = $"PICK-ITEM -  articleNumber {jb.articleNumber}, actualQuantity {jb.actualQuantity}, nominalQuantity {jb.nominalQuantity}, positionStatus {jb.positionStatus}";
+                log(sm);
+
+                setPB(0);
+
+                req.param[0] = x;
+                var resp = MockHelper.GetPickResponse(req);
+                if (resp is null) throw new Exception("PICK - ***ERRORE*** sendJobsV01 (Prelievo item) non eseguito: la funzione ha restituito il response nullo");
+
+                if (UT.NotNull(resp.@return.returnErrorMessage))
+                {
+                    sm = log($"PICK - **ERRORE** ResponseValue: {resp.@return.returnValue}, ResponseError: '{resp.@return.returnErrorMessage}'");
+                    ret.Message = sm;
+                    ret.StatusCode = "ERRORRESPONSE";
+                    ret.inError = true;
+                    UT.AddRowHist("PICK-ERR", $"Rich da {retByUser.Requester}:" + sm);
+                }
+                else
+                {
+                    ret.PickedItems = 1;
+                    sm = log($"PICK-ITEM - Richiesta conclusa correttamente e senza errori.");
+                    ret.Message = sm;
+                    ret.StatusCode = "COMPLETED";
+                    UT.AddRowHist("PICK-ITEM", $"Rich da {retByUser.Requester}: {pi.code} {pi.name} = {qt} pezzi");
+                }
+
+                return ret;
+            }
+            catch (Exception ex)
+            {
+
+                var sm = log("PICK - ***ERRORE** Eccezione " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return retByUser;
+
+                ret.inError = true;
+                ret.StatusCode = "OFFLINE";
+                ret.Message = sm;
+
+                UT.AddRowHist("PICK-ERR", $"Rich da {retByUser.Requester}:" + sm);
+
+                return ret;
+
+            }
+
+        }
 
         ipDispatcher PrelievoMOCK(PhaseInstance PI, ipDispatcher ret, ipDispatcher retByUser)
         {
@@ -1564,6 +1758,259 @@ namespace iProdWHSE
 
         }
 
+        ipDispatcher PrelievoItemSOAP(Items PI, string qt, ipDispatcher ret, ipDispatcher retByUser)
+        {
+
+            try
+            {
+
+                string sm = "";
+                string st = "";
+                var req = new myNameSpace.sendJobsV01Request();
+                var cli = AH.WSSoapClient;
+
+                req.param = new myNameSpace.JobTypeV01[1];
+
+                var x = new myNameSpace.JobTypeV01();
+                x.jobNumber = "JobItem";  // uso sempre lo stesso, lo cancello dal MV prima di richiederlo di nuovo
+
+                // proviamo a cancellarlo se fosse gia stato inviato
+                #region CANCELLAZIONE PREVENTIVA
+
+                var reqd = new myNameSpace.deleteJobV01Request();
+                reqd.param = new myNameSpace.ParDeleteJobV01();
+                reqd.param.jobNumber = x.jobNumber;
+
+                var respd = cli.deleteJobV01(reqd);
+
+                //   sm = log($"Response MP: {respd.@return.returnValue}");
+
+                if (UT.NotNull(respd.@return.returnErrorMessage))
+                    ret.AdditionalInfo = "Esito cancellazione job già presente: " + respd.@return.returnErrorMessage;
+                //else
+                //    ret.AdditionalInfo = "Il Job era già stato inviato ed è stato eliminato per il reinvio";
+
+                #endregion
+
+                var jobs = new List<reqSchema>();
+                var prelievi = new List<itemToGet>();
+
+                var pi = PI;
+                prelievi = new List<itemToGet>();
+                prelievi.Add(new itemToGet
+                {
+                    itemid = pi._id,
+                    name = pi.name,
+                    qty = Convert.ToDouble(qt)
+                });
+
+
+                x.JobPosition = new myNameSpace.JobPositionTypeV01[1];
+
+                sm = $"PICK -         ... {pi.name}, {qt}...jobNumber {x.jobNumber}, jobTime {x.jobTime}, jobDate {x.jobDate}, jobStatus {x.jobStatus}";
+                log(sm);
+
+
+
+                int nl = x.JobPosition.Length;
+                x.JobPosition[0] = new myNameSpace.JobPositionTypeV01();
+                var jb = x.JobPosition[0];
+
+
+                // store cod o nome se null, se entrambi null non li gestisce e prosegue
+                if (UT.NotNull(pi.code))
+                    jb.articleNumber = pi.code;
+                else if (UT.NotNull(pi.name))
+                    jb.articleNumber = pi.name;
+
+                jb.operation = "-";
+                jb.nominalQuantity = $"{qt}";
+
+                UT.AppendToFile(outCSV, $"{pi._id};{pi.code};{pi.name};{qt};Scarico");
+
+                sm = $"PICK -  articleNumber {jb.articleNumber}, actualQuantity {jb.actualQuantity}, nominalQuantity {jb.nominalQuantity}, positionStatus {jb.positionStatus}";
+                log(sm);
+                UT.AddRowHist("PICK-ITEM", $"Rich da {retByUser.Requester}:" + sm);
+
+
+
+                setPB(0);
+
+                //sm = log("PICK -   Risorse caricate da iProd, invio richiesta prelievi al M.V. ");
+                //if (VerboseMax)
+                //    if (!UT.Ask(sm)) return retByUser;
+
+
+                req.param[0] = x;
+                var resp = cli.sendJobsV01(req);
+                if (resp is null) throw new Exception("sendJobsV01 (Prelievo) non eseguito: la funzione ha restituito il response nullo");
+
+                //   sm = log($"Response MP: {resp.@return.returnValue}");
+
+                if (UT.NotNull(resp.@return.returnErrorMessage))
+                {
+                    sm = log($"PICK - **ERRORE** ResponseValue: {resp.@return.returnValue}, ResponseError: '{resp.@return.returnErrorMessage}'");
+                    ret.Message = sm;
+                    ret.StatusCode = "ERRORRESPONSE";
+                    ret.inError = true;
+                    UT.AddRowHist("PICK-ERR", $"Rich da {retByUser.Requester}:" + sm);
+                }
+                else
+                {
+                    ret.PickedItems = 1;
+                    sm = log($"PICK - Richiesta conclusa correttamente e senza errori.");
+                    ret.Message = sm;
+                    ret.StatusCode = "COMPLETED";
+                    UT.AddRowHist("PICK-ITEM", $"Rich da {retByUser.Requester}:" + sm);
+                }
+
+                return ret;
+            }
+            catch (Exception ex)
+            {
+
+                var sm = log("Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return retByUser;
+
+                ret.inError = true;
+                ret.StatusCode = "OFFLINE";
+                ret.Message = sm;
+
+                return ret;
+
+            }
+
+        }
+
+
+
+        ipDispatcher PrelievoItemREST(Items PI, string qt, ipDispatcher ret, ipDispatcher retByUser)
+        {
+
+            /*
+
+            POST
+            url: https://127.0.0.1:12121/reservation
+            body:
+
+                }          
+                  "articleNumber": "TA24451", 
+                  "userIdentifier": "admin", 
+                  "actionType": 3, 
+                  "quantity": 5 
+                } 
+               
+            dove actionType: 2 = Store, 3 = Prelievo
+
+            */
+
+
+            try
+            {
+
+                string sm = "";
+                string st = "";
+
+                string apiHost = $"https://{UT.iProdCFG.MP_IP}:{UT.iProdCFG.MP_Port}/";
+
+                HttpClient httpClient = new HttpClient();
+                httpClient.BaseAddress = new Uri(apiHost);
+
+                var job = new RESTReservation();
+
+                var jobs = new List<reqSchema>();
+                var prelievi = new List<itemToGet>();
+
+
+                var pi = PI;
+                prelievi = new List<itemToGet>();
+                prelievi.Add(new itemToGet
+                {
+                    itemid = pi._id,
+                    name = pi.name,
+                    qty = Convert.ToDouble(qt)
+                });
+
+
+
+                sm = log($"PICK-ITEM -     .... caricamento richiesta http a HOFFMANN per prelievo articolo.");
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return retByUser;
+
+                string errors = "";
+
+                job.articleNumber = "";
+                job.userIdentifier = "admin";
+                job.actionType = "3";           // 3-pick, 2-send
+                job.quantity = "1";
+
+                // store cod o nome se null, se entrambi null non li gestisce e prosegue
+                if (!pi.code.IsNull())
+                    job.articleNumber = pi.code;
+                else if (!pi.name.IsNull())
+                    job.articleNumber = pi.name;
+
+
+                job.quantity = $"{qt}";
+
+
+                var json = JsonConvert.SerializeObject(job);
+                StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+                string APIurl = "reservation";
+
+                var resp = UT.APICall(httpClient, APIurl, requestContent).Result;
+                if (resp.status != "OK")
+                {
+                    sm = $"BAD REQUEST    .... art. '{job.articleNumber}', errore: {resp.response}. {UT.LF}";
+                    errors += sm;
+                    UT.AppendToFile(outCSV, $"{pi._id};{pi.code};{pi.name};{qt};**SCARICO IN ERRORE**");
+                    UT.AddRowHist("PICK-ERR", $"Rich da {retByUser.Requester}:" + sm);
+                }
+                else
+                {
+                    UT.AppendToFile(outCSV, $"{pi._id};{pi.code};{pi.name};{qt};Scarico");
+                    sm = $"PICK-ITEM -  articleNumber {job.articleNumber}, quantity {job.quantity}";
+                    log(sm);
+                    UT.AddRowHist("PICK-OK", $"Rich da {retByUser.Requester}:" + sm);
+
+                }
+
+
+                if (!errors.IsNull())
+                {
+                    ret.Message = errors;
+                    ret.StatusCode = "ERRORRESPONSE";
+                    ret.inError = true;
+                }
+                else
+                {
+                    ret.PickedItems = 1;
+                    sm = log($"PICK - Richiesta conclusa correttamente e senza errori.");
+                    ret.Message = sm;
+                    ret.StatusCode = "COMPLETED";
+                }
+
+                return ret;
+            }
+            catch (Exception ex)
+            {
+
+                var sm = log("Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
+                if (VerboseMax)
+                    if (!UT.Ask(sm)) return retByUser;
+
+                ret.inError = true;
+                ret.StatusCode = "OFFLINE";
+                ret.Message = sm;
+
+                return ret;
+
+            }
+
+        }
+
+
 
 
         ipDispatcher PrelievoSOAP(PhaseInstance PI, ipDispatcher ret, ipDispatcher retByUser)
@@ -1595,8 +2042,8 @@ namespace iProdWHSE
 
                 if (UT.NotNull(respd.@return.returnErrorMessage))
                     ret.AdditionalInfo = "Esito cancellazione job già presente: " + respd.@return.returnErrorMessage;
-                else
-                    ret.AdditionalInfo = "Il Job era già stato inviato ed è stato eliminato per il reinvio";
+                //else
+                //    ret.AdditionalInfo = "Il Job era già stato inviato ed è stato eliminato per il reinvio";
 
                 #endregion
 

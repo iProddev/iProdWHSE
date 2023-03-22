@@ -42,21 +42,15 @@ namespace iProdWHSE
         #region DICHIARAZIONI
 
 
-        public static string Versione { get; set; } = "4.1.16@22.3.23"; // versione iprod @ data
+        public static string Versione { get; set; } = "4.1.16@22.3.23a"; // versione iprod @ data
         // note relative al commit e/o modifiche rilevanti
         public static string Versione_Commit { get; set; } = "";
-
-
-
         public static Form1 mainForm { get; set; }
         public static iProdCustomers Tenant { get; set; }
         public static Customerusers iprod_loggeduser { get; set; }
         public static WHSEInfo iProdCFG { get; set; }
         public static WHSEInfo curMV { get; set; }      // MV selezionato
-
         public static List<WHSEInfo> HwdSupportedModels { get; set; } 
-
-
         public static string EndPointIPROD { get; set; } = "https://localhost:44375/api/";
         public static string EndPointCOMPANY { get; set; } // -> endpoint-lireco; http://192.168.1.254/jwscom/services/Com
         public static bool MockWS { get; set; }
@@ -74,10 +68,8 @@ namespace iProdWHSE
         public static string SVCStatus { get; set; }
         public static DateTime ControlledLastActivity { get; set; }
         public static DateTime SVCWaitTo { get; set; }
-
         private static DateTime lastlog { get; set; }
         public static DateTime lastMailSent { get; set; }
-
 
 
         public static string LF = "\r\n";

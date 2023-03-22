@@ -41,6 +41,7 @@ namespace iProdWHSE
         public static myNameSpace.sendJobsV01Response GetPickResponse(myNameSpace.sendJobsV01Request req)
         {
             var resp = new myNameSpace.sendJobsV01Response();
+            resp.@return = new myNameSpace.RetSendJobsV01();
             resp.@return.returnValue = 1;
 
             // in realta della richiesta non ce ne facciamo nulla perche nel servizio va inviato e restituisce solo return = 1
