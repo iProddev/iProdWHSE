@@ -166,7 +166,7 @@ namespace iProdWHSE
             this.PBperc.Location = new System.Drawing.Point(8, 28);
             this.PBperc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PBperc.Name = "PBperc";
-            this.PBperc.Size = new System.Drawing.Size(58, 22);
+            this.PBperc.Size = new System.Drawing.Size(74, 28);
             this.PBperc.TabIndex = 93;
             this.PBperc.Text = "100%";
             // 
@@ -177,7 +177,7 @@ namespace iProdWHSE
             this.lbTimerStatus.Location = new System.Drawing.Point(183, 3);
             this.lbTimerStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbTimerStatus.Name = "lbTimerStatus";
-            this.lbTimerStatus.Size = new System.Drawing.Size(100, 20);
+            this.lbTimerStatus.Size = new System.Drawing.Size(126, 25);
             this.lbTimerStatus.TabIndex = 92;
             this.lbTimerStatus.Text = "lbTimerStatus";
             // 
@@ -202,7 +202,7 @@ namespace iProdWHSE
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1376, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1376, 28);
             this.menuStrip1.TabIndex = 105;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -218,59 +218,59 @@ namespace iProdWHSE
             this.apriFilePingMPtxtToolStripMenuItem,
             this.apriLirecoLogtxtToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // apriToolStripMenuItem
             // 
             this.apriToolStripMenuItem.Name = "apriToolStripMenuItem";
-            this.apriToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.apriToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.apriToolStripMenuItem.Text = "Config.txt";
             this.apriToolStripMenuItem.Click += new System.EventHandler(this.apriToolStripMenuItem_Click);
             // 
             // utentiToolStripMenuItem
             // 
             this.utentiToolStripMenuItem.Name = "utentiToolStripMenuItem";
-            this.utentiToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.utentiToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.utentiToolStripMenuItem.Text = "Utenti";
             this.utentiToolStripMenuItem.Click += new System.EventHandler(this.utentiToolStripMenuItem_Click);
             // 
             // apriFileDiLogToolStripMenuItem
             // 
             this.apriFileDiLogToolStripMenuItem.Name = "apriFileDiLogToolStripMenuItem";
-            this.apriFileDiLogToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.apriFileDiLogToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.apriFileDiLogToolStripMenuItem.Text = "File di Log";
             this.apriFileDiLogToolStripMenuItem.Click += new System.EventHandler(this.apriFileDiLogToolStripMenuItem_Click);
             // 
             // apriCartellaDiLavoroToolStripMenuItem
             // 
             this.apriCartellaDiLavoroToolStripMenuItem.Name = "apriCartellaDiLavoroToolStripMenuItem";
-            this.apriCartellaDiLavoroToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.apriCartellaDiLavoroToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.apriCartellaDiLavoroToolStripMenuItem.Text = "Apri cartella di lavoro";
             this.apriCartellaDiLavoroToolStripMenuItem.Click += new System.EventHandler(this.apriCartellaDiLavoroToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(183, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(233, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // apriFilePingMPtxtToolStripMenuItem
             // 
             this.apriFilePingMPtxtToolStripMenuItem.Name = "apriFilePingMPtxtToolStripMenuItem";
-            this.apriFilePingMPtxtToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.apriFilePingMPtxtToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.apriFilePingMPtxtToolStripMenuItem.Text = "Apri file Ping_MP.txt";
             this.apriFilePingMPtxtToolStripMenuItem.Click += new System.EventHandler(this.apriFilePingMPtxtToolStripMenuItem_Click);
             // 
             // apriLirecoLogtxtToolStripMenuItem
             // 
             this.apriLirecoLogtxtToolStripMenuItem.Name = "apriLirecoLogtxtToolStripMenuItem";
-            this.apriLirecoLogtxtToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.apriLirecoLogtxtToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.apriLirecoLogtxtToolStripMenuItem.Text = "Apri LirecoLog.txt";
             this.apriLirecoLogtxtToolStripMenuItem.Click += new System.EventHandler(this.apriLirecoLogtxtToolStripMenuItem_Click);
             // 
@@ -326,7 +326,7 @@ namespace iProdWHSE
             this.ckSlow.Location = new System.Drawing.Point(44, 1);
             this.ckSlow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ckSlow.Name = "ckSlow";
-            this.ckSlow.Size = new System.Drawing.Size(96, 19);
+            this.ckSlow.Size = new System.Drawing.Size(121, 24);
             this.ckSlow.TabIndex = 227;
             this.ckSlow.Text = "Bassa priorità";
             this.toolTip1.SetToolTip(this.ckSlow, "Esegue le istruzioni lentamente per controllare meglio le operazioni");
@@ -340,7 +340,7 @@ namespace iProdWHSE
             this.ckPauseOnError.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ckPauseOnError.Name = "ckPauseOnError";
             this.ckPauseOnError.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ckPauseOnError.Size = new System.Drawing.Size(91, 19);
+            this.ckPauseOnError.Size = new System.Drawing.Size(112, 24);
             this.ckPauseOnError.TabIndex = 226;
             this.ckPauseOnError.Text = "Pausa Errore";
             this.toolTip1.SetToolTip(this.ckPauseOnError, "Si ferma ad ogni errore");
@@ -354,7 +354,7 @@ namespace iProdWHSE
             this.ckVerbose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.ckVerbose.Name = "ckVerbose";
             this.ckVerbose.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ckVerbose.Size = new System.Drawing.Size(106, 19);
+            this.ckVerbose.Size = new System.Drawing.Size(134, 24);
             this.ckVerbose.TabIndex = 104;
             this.ckVerbose.Text = "Log dettagliato";
             this.toolTip1.SetToolTip(this.ckVerbose, "Mostra più informazioni possibili durante la migrazione (più lento)");
@@ -393,7 +393,7 @@ namespace iProdWHSE
             this.txtautoupdate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtautoupdate.Location = new System.Drawing.Point(315, 408);
             this.txtautoupdate.Name = "txtautoupdate";
-            this.txtautoupdate.Size = new System.Drawing.Size(60, 29);
+            this.txtautoupdate.Size = new System.Drawing.Size(60, 34);
             this.txtautoupdate.TabIndex = 90;
             this.txtautoupdate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtautoupdate, "Intervallo di tempo, in secondi, tra un controllo giacenze e l\'altro");
@@ -404,7 +404,7 @@ namespace iProdWHSE
             this.ckAutostart.Location = new System.Drawing.Point(212, 158);
             this.ckAutostart.Name = "ckAutostart";
             this.ckAutostart.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.ckAutostart.Size = new System.Drawing.Size(155, 25);
+            this.ckAutostart.Size = new System.Drawing.Size(194, 32);
             this.ckAutostart.TabIndex = 125;
             this.ckAutostart.Text = "Autentica all\'avvio";
             this.toolTip1.SetToolTip(this.ckAutostart, "Connessione automatica a iProd all\'avvio del servizio");
@@ -415,7 +415,7 @@ namespace iProdWHSE
             this.ckSkipGIAC.AutoSize = true;
             this.ckSkipGIAC.Location = new System.Drawing.Point(9, 449);
             this.ckSkipGIAC.Name = "ckSkipGIAC";
-            this.ckSkipGIAC.Size = new System.Drawing.Size(241, 25);
+            this.ckSkipGIAC.Size = new System.Drawing.Size(300, 32);
             this.ckSkipGIAC.TabIndex = 209;
             this.ckSkipGIAC.Text = "Non elaborare mai le Giacenze";
             this.toolTip1.SetToolTip(this.ckSkipGIAC, "Non esegue il servizio di allineamento giacenze tra iProd e il M.V.");
@@ -426,7 +426,7 @@ namespace iProdWHSE
             this.txtMaxHist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaxHist.Location = new System.Drawing.Point(558, 494);
             this.txtMaxHist.Name = "txtMaxHist";
-            this.txtMaxHist.Size = new System.Drawing.Size(60, 29);
+            this.txtMaxHist.Size = new System.Drawing.Size(60, 34);
             this.txtMaxHist.TabIndex = 210;
             this.txtMaxHist.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtMaxHist, "Intervallo di tempo, in minuti, tra una migrazione e l\'altra");
@@ -850,7 +850,7 @@ namespace iProdWHSE
             this.label5.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(1265, 40);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(24, 13);
+            this.label5.Size = new System.Drawing.Size(28, 17);
             this.label5.TabIndex = 162;
             this.label5.Text = "WS";
             // 
@@ -861,7 +861,7 @@ namespace iProdWHSE
             this.label4.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(1228, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 13);
+            this.label4.Size = new System.Drawing.Size(20, 17);
             this.label4.TabIndex = 161;
             this.label4.Text = "IP";
             // 
@@ -872,7 +872,7 @@ namespace iProdWHSE
             this.lbLR.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbLR.Location = new System.Drawing.Point(1185, 40);
             this.lbLR.Name = "lbLR";
-            this.lbLR.Size = new System.Drawing.Size(20, 13);
+            this.lbLR.Size = new System.Drawing.Size(23, 17);
             this.lbLR.TabIndex = 160;
             this.lbLR.Text = "LR";
             // 
@@ -910,7 +910,7 @@ namespace iProdWHSE
             this.lblSync.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSync.Location = new System.Drawing.Point(94, 32);
             this.lblSync.Name = "lblSync";
-            this.lblSync.Size = new System.Drawing.Size(43, 13);
+            this.lblSync.Size = new System.Drawing.Size(51, 19);
             this.lblSync.TabIndex = 152;
             this.lblSync.Text = "lblSync";
             // 
@@ -920,7 +920,7 @@ namespace iProdWHSE
             this.label37.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.Location = new System.Drawing.Point(94, 7);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(56, 19);
+            this.label37.Size = new System.Drawing.Size(68, 23);
             this.label37.TabIndex = 151;
             this.label37.Text = "Attività:";
             // 
@@ -962,7 +962,7 @@ namespace iProdWHSE
             this.lbSYM.Location = new System.Drawing.Point(574, 20);
             this.lbSYM.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbSYM.Name = "lbSYM";
-            this.lbSYM.Size = new System.Drawing.Size(209, 25);
+            this.lbSYM.Size = new System.Drawing.Size(268, 32);
             this.lbSYM.TabIndex = 606;
             this.lbSYM.Text = "Simulazione WS attiva";
             this.lbSYM.Visible = false;
@@ -992,7 +992,7 @@ namespace iProdWHSE
             this.lbEvidentMsg.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.lbEvidentMsg.Location = new System.Drawing.Point(3, 36);
             this.lbEvidentMsg.Name = "lbEvidentMsg";
-            this.lbEvidentMsg.Size = new System.Drawing.Size(104, 21);
+            this.lbEvidentMsg.Size = new System.Drawing.Size(132, 28);
             this.lbEvidentMsg.TabIndex = 603;
             this.lbEvidentMsg.Text = "lbEvidentMsg";
             this.lbEvidentMsg.Visible = false;
@@ -1116,7 +1116,7 @@ namespace iProdWHSE
             this.label1.Location = new System.Drawing.Point(112, 5);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(246, 21);
+            this.label1.Size = new System.Drawing.Size(305, 28);
             this.label1.TabIndex = 226;
             this.label1.Text = "Cronologia attività del servizio";
             // 
@@ -1129,7 +1129,7 @@ namespace iProdWHSE
             this.btEvents.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btEvents.Location = new System.Drawing.Point(117, 0);
             this.btEvents.Name = "btEvents";
-            this.btEvents.Size = new System.Drawing.Size(62, 31);
+            this.btEvents.Size = new System.Drawing.Size(75, 38);
             this.btEvents.TabIndex = 4;
             this.btEvents.TabStop = true;
             this.btEvents.Text = "Eventi";
@@ -1145,7 +1145,7 @@ namespace iProdWHSE
             this.btHist.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btHist.Location = new System.Drawing.Point(3, 0);
             this.btHist.Name = "btHist";
-            this.btHist.Size = new System.Drawing.Size(105, 31);
+            this.btHist.Size = new System.Drawing.Size(125, 38);
             this.btHist.TabIndex = 3;
             this.btHist.Text = "Cronologia";
             this.btHist.UseVisualStyleBackColor = true;
@@ -1202,7 +1202,7 @@ namespace iProdWHSE
             // 
             this.txtiProdUrl.Location = new System.Drawing.Point(167, 224);
             this.txtiProdUrl.Name = "txtiProdUrl";
-            this.txtiProdUrl.Size = new System.Drawing.Size(381, 29);
+            this.txtiProdUrl.Size = new System.Drawing.Size(381, 34);
             this.txtiProdUrl.TabIndex = 50;
             this.txtiProdUrl.Visible = false;
             // 
@@ -1211,7 +1211,7 @@ namespace iProdWHSE
             this.label32.AutoSize = true;
             this.label32.Location = new System.Drawing.Point(19, 60);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(84, 21);
+            this.label32.Size = new System.Drawing.Size(103, 28);
             this.label32.TabIndex = 40;
             this.label32.Text = "UserName";
             // 
@@ -1220,7 +1220,7 @@ namespace iProdWHSE
             this.label33.AutoSize = true;
             this.label33.Location = new System.Drawing.Point(19, 99);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(76, 21);
+            this.label33.Size = new System.Drawing.Size(93, 28);
             this.label33.TabIndex = 42;
             this.label33.Text = "Password";
             // 
@@ -1228,7 +1228,7 @@ namespace iProdWHSE
             // 
             this.txtUser.Location = new System.Drawing.Point(179, 57);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(227, 29);
+            this.txtUser.Size = new System.Drawing.Size(227, 34);
             this.txtUser.TabIndex = 60;
             // 
             // txtPwd
@@ -1236,7 +1236,7 @@ namespace iProdWHSE
             this.txtPwd.Location = new System.Drawing.Point(179, 103);
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.PasswordChar = '*';
-            this.txtPwd.Size = new System.Drawing.Size(227, 29);
+            this.txtPwd.Size = new System.Drawing.Size(227, 34);
             this.txtPwd.TabIndex = 70;
             // 
             // label31
@@ -1244,7 +1244,7 @@ namespace iProdWHSE
             this.label31.AutoSize = true;
             this.label31.Location = new System.Drawing.Point(7, 223);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(72, 21);
+            this.label31.Size = new System.Drawing.Size(90, 28);
             this.label31.TabIndex = 49;
             this.label31.Text = "Url iProd";
             this.label31.Visible = false;
@@ -1281,7 +1281,7 @@ namespace iProdWHSE
             // 
             this.txtMPUrl.Location = new System.Drawing.Point(165, 188);
             this.txtMPUrl.Name = "txtMPUrl";
-            this.txtMPUrl.Size = new System.Drawing.Size(331, 29);
+            this.txtMPUrl.Size = new System.Drawing.Size(331, 34);
             this.txtMPUrl.TabIndex = 157;
             // 
             // label2
@@ -1289,7 +1289,7 @@ namespace iProdWHSE
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 183);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 21);
+            this.label2.Size = new System.Drawing.Size(38, 28);
             this.label2.TabIndex = 156;
             this.label2.Text = "Url";
             // 
@@ -1300,7 +1300,7 @@ namespace iProdWHSE
             this.cboHWModels.FormattingEnabled = true;
             this.cboHWModels.Location = new System.Drawing.Point(166, 51);
             this.cboHWModels.Name = "cboHWModels";
-            this.cboHWModels.Size = new System.Drawing.Size(330, 38);
+            this.cboHWModels.Size = new System.Drawing.Size(330, 45);
             this.cboHWModels.TabIndex = 30;
             this.cboHWModels.SelectedIndexChanged += new System.EventHandler(this.cboHWModels_SelectedIndexChanged);
             // 
@@ -1308,7 +1308,7 @@ namespace iProdWHSE
             // 
             this.txtIP.Location = new System.Drawing.Point(165, 108);
             this.txtIP.Name = "txtIP";
-            this.txtIP.Size = new System.Drawing.Size(227, 29);
+            this.txtIP.Size = new System.Drawing.Size(227, 34);
             this.txtIP.TabIndex = 40;
             // 
             // label29
@@ -1316,7 +1316,7 @@ namespace iProdWHSE
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(11, 113);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(86, 21);
+            this.label29.Size = new System.Drawing.Size(108, 28);
             this.label29.TabIndex = 38;
             this.label29.Text = "Indirizzo IP";
             // 
@@ -1325,7 +1325,7 @@ namespace iProdWHSE
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(12, 56);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(67, 21);
+            this.label24.Size = new System.Drawing.Size(86, 28);
             this.label24.TabIndex = 51;
             this.label24.Text = "Modello";
             // 
@@ -1334,7 +1334,7 @@ namespace iProdWHSE
             this.label42.AutoSize = true;
             this.label42.Location = new System.Drawing.Point(11, 146);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(46, 21);
+            this.label42.Size = new System.Drawing.Size(58, 28);
             this.label42.TabIndex = 154;
             this.label42.Text = "Porta";
             // 
@@ -1342,7 +1342,7 @@ namespace iProdWHSE
             // 
             this.txtPort.Location = new System.Drawing.Point(165, 148);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(80, 29);
+            this.txtPort.Size = new System.Drawing.Size(80, 34);
             this.txtPort.TabIndex = 155;
             // 
             // lbEsitoTestConnessione
@@ -1360,7 +1360,7 @@ namespace iProdWHSE
             this.label44.AutoSize = true;
             this.label44.Location = new System.Drawing.Point(12, 408);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(234, 21);
+            this.label44.Size = new System.Drawing.Size(295, 28);
             this.label44.TabIndex = 144;
             this.label44.Text = "Interroga servizio giacenze ogni ";
             // 
@@ -1369,7 +1369,7 @@ namespace iProdWHSE
             this.label45.AutoSize = true;
             this.label45.Location = new System.Drawing.Point(381, 411);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(63, 21);
+            this.label45.Size = new System.Drawing.Size(79, 28);
             this.label45.TabIndex = 146;
             this.label45.Text = "secondi";
             // 
@@ -1378,7 +1378,7 @@ namespace iProdWHSE
             this.label47.AutoSize = true;
             this.label47.Location = new System.Drawing.Point(7, 497);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(436, 21);
+            this.label47.Size = new System.Drawing.Size(545, 28);
             this.label47.TabIndex = 202;
             this.label47.Text = "Numero massimo di elementi da visualizzare nella cronologia";
             // 
@@ -1389,13 +1389,13 @@ namespace iProdWHSE
             this.label30.Location = new System.Drawing.Point(446, 5);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(127, 25);
+            this.label30.Size = new System.Drawing.Size(163, 32);
             this.label30.TabIndex = 124;
             this.label30.Text = "Impostazioni";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1376, 756);
             this.Controls.Add(this.pnlCFG);

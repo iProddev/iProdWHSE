@@ -42,7 +42,7 @@ namespace iProdWHSE
         #region DICHIARAZIONI
 
 
-        public static string Versione { get; set; } = "4.1.14@15.3.23"; // versione iprod @ data
+        public static string Versione { get; set; } = "4.1.16@22.3.23"; // versione iprod @ data
         // note relative al commit e/o modifiche rilevanti
         public static string Versione_Commit { get; set; } = "";
 
@@ -779,7 +779,7 @@ namespace iProdWHSE
             } while (DateTime.Now < d);
         }
 
-        public static async Task<httpResponse> iProdLogin(string url, string usr, string pwd)
+        public static async Task<httpResponse> iProdLogin(string url, string usr, string pwd, bool silent = false)
         {
 
 
@@ -812,8 +812,11 @@ namespace iProdWHSE
                 var resp = await APICall(httpClient, APIurl, requestContent);
                 if (resp.status != "OK")
                 {
-                    sm=mainForm.log("Login iProd fallito!");
-                    mainForm.SetNetStatus("IP-ERR",sm);
+                    if (!silent)
+                    {
+                        sm = mainForm.log("Login iProd fallito!");
+                        mainForm.SetNetStatus("IP-ERR", sm);
+                    }
                     connecting = false;
                     return resp;
                 }
@@ -828,8 +831,11 @@ namespace iProdWHSE
                 resp = await APICall(httpClient, APIurl);
                 if (resp.status != "OK")
                 {
-                    sm = mainForm.log("Login iProd fallito!");
-                    mainForm.SetNetStatus("IP-ERR", sm);
+                    if (!silent)
+                    {
+                        sm = mainForm.log("Login iProd fallito!");
+                        mainForm.SetNetStatus("IP-ERR", sm);
+                    }
                     connecting = false;
                     return resp;
                 }
@@ -847,8 +853,11 @@ namespace iProdWHSE
             {
 
                 connecting = false;
-                sm = mainForm.log("Login iProd fallito!");
-                mainForm.SetNetStatus("IP-ERR", sm);
+                if (!silent)
+                {
+                    sm = mainForm.log("Login iProd fallito!");
+                    mainForm.SetNetStatus("IP-ERR", sm);
+                }
                 iProdConnected = false;
                 string m = "Rilevata Eccezione: " + ex.Message + "|" + ex.StackTrace;
                 mainForm.log(m);

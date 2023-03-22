@@ -2375,12 +2375,40 @@ namespace iProdWHSE
 
 
 
+        public async Task<bool> Autentica_Renew_iProd()
+        {
+
+            if (!timer1.Enabled) return true;
+
+            UT.iProdConnected = false;
+
+            var msg = await UT.iProdLogin(Program.UrlGate.api, Program.ipUSER, Program.ipPWD, true);
+
+            if (!UT.IsNull(msg.status))
+            {
+                if (msg.status != "OK")
+                {
+                    log($"0685 Tentativo di rinnovo autenticazione iProd FALLITO ({msg.response}). Il sistema ritenterà tra 1 minuto");
+                    return false;
+                }
+            }
+
+            log("    ....rinnovo autenticazione a iProd riuscita.");
+            return true;
+
+        }
+
+
         //  bool Notte = false;
         bool forzaExitApp = false;
- 
+        private int cntCicli = 0;
         string SVCState = "wait";
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
+
+            bool logged = false;
+            int cntTry = 0;
+
 
             try
             {
@@ -2388,13 +2416,10 @@ namespace iProdWHSE
                 if (aborted || abort_requested)
                 {
                     log("Interruzione richiesta dall'utente");
-
                     timer1.Enabled = false;
                     aborted = false;
                     abort_requested = false;
-
                     UT.CompactMemory();
-
                     return;
                 }
 
@@ -2425,9 +2450,53 @@ namespace iProdWHSE
                         Application.DoEvents();
                     }
 
-               
 
+
+                    cntCicli++;
+
+                    log($"TIMER START #{cntCicli} --------------------------------------");
+                    log(" ");
                     log($"Avviato servizio alle ore {DateTime.Now:hh:mm:ss}");
+                    log(" ");
+
+
+                    // ================================================================
+
+                    // ad ogni sync con timer devo disconnettermi e riconnettermi a iprod
+                    // potrebbe essere passato un giorno e la sessione/token sicuramente non è piu valida
+                    // quindi ogni volta si autentica
+
+
+                    do
+                    {
+                        logged = await Autentica_Renew_iProd();
+                        if (!logged)
+                        {
+                            cntTry++;
+                            UT.Sleep(6000); // 1 min wait
+                        }
+                    } while (!logged && cntTry < 30);
+
+                    // se in 30 min non è venuto su iProd c'è qualcosa di locale, inutile continuare
+                    if (cntTry >= 30)
+                    {
+                        log("0785 Superati 30 tentativi di riconnessione a iProd senza successo, timer sincronizzazione disattivato");
+                        aborted = true;
+                    }
+
+                    if (aborted)
+                    {
+                        log("Interruzione richiesta dall'utente");
+                        timer1.Enabled = false;
+                        aborted = false;
+                        abort_requested = false;
+                        UT.CompactMemory();
+                        return;
+                    }
+
+                    // =====================================
+
+
                     preload.Visible = true;
 
                     var dStart = DateTime.Now;
@@ -2449,7 +2518,9 @@ namespace iProdWHSE
 
                     var ctemp = UT.ElapsedTimeToString(DateTime.Now, dStart, true);
                     log($"Processo eseguito in {ctemp}");
-
+                    log("");
+                    log($"TIMER END #{cntCicli} --------------------------------------");
+                    log("");
                     setPB(0);
 
                 }
@@ -2457,7 +2528,9 @@ namespace iProdWHSE
             }
             catch (Exception ex)
             {
-
+                log("");
+                log($"TIMER END #{cntCicli} --------------------------------------");
+                log("");
                 preload.Visible = false;
                 if (Interactive)
                     MessageBox.Show(log("Errore " + ex.Message + ", " + ex.StackTrace));

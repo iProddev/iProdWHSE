@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>M%40V_Icon_Black.ico</ApplicationIcon>
+    <ApplicationIcon>M%40V_Icon_White.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Azure.Core, Version=1.25.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
@@ -440,6 +440,7 @@
     <Content Include="img\icons\SENDRECIcons\32\transfer-SEND_OFF.png" />
     <None Include="img\Ionut2\iProd_M%40V_Black_472x211.png" />
     <Content Include="M%40V_Icon_Black.ico" />
+    <Content Include="M%40V_Icon_White.ico" />
     <Content Include="mongocrypt.dll" />
     <Content Include="Resources\accessories-text-editor.png" />
     <Content Include="Resources\application-x-executable.png" />
