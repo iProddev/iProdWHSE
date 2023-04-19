@@ -756,8 +756,8 @@ namespace iProdWHSE
     {
         public string articleNumber { get; set; }
         public string userIdentifier { get; set; }
-        public string actionType { get; set; }
-        public string quantity { get; set; }
+        public int actionType { get; set; }
+        public int quantity { get; set; }
 
     }
 
@@ -1019,7 +1019,7 @@ namespace iProdWHSE
 
         bool listenerRunning = false;
 
-        public void httpListener()
+        public async Task httpListener()
         {
 
             if (listenerRunning) return;
@@ -1109,7 +1109,7 @@ namespace iProdWHSE
 
 
                     string dxa = "";
-                    if (dsp.Action == "missing-parms") dxa = " (ATT!: La richiesta ricevuta non contiene alcuni dei parametri essenziali e viene ignorata)";
+                    if (dsp.Action == "missing-parms") dxa = $" (ATT!: La richiesta ricevuta non contiene alcuni dei parametri essenziali e viene ignorata. Richiesta: '{request.Url}'. Errore: '{dsp.Message}')";
                     if (dsp.Action == "missing-id" || dsp.Action.Contains("missing-id-item")) dxa = " (ATT!: La richiesta ricevuta non contiene l'ID e viene ignorata)";
                     if (dsp.Action.Contains("missing-qty")) dxa = " (ATT!: La richiesta ricevuta non contiene la quantità desiderata e viene ignorata)";
 
@@ -1129,13 +1129,13 @@ namespace iProdWHSE
                     else if (dsp.Action == "pickerbom")
                     {
                         log($"LSNR PICK - ..esecuzione prelievo di IdPhaseInstance = '{dsp.IdPhaseInstance}'");
-                        var ret = ExecuteProcess("Lista di Prelievo", dsp.IdPhaseInstance);
+                        var ret = await ExecuteProcess("Lista di Prelievo", dsp.IdPhaseInstance);
                         ret.sendResponse(context);
                     }
                     else if (dsp.Action == "pickeritem")
                     {
                         log($"LSNR PICK - ..esecuzione prelievo di singolo prodotto = '{dsp.IdItem}'");
-                        var ret = ExecuteProcess("Prelievo Prodotto", $"{dsp.IdItem}|{dsp.Qty}", dsp.Requester);
+                        var ret =await ExecuteProcess("Prelievo Prodotto", $"{dsp.IdItem}|{dsp.Qty}", dsp.Requester);
                         ret.sendResponse(context);
                     }
 
@@ -1174,7 +1174,7 @@ namespace iProdWHSE
 
 
         bool VerboseMax = false;
-        public ipDispatcher ExecuteProcess(string taskName, string ObjId = "", string richiedente="")
+        public async Task<ipDispatcher> ExecuteProcess(string taskName, string ObjId = "", string richiedente="")
         {
 
             var ret = new ipDispatcher();
@@ -1225,11 +1225,11 @@ namespace iProdWHSE
                         if (ar.Length > 1) {
                             string id = ar[0];
                             string qt = ar[1];
-                            ret = EseguiRichiestaPrelievoItem(id, qt, richiedente);
+                            ret = await EseguiRichiestaPrelievoItem(id, qt, richiedente);
                         }
                     }
                     else
-                        ret = EseguiRichiestaPrelievi(ObjId, richiedente);
+                        ret = await EseguiRichiestaPrelievi(ObjId, richiedente);
                 }
 
                 setPB(0);
@@ -1396,7 +1396,7 @@ namespace iProdWHSE
         /// <param name="qt"></param>
         /// <param name="richiedente"></param>
         /// <returns></returns>
-        ipDispatcher EseguiRichiestaPrelievoItem(string ItemId, string qt, string richiedente)
+        async Task<ipDispatcher> EseguiRichiestaPrelievoItem(string ItemId, string qt, string richiedente)
         {
             try
             {
@@ -1443,7 +1443,7 @@ namespace iProdWHSE
                     if (UT.curMV.Technology == "SOAP")
                         return PrelievoItemSOAP(PI, qt, ret, retByUser);
                     else if (UT.curMV.Technology == "REST")
-                        return PrelievoItemREST(PI, qt, ret, retByUser);
+                        return await PrelievoItemREST(PI, qt, ret, retByUser);
                     else return ret;
 
                 }
@@ -1461,7 +1461,7 @@ namespace iProdWHSE
         // Elabora BOMS PhaseInstances e Itemss
 
 
-        ipDispatcher EseguiRichiestaPrelievi(string phaseInstanceId, string richiedente)
+        async Task<ipDispatcher> EseguiRichiestaPrelievi(string phaseInstanceId, string richiedente)
         {
             try
             {
@@ -1507,7 +1507,7 @@ namespace iProdWHSE
                     if (UT.curMV.Technology == "SOAP")
                         return PrelievoSOAP(PI, ret, retByUser);
                     else if (UT.curMV.Technology == "REST")
-                        return PrelievoREST(PI, ret, retByUser);
+                        return await PrelievoREST(PI, ret, retByUser);
                     else return ret;
 
                 }
@@ -1885,7 +1885,7 @@ namespace iProdWHSE
 
 
 
-        ipDispatcher PrelievoItemREST(Items PI, string qt, ipDispatcher ret, ipDispatcher retByUser)
+        async Task<ipDispatcher> PrelievoItemREST(Items PI, string qt, ipDispatcher ret, ipDispatcher retByUser)
         {
 
             /*
@@ -1912,10 +1912,10 @@ namespace iProdWHSE
                 string sm = "";
                 string st = "";
 
-                string apiHost = $"https://{UT.iProdCFG.MP_IP}:{UT.iProdCFG.MP_Port}/";
+                //string apiHost = $"https://{UT.iProdCFG.MP_IP}:{UT.iProdCFG.MP_Port}/";
 
-                HttpClient httpClient = new HttpClient();
-                httpClient.BaseAddress = new Uri(apiHost);
+                //HttpClient httpClient = new HttpClient();
+                //httpClient.BaseAddress = new Uri(apiHost);
 
                 var job = new RESTReservation();
 
@@ -1941,9 +1941,10 @@ namespace iProdWHSE
                 string errors = "";
 
                 job.articleNumber = "";
-                job.userIdentifier = "admin";
-                job.actionType = "3";           // 3-pick, 2-send
-                job.quantity = "1";
+                job.userIdentifier = "Admin";
+                job.actionType = 3;           // 3-pick, 2-send
+                job.quantity = Convert.ToInt32(qt);
+                if (job.quantity < 1) job.quantity = 1;
 
                 // store cod o nome se null, se entrambi null non li gestisce e prosegue
                 if (!pi.code.IsNull())
@@ -1952,24 +1953,21 @@ namespace iProdWHSE
                     job.articleNumber = pi.name;
 
 
-                job.quantity = $"{qt}";
-
-
                 var json = JsonConvert.SerializeObject(job);
                 StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
                 string APIurl = "reservation";
 
-                var resp = UT.APICall(httpClient, APIurl, requestContent).Result;
+                var resp = await UT.APICall(AH.WSClient, APIurl, requestContent);
                 if (resp.status != "OK")
                 {
-                    sm = $"BAD REQUEST    .... art. '{job.articleNumber}', errore: {resp.response}. {UT.LF}";
+                    sm = $"BAD REQUEST    .... art. '{job.articleNumber}', response: '{resp.response}'. {UT.LF}";
                     errors += sm;
-                    UT.AppendToFile(outCSV, $"{pi._id};{pi.code};{pi.name};{qt};**SCARICO IN ERRORE**");
+                    UT.AppendToFile(outCSV, log($"{pi._id};{pi.code};{pi.name};{qt};**SCARICO IN ERRORE**"));
                     UT.AddRowHist("PICK-ERR", $"Rich da {retByUser.Requester}:" + sm);
                 }
                 else
                 {
-                    UT.AppendToFile(outCSV, $"{pi._id};{pi.code};{pi.name};{qt};Scarico");
+                    UT.AppendToFile(outCSV, log($"{pi._id};{pi.code};{pi.name};{qt};Scarico"));
                     sm = $"PICK-ITEM -  articleNumber {job.articleNumber}, quantity {job.quantity}";
                     log(sm);
                     UT.AddRowHist("PICK-OK", $"Rich da {retByUser.Requester}:" + sm);
@@ -1979,7 +1977,7 @@ namespace iProdWHSE
 
                 if (!errors.IsNull())
                 {
-                    ret.Message = errors;
+                    ret.Message = log(errors);
                     ret.StatusCode = "ERRORRESPONSE";
                     ret.inError = true;
                 }
@@ -2175,7 +2173,7 @@ namespace iProdWHSE
         }
 
 
-        ipDispatcher PrelievoREST(PhaseInstance PI, ipDispatcher ret, ipDispatcher retByUser)
+        async Task<ipDispatcher> PrelievoREST(PhaseInstance PI, ipDispatcher ret, ipDispatcher retByUser)
         {
 
             /*
@@ -2202,10 +2200,10 @@ namespace iProdWHSE
                 string sm = "";
                 string st = "";
 
-                string apiHost = $"https://{UT.iProdCFG.MP_IP}:{UT.iProdCFG.MP_Port}/";
+                //string apiHost = $"https://{UT.iProdCFG.MP_IP}:{UT.iProdCFG.MP_Port}/";
 
-                HttpClient httpClient = new HttpClient();
-                httpClient.BaseAddress = new Uri(apiHost);
+                //HttpClient httpClient = new HttpClient();
+                //httpClient.BaseAddress = new Uri(apiHost);
 
                 var job = new RESTReservation();
               
@@ -2263,10 +2261,11 @@ namespace iProdWHSE
                         if (!UT.Ask(sm)) return retByUser;
 
                     job.articleNumber = "";
-                    job.userIdentifier = "admin";
-                    job.actionType = "3";           // 3-pick, 2-send
-                    job.quantity = "1";
-                    
+                    job.userIdentifier = "Admin";
+                    job.actionType = 3;           // 3-pick, 2-send
+                    job.quantity = (int)pr.qty;
+                    if (job.quantity < 1) job.quantity = 1;
+
                     // store cod o nome se null, se entrambi null non li gestisce e prosegue
                     if (!item.code.IsNull())
                         job.articleNumber = item.code;
@@ -2275,16 +2274,11 @@ namespace iProdWHSE
                     else
                         continue;
 
-                    job.quantity = $"{pr.qty}";
-
-
-                
-
                     var json = JsonConvert.SerializeObject(job);
                     StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
                     string APIurl = "reservation";
 
-                    var resp = UT.APICall(httpClient, APIurl, requestContent).Result;
+                    var resp = await UT.APICall(AH.WSClient, APIurl, requestContent);
                     if (resp.status != "OK")
                     {
                         sm = $"BAD REQUEST    ....#{xi}, art. '{job.articleNumber}', errore: {resp.response}. {UT.LF}";

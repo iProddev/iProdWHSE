@@ -42,7 +42,7 @@ namespace iProdWHSE
         #region DICHIARAZIONI
 
 
-        public static string Versione { get; set; } = "4.1.16@22.3.23a"; // versione iprod @ data
+        public static string Versione { get; set; } = "4.1.18@17.4.23"; // versione iprod @ data
         // note relative al commit e/o modifiche rilevanti
         public static string Versione_Commit { get; set; } = "";
         public static Form1 mainForm { get; set; }
