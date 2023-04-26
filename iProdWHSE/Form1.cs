@@ -77,11 +77,9 @@ namespace iProdWHSE
         public static WHSEInfo iProdCFG { get; set; }
         public static string MockHost { get; set; } = "localhost";
         public static int MockPort { get; set; } = 8088;
-
         public static string outF { get; set; }
         public static string outCSV { get; set; }
         private static Thread ThreadListener { get; set; }
- 
         public static bool isLoading { get; set; }
         public static string NameSurname  { get; set; }
         public static bool inprogress { get; set; }
@@ -113,11 +111,7 @@ namespace iProdWHSE
         static System.Net.HttpStatusCode isOk { get; set; }
         public static List<fieldSchema> utenti { get; set; }
         static UT.Counters CCN { get; set; }
-
         static string FASE { get; set; }
-
-
-
         private static string timerstatus { get; set; }
         private static DateTime started { get; set; }
         private static DateTime lastscan { get; set; }
@@ -147,8 +141,6 @@ namespace iProdWHSE
             FontBold = new Font("Segoe UI", 12, FontStyle.Bold);
             FontNormal = new Font("Segoe UI", 12, FontStyle.Regular);
 
-
-
             UT.HwdSupportedModels = new List<WHSEInfo>() {
                 new  WHSEInfo { Name = "MP-12N", Technology = "SOAP"  },
                 new  WHSEInfo { Name = "MP-100D", Technology = "SOAP"  },
@@ -158,33 +150,20 @@ namespace iProdWHSE
             try
             {
                 UT.mainForm = this;
-
                 WindowState = FormWindowState.Maximized;
-
-
-
             }
             catch (Exception ex)
             {
-
                 log(ex, "inizializzazione di Form1");
                 
             }
-
-        //   AvviaTimer();
-
         }
-
-
-
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             try
             {
-
                 isLoading = true;
 
                 if (!UT.loadConfig())
@@ -246,28 +225,17 @@ namespace iProdWHSE
                 log("===================================================================================================================================================");
 
                 PBperc.Text = "";
-
                 LayoutControls();
-
                 lbTimerStatus.Text = "Pronto.";
-
-                //log("Servizio Listener INATTIVO. Premi START per metterlo in ascolto di richieste dai tablet", true);
-                //log("Servizio Giacenze INATTIVO. Premi START per avviare la schedulazione", true);
-
 
                 var f = UT.pathData + "listenerLog.txt";
                 if (File.Exists(f) && !UT.FileGetIfCreatedToday(f))
                     UT.CopySafe(f, UT.pathBackups, true);
 
-
                 loadDataObjects();
-
-
-            
 
                 pnlHist.Visible = false;
                 pnlEvents.Visible = true;
-
                 btHist.Font = FontNormal;
                 btEvents.Font = FontBold;
 
@@ -281,9 +249,6 @@ namespace iProdWHSE
                 iProdCFG.LocalIP = UT.GetLocalIP();
 
                 isLoading = false;
-
-
-
            
                 log($" ");
                 log($"   Path di lavoro: {UT.pathData}");
@@ -302,11 +267,9 @@ namespace iProdWHSE
 
                 if (UT.MockWS)
                 {
-
                     log($"   ATTENZIONE!! DA CONFIGURAZIONE E' STATO IMPOSTATO L'USO DEL WEB SERVICE FAKE PER I TEST");
                     lbSYM.Visible = true;
                 }
-
 
                 ShowHist();
             }
@@ -315,7 +278,6 @@ namespace iProdWHSE
                 UT.WriteErrFile("Form1_Load  " + ex.Message + " - " + ex.StackTrace);
                 MessageBox.Show(ex.Message + " - " + ex.StackTrace);
             }
-
         }
 
 
@@ -330,7 +292,6 @@ namespace iProdWHSE
             }
 
             var lst = UT.LoadTextFile(UT.HistFile);
-
             UT.HistCount = lst.Count;
 
             foreach(var line in lst)
@@ -339,7 +300,6 @@ namespace iProdWHSE
                 var row = new RowHist(line);
                 elenco.Add(row);
             }
-
 
             elenco = elenco.OrderByDescending(x => x.Data).ToList();
 
@@ -353,64 +313,37 @@ namespace iProdWHSE
                 nod.SubItems.Add(e.Tipo);
                 nod.SubItems.Add(e.Data.ToString());
                 nod.SubItems.Add(e.Dex);
-
             }
-
-
         }
 
-        
-
-
-     
 
         private void btSTOP_Click(object sender, EventArgs e)
         {
             log("Interruzione processi in background richiesta dall'utente");
-
             timer1.Enabled = false;
             aborted = false;
             abort_requested = false;
             var m = UT.CompactMemory();
-
             var ms = UT.GetBytesReadable(m);
             log($"Memoria compattata (recuperato {ms})");
             AgentHelper.shutDownListenerRequest = true; // questo interrompe il thread dei prelievi
         }
 
-
-
-     
-
-
         void LayoutControls()
         {
-
             var p = new Point(0, 118);
-
             panelHome.Location = p;
             panelHome.Width = Width;
-
             panelHome.Visible = true;
-
             pnlCFG.Location = p;
             pnlCFG.Width = Width;
-
             pnlCFG.Visible = false;
-
-
             pnlEvents.Location = new Point(0, 42);
             pnlHist.Location = new Point(0, 42);
-
             var MarginBottom = pnlTimerContainer.Top;
-            pnlEvents.Height = MarginBottom - 180; // pnlEvents.Top;
-            //pnlHist.Height = pnlEvents.Height -130;
-            //pnlHist.Width = Width-20;
+            pnlEvents.Height = MarginBottom - 180; 
             pnlEvents.Width = Width-20;
-
         }
-
-
 
       
         void loadDataObjects()
@@ -420,37 +353,23 @@ namespace iProdWHSE
             Requests.Add(new reqSchema("Lista di Prelievo", "sendJobsReqV01", "sample_lista_prelievi.txt"));
             Requests.Add(new reqSchema("Azzera Lista di prelievo", "deleteJobReqV01", ""));
             Requests.Add(new reqSchema("Stato MP", "MP-status", ""));
-
         }
-
-
-     
-
-
 
         void ListenerBackGroundWorker()
         {
             new ThreadPicker();
         }
 
-
         // qui mettici tutti i timers del progetto
         public void stopTimers()
         {
          //   timer_progress.Enabled = false;
          //   timerLEDS.Enabled = false;
-
         }
 
 
         void setPB(double conta, double mx = int.MaxValue)
         {
-
-
-            //int minusTwo = int.Parse("(2)", NumberStyles.Integer |NumberStyles.AllowParentheses);
-            //decimal fivePointTwo = decimal.Parse("£5.20", NumberStyles.Currency, CultureInfo.GetCultureInfo("en-GB"));
-
-
             if (conta <= 0 || mx <= 0 || mx < conta)
             {
                 PB1.Value = 0;
@@ -483,9 +402,6 @@ namespace iProdWHSE
             if (tcs > int.MaxValue) tcs = int.MaxValue;
 
             int dtcs = Convert.ToInt32(tcs);
-
-            //  int.TryParse($"{tcs}", out int dtcs);
-
             if (dtcs > 100) dtcs = 100;
             if (dtcs < 0) dtcs = 0;
             PB1.Value = dtcs;
@@ -524,9 +440,7 @@ namespace iProdWHSE
             var exp = bom.exponents.FirstOrDefault(x => x.produceditems.FirstOrDefault(y => y.itemid == itm) != null);
             if (exp is null) return ret;
             // get 1° nodo con phaseid = Phaseinstance.Phaseid
-            //    var btree = exp.bomtree.FirstOrDefault(x => x.type == 0 && x.typeid == pi.Phaseid);
 
-            //  if (btree is null) return 0;
             // somma la qta di tutti i figli di tipo item * la qua de phaseinstance
             foreach (var btree in exp.bomtree)
             {
@@ -534,13 +448,9 @@ namespace iProdWHSE
                 {
                     ret = fetchSons(s, pi, ret);
                 }
-
             }
-
             return ret;
         }
-
-
 
 
         List<itemToGet> fetchSons(BomTreeNode n, PhaseInstance pi, List<itemToGet> lista)
@@ -634,7 +544,6 @@ namespace iProdWHSE
                 if (prod) return true;
 
                 setFASE("testWS");
-
                 log($"{FASE} test connessione a WS SOAP in corso..");
 
                 if (!AgentHelper.initWS(UT.EndPointCOMPANY))
@@ -660,14 +569,11 @@ namespace iProdWHSE
         #region ExecuteProcess (giac, prel, del, ping mp)
 
 
-
         // get Stocks dal servizio REST, usa gli oggetti del Soap per uniformare i risultati
         async Task<myNameSpace.readAllAMDV01Response> GetStockREST(myNameSpace.readAllAMDV01Request req)
         {
-
             string sm = "";
             var resp = new myNameSpace.readAllAMDV01Response();
-
 
             try
             {
@@ -680,16 +586,13 @@ namespace iProdWHSE
                 {
                     sm = log($"BAD REQUEST    ....errore: {ret.response}.");
                     UT.AddRowHist("STOCK-ERR", sm);
-
                 }
                 else
                 {
                     // li converto in SOAP AMDTypeV01 e li restituisco al chiamante
-
                     var articles = JsonConvert.DeserializeObject<warehousedata>(ret.response);
                     log("Initializing AMDTypeV01");
                     var amd = new List<myNameSpace.AMDTypeV01>();
-
 
                     log("Before Location Article Cycle");
                     foreach (var art in articles.locationarticle)                    
@@ -708,44 +611,30 @@ namespace iProdWHSE
                     }
                     resp.@return.returnValue = 1;
                     resp.@return.article = amd.ToArray();
-
-                    //sm = $"PICK -  #{xi} articleNumber {job.articleNumber}, quantity {job.quantity}";
-                    //log(sm);
-                    //UT.AddRowHist("PICK-OK", $"Rich da {retByUser.Requester}:" + sm);
-
                 }
-
                 return resp;
             }
             catch (Exception ex)
             {
-
                 sm = log($"BAD REQUEST  Rilevata eccezione: {ex.Message + " " +  ex.StackTrace}.");
                 UT.AddRowHist("STOCK-ERR", sm);
                 return resp;
             }
-
         }
 
 
         bool EseguiRichiestaGiacenze(reqSchema rq)
         {
-
             if (ckSkipGIAC.Checked) return true;
-            
 
             UT.Contatore CC = null;
             var sm = "";
             try
             {
                 SetNetStatus("LEDS-TIMER-ON");
-
                 CicliEseguiti++;
                 log($"Lettura giacenze n° {CicliEseguiti} {DateTime.Now:ddd dd alle HH:mm:ss}", Forza);
-
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-
-
                 setPB(40, 100);
                 if (iprod_items is null || iprod_items.Count == 0)
                 {
@@ -753,25 +642,19 @@ namespace iProdWHSE
                     sm = log("GIAC -        ....connessione a iProd e download Prodotti");
                 }
 
-
-
                 CC = load_iProd("items");
                 CC.RowCount = iprod_items.Count;
-
                 var resp = new myNameSpace.readAllAMDV01Response();
 
                 if (UT.MockWS)
                 {
-
                     MHE.Slow = ckSlow.Checked;
                     resp = MHE.GetStockResponse(iprod_items, 5);
-
                 }
                 else
                 {
                     AgentHelper.Slow = ckSlow.Checked;
                     var req = new myNameSpace.readAllAMDV01Request();
-
 
                     if (UT.curMV.Technology == "SOAP")
                     {
@@ -784,10 +667,7 @@ namespace iProdWHSE
                         log("  ...recupero catalogo prodotti in magazzino da servizio REST");
                         resp = GetStockREST(req).Result;
                     }
-                    
-
                 }
-
 
                 if (resp is null) throw new Exception("readAllAMDV01 FALLITO: la funzione ha restituito il response = null");
 
@@ -796,7 +676,6 @@ namespace iProdWHSE
                 {
                     setPB(0, 100);
                     SetNetStatus("LEDS-TIMER-OFF");
-
                     return true;
                 }
 
@@ -805,7 +684,6 @@ namespace iProdWHSE
 
                 // ok, articoli scaricati
                 var listArt = resp.@return.article;
-
                 int u = 0;
                 var m = "#;cod;v.articleName;containerSize;containerSizeSpecified;compartmentNumber;compartmentDepthNumber";
                 m += ";minimumInventory;fifo;inventoryAtStorageLocation";
@@ -824,29 +702,21 @@ namespace iProdWHSE
                 log(" ", true);
 
                 checkStockIprod(listArt);
-
                 preload.Visible = false;
-
                 sm = log($"GIAC - Richiesta completata", true);
-
             }
             catch (Exception ex)
             {
-
                 SetNetStatus("LEDS-TIMER-OFF");
-
                 sm = log("GIAC - Errore: " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""), Forza);
                     if (!UT.Ask(sm)) return true;
-
             }
-
-
             return true;
         }
 
+
         bool EseguiRichiestaDelete(reqSchema rq)
         {
-
             try
             {
                 outCSV = $"{UT.pathData}\\Requests\\DeleteJob_{DateTime.Now:HHmmssfff}.txt";
@@ -861,12 +731,10 @@ namespace iProdWHSE
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return true;
 
-
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 log("Connessione a WS, setup action sendJobsReqV01 (Prelievi)"); // deleteJobReqV01
                 var req = new myNameSpace.deleteAllAPDV01Request();
                 var cli = AgentHelper.WSSoapClient;
-                //  var cli = new myNameSpace.ComPortTypeClient();
 
                 sm = log("Esegue richiesta di azzeramento job");
                 if (VerboseMax)
@@ -880,7 +748,6 @@ namespace iProdWHSE
             }
             catch (Exception ex)
             {
-
                 preload.Visible = false;
                 var sm = log("Errore " + ex.Message + ", " + ex.StackTrace);
                 if (VerboseMax)
@@ -889,6 +756,7 @@ namespace iProdWHSE
             }
         }
 
+
         // questa in realta non viene mai eseguita per sono i tablets a richiederla ed è processata dentro ThreadPicker in AgentHelper
         bool EseguiRichiestaPrelievi(reqSchema rq)
         {
@@ -896,74 +764,52 @@ namespace iProdWHSE
             try
             {
                 outCSV = $"{UT.pathLog}\\Requests\\Lista_Prelievi_{DateTime.Now:HHmmssfff}_csv.txt";
-
                 UT.AppendToFile(outCSV, "Codice;Prodotto;BOM;Qty;Operazione");
-
-
                 string sm = log($"Avvio GET Lista Prelievi. file di output per verifiche: {outCSV}");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return true;
-
 
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 log("Connessione a MP, setup action sendJobsReqV01 (Prelievi)");
                 var req = new myNameSpace.sendJobsV01Request();
                 var cli = AgentHelper.WSSoapClient;
-                //   var cli = new myNameSpace.ComPortTypeClient();
 
                 sm = log("Setup richiesta con articoli da prelevare");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return true;
 
-
                 req.param = new myNameSpace.JobTypeV01[1];
-
                 var x = new myNameSpace.JobTypeV01();
                 x.jobNumber = NameSurname;
-
                 sm = log("Caricamento BOMs da iProd");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return true;
-
                 var jobs = new List<reqSchema>();
                 var prelievi = new List<itemToGet>();
-
                 setPB(40, 100);
                 var CB = load_iProd("boms");
-
                 rq.isPrelievo = true;
                 rq.pickUpJobName = NameSurname; // utente connesso 
-
                 sm = log($"{CB.RowCount} BOMs in memoria. Caricamento active-phaseinstances");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return true;
-
                 setPB(50, 100);
                 var CPI = load_iProd("active-phaseinstances");
-
-
                 sm = log($"Trovati {CPI.RowCount} elementi da prelevare. Generazione richiesta per ciascun item");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return true;
 
-
                 if (iprod_pi.Count == 0)
                 {
-
                     sm = log("Nessun prelievo da eseguire");
                     if (VerboseMax)
                         if (!UT.Ask(sm)) return true;
-
                     UT.AppendToFile(outCSV, $"null;null;{curBom};0;NO-ACTIVE-PI");
                     preload.Visible = false;
-
                     return true;
                 }
 
                 string st = "";
-             
-
-
                 x.JobPosition = new myNameSpace.JobPositionTypeV01[iprod_pi.Count];
                 int xi = 0;
                 foreach (var pi in iprod_pi)
@@ -972,10 +818,7 @@ namespace iProdWHSE
                     var item = findItem(st);
                     if (item is null)
                     {
-
                         sm = log($"Articolo con id {st} non trovato");
-                        //if (VerboseMax)
-                        //    if (!UT.Ask(sm)) return;
                         UT.AppendToFile(outCSV, $"ID ITEM={st};null;{curBom};0;ITEM-NOT-FOUND");
                         continue;
                     }
@@ -984,14 +827,10 @@ namespace iProdWHSE
                     prelievi = fetchItemsToGet(pi);
                     if (prelievi.Count == 0)
                     {
-
                         sm = log($"Richiesto prelievo per {item.name} ma non risultano giacenze consistenti per poter essere prelevato dal magazzino");
-                        //if (VerboseMax)
-                        //    if (!UT.Ask(sm)) return;
 
                         // generiamo comunque il record csv con qty = 0,  non lo invieremo a soap ma noi possiamo sapere cosa non ha trovato
                         UT.AppendToFile(outCSV, $"{item.code};{item.name};{curBom};0;ND");
-
                         continue;
                     }
 
@@ -1004,23 +843,13 @@ namespace iProdWHSE
 
                     foreach (var pr in prelievi)
                     {
-
                         item = findItem(pr.itemid);
-
                         sm = log($"da prelevare {pr.qty} pezzi di {item.name} per {curBom}");
-                        //if (VerboseMax)
-                        //    if (!UT.Ask(sm)) return;
-
                         int nl = x.JobPosition.Length;
                         sm = log($"JobPosition array of {nl} elements, corrente = {xi}");
-                        //if (VerboseMax)
-                        //    if (!UT.Ask(sm)) return;
-
                         x.JobPosition[xi] = new myNameSpace.JobPositionTypeV01();
                         var jb = x.JobPosition[xi];
-
-                        //if (VerboseMax)
-                        //    if (!UT.Ask(sm)) return;
+                        
                         // store cod o nome se null, se entrambi null non li gestisce e prosegue
                         if (UT.NotNull(item.code))
                             jb.articleNumber = item.code;
@@ -1042,7 +871,6 @@ namespace iProdWHSE
                         break; // ne puo gestire uno solo per articolo, di prelievi
                     }
                     jobs.Add(job);
-
                 }
 
                 setPB(0);
@@ -1055,11 +883,6 @@ namespace iProdWHSE
                 var resp = cli.sendJobsV01(req);
                 if (resp is null) throw new Exception("sendJobsV01 (Prelievi) non eseguito: la funzione ha restituito il response nullo");
 
-
-                /*
-                    var listaPrelievi = getXmlJobs(jobs);
-                    SendToWS(listaPrelievi);   // <-- da qui la inviamo a SOAP aspettiamo il response e lo elaboriamo
-                */
                 preload.Visible = false;
 
                 sm = log($"Il servizio richiesto si è concluso correttamente e senza errori. Generati {jobs.Count} elementi. Premi Ok per visualizzarne un riepilogo della richiesta");
@@ -1071,18 +894,14 @@ namespace iProdWHSE
             }
             catch (Exception ex)
             {
-
                 preload.Visible = false;
                 var sm = log("Errore " + ex.Message + ", " + ex.StackTrace);
                 if (Interactive)
                     MessageBox.Show(sm);
-
             }
 
             return true;
         }
-
-
 
         /// <summary>
         /// Controlla lo stato di MP richiedendo le giacenze e valuta i vari comportamenti 
@@ -1092,10 +911,8 @@ namespace iProdWHSE
         {
             var ret = new ipDispatcher();
             var retByUser = new ipDispatcher();
-
             retByUser.StatusCode = "ABORTED";
             retByUser.Message = "L'utente ha scelto annulla a una conferma task";
-
             ret.Action = "ping";
 
             try
@@ -1105,19 +922,14 @@ namespace iProdWHSE
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
 
-
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-
                 log("Connessione a MP..");
                 var req = new myNameSpace.readAllAMDV01Request();
                 var cli = AgentHelper.WSSoapClient;
-
                 sm = log("Invio Ping..");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
-
                 var resp = cli.readAllAMDV01(req);
-
                 if (resp is null)
                 {
                     ret.StatusCode = "MUTE";
@@ -1130,10 +942,8 @@ namespace iProdWHSE
                 }
                 else
                 {
-
                     // ok, articoli scaricati
                     var listArt = resp.@return.article;
-
                     var nban = listArt.Select(a => a.shelfNumber).Distinct().Count();
                     sm = log($"MP Operativo. In uso {listArt.Length} scomparti e {nban} bancali.");
                     UT.AppendToFile(outCSV, $"{DateTime.Now} {sm}");
@@ -1142,15 +952,11 @@ namespace iProdWHSE
 
                     ret.StatusCode = "ONLINE";
                     ret.Message = sm;
-
                 }
-
                 return ret;
-
             }
             catch (Exception ex)
             {
-
                 var sm = log("Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
@@ -1163,18 +969,13 @@ namespace iProdWHSE
             }
         }
 
-
-
         public bool ExecuteProcess(string taskName)
         {
-
             doingtask = true;
-
 
             if (abort_requested)
             {
                 SetNetStatus("LEDS-TIMER-OFF");
-
                 aborted = true;
                 doingtask = false;
                 return false;
@@ -1182,8 +983,6 @@ namespace iProdWHSE
 
             try
             {
-
-
                 if(!UT.WSConnected)
                 {
                     log($"Task '{taskName}' non eseguito per mancanza di connessione con il WS", true);
@@ -1192,21 +991,11 @@ namespace iProdWHSE
                 }
 
                 VerboseMax = ckVerbose.Checked;
-
                 System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-
                 SetNetStatus("LEDS-TIMER-ON");
-
-
-
                 setPB(20, 100);
-
                 var rq = Requests.FirstOrDefault(x => x.dex == taskName);
-
                 AgentHelper.Request = rq;
-
-
-
 
                 // RICHIESTA GIACENZE
                 if (rq.mainName == "readAllAMDReqV01") EseguiRichiestaGiacenze(rq);
@@ -1228,28 +1017,16 @@ namespace iProdWHSE
                     log($"Pronto.");
                 }
 
-
-
                 setPB(0);
-
                 SetNetStatus("LEDS-TIMER-OFF");
-
-
                 doingtask = false;
-
             }
             catch (Exception ex)
             {
-
                 SetNetStatus("LEDS-TIMER-OFF");
-
                 if (Interactive)
                     MessageBox.Show(log("Errore " + ex.Message + ", " + ex.StackTrace));
-
-
             }
-
-
             return true;
         }
 
@@ -1277,7 +1054,6 @@ namespace iProdWHSE
             try
             {
                 var sm = "";
-               
                 if (arts is null)
                 {
                     sm = log($"Error: AMDTypeV01[] arts passed as Null. Aborted.");
@@ -1286,8 +1062,6 @@ namespace iProdWHSE
 
                 var ora = DateTime.UtcNow;
                 var rigo = new StockData();
-           
-
                 var u = 0;
                 foreach (var e in arts)
                 {
@@ -1301,10 +1075,8 @@ namespace iProdWHSE
                     if (itm != null)
                     {
                         pos = 2;
-                        
                         if (itm.stockinformation is null) itm.stockinformation = new List<StockData>();
                         var stocks = itm.stockinformation;
-
                         if (stocks.Count == 0)
                         {
                             sm = log($"      ...item n.{u}-{e?.articleNumber} da allineare: giacenza iProd=0  MP={LrcQty:N3}");
@@ -1322,7 +1094,6 @@ namespace iProdWHSE
                             bool found = false;
                             foreach (var stock in stocks)
                             {
-                               
                                 equal = false;
                                 if (stock?.date.Date == ora.Date)
                                 {
@@ -1339,12 +1110,9 @@ namespace iProdWHSE
                                 rigo = stock;
                             }
 
-
                             pos = 6;
                             if (rigo != null)
                             {
-                                
-                                
                                 if (equal)
                                 {
                                     pos = 7;
@@ -1390,7 +1158,6 @@ namespace iProdWHSE
                         UT.AddRowHist("STOCK-ERR", sm);
                     }
                 }
-
                 log("Allineamento completato");
             }
             catch (Exception ex)
@@ -1419,11 +1186,9 @@ namespace iProdWHSE
         // salva la richiesta su disco e la restituisce al chiamante per l'invio al WS
         string GetRichiesta(reqSchema rq, string fout = "")
         {
-
             string f = $"{UT.pathLog}\\Requests\\{rq.dex.Replace(" ", "_")}_{DateTime.Now:HHmmssfff}_xml.txt";
             var xml = rq.getXML(UT.pathLog);
             if (UT.NotNull(fout)) f = fout;
-
             UT.AppendToFile(f, xml);
             return xml;
         }
@@ -1459,29 +1224,21 @@ namespace iProdWHSE
                 do { Application.DoEvents(); } while ((DateTime.Now - ds).TotalMilliseconds < 200); // sleep .2 secondi
             }
 
-
             if (abort_requested)
             {
                 abort_requested = false;
                 aborted = true;
                 timer1.Enabled = false;
-                //   EnableAllButtons(true);
-
                 timerstatus = $"Interrotto dall'utente. ultimo pool eseguito il {lastscan}";
                 log(timerstatus);
-
                 lbTimerStatus.Text = timerstatus;
                 doingtask = false;
                 inprogress = false;
-                //    preload.Visible = false;
                 PB1.Value = 0;
                 return false; // l'utente ha chiesto di stoppare il processo
             }
             return true;
-
         }
-
-
 
 
         /// <summary>
@@ -1490,8 +1247,6 @@ namespace iProdWHSE
         /// <param name="what"></param>
         public void SetNetStatus(string what, string tip = "")
         {
-           // log($"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   command --->   '{what}'  ");
-
             // iprod
 
             if (what == "IP-OFF" || what == "IP-OFFLINE" )
@@ -1515,7 +1270,6 @@ namespace iProdWHSE
                 SetNetStatus("LEDS-TIMER-OFF");
             }
 
-
             // WS
 
             if (what == "WS-OFF" || what == "WS-OFFLINE")
@@ -1533,8 +1287,6 @@ namespace iProdWHSE
                 toolTip1.SetToolTip(LEDWSOn, tip);
                 SetNetStatus("LEDS-TIMER-OFF");
             }
-
-
 
             // STOCK
 
@@ -1554,15 +1306,12 @@ namespace iProdWHSE
                 SetNetStatus("LEDS-TIMER-OFF");
             }
 
-
-
             // small leds trasmissions
             if (what.ToUpper() == "IDLE" || what == "ONLINE" || what == "ON")
             {
                 LedIP.ImageKey = "LEDGOFF";
                 LedSQL.ImageKey = "LEDGOFF";
             }
-
 
             if (what == "SEND")
             {
@@ -1574,7 +1323,6 @@ namespace iProdWHSE
                 LedIP.ImageKey = "LEDGOFF";
                 LedSQL.ImageKey = "LEDGON";
             }
-
 
             // timerLEDS
             if (what == "LEDS-TIMER-ON")
@@ -1592,17 +1340,13 @@ namespace iProdWHSE
 
             Application.DoEvents();
 
-
         }
 
 
 
         public string log(Exception ex, string func = "")
         {
-            // if (!ckLogGiac.Checked && !forza && !inDebug) return m;
-
             // standard log, semplifica la codifica
-
             string m = $"Rilevata Eccezione in {func}: '{ex.Message}', stack '{ex.StackTrace}'";
 
             UT.WriteToEventLog(this, m);
@@ -1613,7 +1357,6 @@ namespace iProdWHSE
 
         public string log(string m, bool forza = true)
         {
-
             // standard log, semplifica la codifica
             UT.WriteToEventLog(this, m, forza);
             Application.DoEvents();
@@ -1624,7 +1367,6 @@ namespace iProdWHSE
         void setFASE(string v = "SYS")
         {
             string space = "                     ";
-
             var i = v.Length;
             if (i > 10) { FASE = v.Substring(0, 10); return; }
             i = 10 - i;
@@ -1645,9 +1387,7 @@ namespace iProdWHSE
             string prevWhat = what;
             string curWhat = what;
             string msg = "";
-
             bool isEmpty = false;
-           
             var CC = new UT.Contatore(what); // avvia timer 
 
             Application.DoEvents();
@@ -1661,10 +1401,6 @@ namespace iProdWHSE
                 var httpClient = new HttpClient();
                 httpClient.BaseAddress = new Uri(UT.EndPointIPROD);
 
-
-
-
-
                 curWhat = prevWhat;
 
                 /* ==============================================================================================================
@@ -1674,20 +1410,13 @@ namespace iProdWHSE
 
                    ==============================================================================================================*/
 
-                // scarica la lista richiesta 
-
-
                 switch (curWhat)
                 {
                     case "customers":
 
                         setFASE("CLI");
 
-                        //preload.Top = wheel.Clienti;
-                        //preload.Visible = true;
-
                         // GET Clienti
-
                         isEmpty = (iprod_customers is null || iprod_customers.Count == 0);
                         if (!isEmpty)
                         {
@@ -1697,9 +1426,7 @@ namespace iProdWHSE
                         }
 
                         iprod_customers = new List<Customers>();
-
                         log($"{FASE}download Clienti in corso..");
-
                         dataparameter = "Customers/GetCustomersTable?token=" + Program.ipTOKEN;
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
@@ -1707,7 +1434,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"{FASE}Wrong API response. download iprod_customers, Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -1718,7 +1444,6 @@ namespace iProdWHSE
 
                         txtContatore = $"Scaricati da iProd {iprod_customers.Count} clienti ";
                         CC.read = iprod_customers.Count;
-
                         break;
 
                     //  I T E M S =================================================================================================================================
@@ -1726,10 +1451,7 @@ namespace iProdWHSE
                     case "items":
 
                         setFASE("ITEMS");
-
-
                         Application.DoEvents();
-
                         isEmpty = (iprod_items is null || iprod_items.Count == 0);
                         if (!isEmpty)
                         {
@@ -1737,9 +1459,7 @@ namespace iProdWHSE
                             CC.ProcessCompleted(true, true);
                             return CC;
                         }
-
                         iprod_items = new List<Items>();
-
                         log($"{FASE}download Articoli in corso..");
 
                         // GET Articoli
@@ -1768,14 +1488,9 @@ namespace iProdWHSE
                     case "phaseinstances":
 
                         setFASE("PI");
-
-
                         Application.DoEvents();
-
                         isEmpty = (iprod_pi is null || iprod_pi.Count == 0);
-
                         iprod_pi = new List<PhaseInstance>();
-
                         log($"{FASE}  download Istanze di fase (tutte) in corso..");
 
                         // GET Phaseinstances table
@@ -1786,7 +1501,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"{FASE}Wrong API response. Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -1799,19 +1513,14 @@ namespace iProdWHSE
                         CC.read = iprod_pi.Count;
                         break;
 
-
                     // ACTIVE PHASEINSTANCES *****************************************************************************************************************************************************
 
                     case "active-phaseinstances":
 
                         setFASE("PI-ACTIVE ");
-
                         Application.DoEvents();
-
                         isEmpty = (iprod_pi is null || iprod_pi.Count == 0);
-
                         iprod_pi = new List<PhaseInstance>();
-
                         log($"{FASE}  download Istanze di fase attive in corso..");
 
                         // GET Articoli
@@ -1822,7 +1531,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"{FASE}Wrong API response. Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -1843,13 +1551,10 @@ namespace iProdWHSE
                         break;
 
 
-                    // P H A S E S  ==================================================================================================================================
-
-
                     case "phases":
+                        // P H A S E S  ==================================================================================================================================
 
                         setFASE("FASE");
-
 
                         // GET fasi (Phases) e macchines
 
@@ -1860,17 +1565,16 @@ namespace iProdWHSE
                             CC.ProcessCompleted(true, true);
                             return CC;
                         }
+
                         iprod_phases = new List<Phase>();
-
                         log($"{FASE}  download Fasi in corso..");
-
+                        
                         dataparameter = "Phases/GetPhaseTable?token=" + Program.ipTOKEN;
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"{FASE}Wrong API response. carica iprod_phases, Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -1883,9 +1587,10 @@ namespace iProdWHSE
                         CC.read = iprod_phases.Count;
                         break;
 
-                    // P O S T S ==================================================================================================================================
 
                     case "posts":
+
+                        // P O S T S ==================================================================================================================================
 
                         setFASE("POSTS");
 
@@ -1896,10 +1601,9 @@ namespace iProdWHSE
                             CC.ProcessCompleted(true, true);
                             return CC;
                         }
+
                         iprod_posts = new List<Posts>();
-
                         log($"{FASE}download Posts di tipo 1 in corso..");
-
                         if (UT.IsNull(tipoPost)) tipoPost = "1";
                         dataparameter = $"Posts/GetPosts?token={Program.ipTOKEN}&type={tipoPost}";
                         content = httpClient.GetAsync(dataparameter).Result;
@@ -1907,7 +1611,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"{FASE}Wrong API response. carica iprod_phases, Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -1916,21 +1619,16 @@ namespace iProdWHSE
                         else
                             iprod_posts = JsonConvert.DeserializeObject<List<Posts>>(customerdata);
 
-
-
                         txtContatore = $"Scaricati da iProd {iprod_posts.Count} POST ";
                         CC.read = iprod_posts.Count;
-
                         break;
 
 
-                    // C A T E G O R I E S  ==================================================================================================================================
-
                     case "categories":
 
+                        // C A T E G O R I E S  ==================================================================================================================================
+
                         setFASE("CAT");
-
-
                         isEmpty = (categories is null || categories.Count == 0);
                         if (!isEmpty)
                         {
@@ -1939,15 +1637,11 @@ namespace iProdWHSE
                             return CC;
                         }
                         categories = new Dictionary<string, string>();
-
-
                         log($"{FASE}download categorie in corso..");
-
 
                         dataparameter = "Home/GetCategories?token=" + Program.ipTOKEN;
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
-
                         if (content.StatusCode != isOk)
                         {
                             MessageBox.Show("Errore durante il download delle categorie");
@@ -1958,19 +1652,15 @@ namespace iProdWHSE
                         else
                             categories = JsonConvert.DeserializeObject<Dictionary<string, string>>(customerdata);
 
-
                         txtContatore = $"Scaricate da iProd {categories.Count} categorie ";
 
                         break;
 
-                    // W A R E H O U S E S  ==================================================================================================================================
-
-
                     case "warehouses":
 
+                        // W A R E H O U S E S  ==================================================================================================================================
+
                         setFASE("MAG");
-
-
                         isEmpty = (warehouses is null || warehouses.Count == 0);
                         if (!isEmpty)
                         {
@@ -1979,16 +1669,11 @@ namespace iProdWHSE
                             return CC;
                         }
                         warehouses = new List<Warehouse>();
-
-
                         log($"{FASE}download Magazzini in corso..");
-
-                        warehouses = new List<Warehouse>();
 
                         dataparameter = "WareHouses/GetWareHousesTable?token=" + Program.ipTOKEN;
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
-
                         if (content.StatusCode != isOk)
                         {
                             MessageBox.Show("Errore durante il download dei magazzini");
@@ -2003,13 +1688,11 @@ namespace iProdWHSE
                         CC.read = warehouses.Count;
                         break;
 
-                    // M A C H I N E S ==================================================================================================================================
-
-
                     case "machines":
 
-                        setFASE("MACH");
+                        // M A C H I N E S ==================================================================================================================================
 
+                        setFASE("MACH");
                         isEmpty = (iprod_machines is null || iprod_machines.Count == 0);
                         if (!isEmpty)
                         {
@@ -2018,7 +1701,6 @@ namespace iProdWHSE
                             return CC;
                         }
                         iprod_machines = new List<Customermachine>();
-
                         log($"{FASE}download Macchinari in corso..");
 
                         dataparameter = "Machines/GetMachineTable?token=" + Program.ipTOKEN;
@@ -2027,7 +1709,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"{FASE}Wrong API response. carica MACHINES, Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -2040,12 +1721,13 @@ namespace iProdWHSE
                         CC.read = iprod_machines.Count;
                         break;
 
-                    // B O M S ==================================================================================================================================
 
 
                     case "boms":
-                        setFASE("BOMS");
 
+                        // B O M S ==================================================================================================================================
+
+                        setFASE("BOMS");
                         isEmpty = (iprod_boms is null || iprod_boms.Count == 0);
                         if (!isEmpty)
                         {
@@ -2054,13 +1736,11 @@ namespace iProdWHSE
                             return CC;
                         }
                         iprod_boms = new List<Bom>();
-
                         log($"{FASE}download Distinte in corso..");
-
+                        
                         dataparameter = "Boms/GetBomsTable?token=" + Program.ipTOKEN;
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
-
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
@@ -2080,13 +1760,6 @@ namespace iProdWHSE
                         throw new Exception($"Attenzione, parametro 'what' sconosciuto: {what}");
                 }
 
-                //if (txtContatore != "")
-                //{
-                //    ctemp = UT.ElapsedTimeToString(DateTime.Now, dStart, true);
-                //    log($"{FASE}{txtContatore} in {ctemp} ");
-                //}
-
-                //setFASE();
                 CC.RowCount = Convert.ToInt32(CC.read);
                 log(CC.ProcessCompleted(true, true));
                 return CC;
@@ -2097,7 +1770,6 @@ namespace iProdWHSE
                 UT.WriteErrFile(mm);
                 log(mm);
                 throw ex;
-               // return CC;
             }
         }
 
@@ -2139,10 +1811,8 @@ namespace iProdWHSE
             try
             {
                 timer1.Enabled = true;
-
                 lastscan = DateTime.Now;
                 startSleep = lastscan;
-
 
                 if (!aborted)
                 {
@@ -2159,15 +1829,12 @@ namespace iProdWHSE
                 Listener_start();
                 log("****");
                 ExecuteProcess("Giacenze");
-
-
             }
             catch (Exception ex)
             {
                 var st = "LSTNR - Errore all'avvio del servizio: Messaggio di errore: " + ex.Message;
                 log(st);
                 MessageBox.Show(st);
-
             }
         }
 
@@ -2181,8 +1848,6 @@ namespace iProdWHSE
                 setSVCStatus("stopped");
                 return false;
             }
-
-            //SetNetStatus("LEDS-TIMER-ON");
 
             ThreadListener = new Thread(new ThreadStart(ListenerBackGroundWorker));
             ThreadListener.IsBackground = true;
@@ -2213,18 +1878,15 @@ namespace iProdWHSE
             LEDLSTNR.ImageKey = "LEDROFF";
             SetNetStatus("LEDS-TIMER-OFF");
 
-
             return true;
         }
 
         public void setSVCStatus(string how)
         {
-
             cbControlProcess.Items.Clear();
             if (how == "active")
             {
                 SetNetStatus("LEDS-TIMER-ON");
-
                 SetNetStatus("STK-ONLINE", "Stock timer running");
                 SVCstatus[0].Text = "In Esecuzione";
 
@@ -2241,15 +1903,12 @@ namespace iProdWHSE
             else
             {
                 SetNetStatus("LEDS-TIMER-OFF");
-
                 cbControlProcess.Items.Add(new ImageComboBox.ImageComboBoxItem(10, "Fermo", 0));
                 cbControlProcess.Items.Add(new ImageComboBox.ImageComboBoxItem(9, "Avvia", 0));
                 UT.SVCPausedUntil = "Inattivo.";
             }
 
-
             cbControlProcess.SelectedIndex = 0;
-
             lblSync.Text = UT.SVCPausedUntil;
             UT.SVCStatus = how;
         }
@@ -2259,31 +1918,23 @@ namespace iProdWHSE
         {
             return Listener_stop() && Listener_start();
         }
-
-
      
         private void btHelp_Click(object sender, EventArgs e)
         {
             var txtf = UT.pathLog + "\\help-agent.txt";
             UT.ShellExec(txtf);
-
         }
 
 
         #region COMUNICAZIONI/TRANSAZIONI DA E VERSO IPROD
 
-
-
         private bool saveItem(Items item, bool isNew = false)
         {
             string sm = "";
-            
             if(UT.MockWS)
             {
-            //    var sm = log($"     ...simulo il salvataggio di {item.code}");
                 return true;
             }
-
 
             try
             {
@@ -2299,39 +1950,29 @@ namespace iProdWHSE
                 {
                     var msg = resp.Content.ReadAsStringAsync().Result;
                     UT.httpErr objErr = JsonConvert.DeserializeObject<UT.httpErr>(msg);
-
                     sm = log($"***Errore Bad Request*** Err Code: {objErr.status} - {resp.StatusCode}, msg: {objErr.title}, API Items/SaveProduct");
                     SetNetStatus("LEDS-TIMER-OFF");
-
                     return false;
                 }
-
                 SetNetStatus("LEDS-TIMER-OFF");
                 return true;
-
             }
             catch (Exception ex)
             {
                 SetNetStatus("LEDS-TIMER-OFF");
-
                 sm = log($"**ERRORE** Rilevata Eccezione durante il salvataggio: {ex.Message.Replace("\r\n", "")} - {ex.StackTrace.Replace("\r\n", "")}");
                 return false;
             }
         }
 
 
-
-
         #endregion
-
-
 
         void CalcolaPausa(string s)
         {
             if (!UT.iProdConnected) return;
 
             var t = new TimeSpan();
-
             UT.SVCWaitTo = new DateTime(1970, 1, 1);
 
             if (s.Contains("30 minuti")) t = new TimeSpan(0, 30, 0);
@@ -2368,22 +2009,15 @@ namespace iProdWHSE
             }
 
             lblSync.Text = UT.SVCPausedUntil;
-
-
         }
-
-
 
 
         public async Task<bool> Autentica_Renew_iProd()
         {
-
             if (!timer1.Enabled) return true;
 
             UT.iProdConnected = false;
-
             var msg = await UT.iProdLogin(Program.UrlGate.api, Program.ipUSER, Program.ipPWD, true);
-
             if (!UT.IsNull(msg.status))
             {
                 if (msg.status != "OK")
@@ -2392,27 +2026,20 @@ namespace iProdWHSE
                     return false;
                 }
             }
-
             log("    ....rinnovo autenticazione a iProd riuscita.");
             return true;
-
         }
 
 
-        //  bool Notte = false;
         bool forzaExitApp = false;
         private int cntCicli = 0;
         string SVCState = "wait";
         private async void timer1_Tick(object sender, EventArgs e)
         {
-
             bool logged = false;
             int cntTry = 0;
-
-
             try
             {
-
                 if (aborted || abort_requested)
                 {
                     log("Interruzione richiesta dall'utente");
@@ -2422,7 +2049,6 @@ namespace iProdWHSE
                     UT.CompactMemory();
                     return;
                 }
-
 
                 if (DateTime.Now < UT.SVCWaitTo)
                 {
@@ -2439,7 +2065,6 @@ namespace iProdWHSE
 
                 if (forzaExitApp)
                 {
- 
                     Application.Exit();
                 }
 
@@ -2450,8 +2075,6 @@ namespace iProdWHSE
                         Application.DoEvents();
                     }
 
-
-
                     cntCicli++;
 
                     log($"TIMER START #{cntCicli} --------------------------------------");
@@ -2459,13 +2082,10 @@ namespace iProdWHSE
                     log($"Avviato servizio alle ore {DateTime.Now:hh:mm:ss}");
                     log(" ");
 
-
                     // ================================================================
-
                     // ad ogni sync con timer devo disconnettermi e riconnettermi a iprod
                     // potrebbe essere passato un giorno e la sessione/token sicuramente non è piu valida
                     // quindi ogni volta si autentica
-
 
                     do
                     {
@@ -2496,35 +2116,27 @@ namespace iProdWHSE
 
                     // =====================================
 
-
                     preload.Visible = true;
-
                     var dStart = DateTime.Now;
                     started = dStart;
                     UT.cntGlobale.dStart = dStart;
-              
                     ExecuteProcess("Giacenze");
-
+                    
                     CalcolaPausa("Attivo");
 
                     UT.Interactive = true;
-
                     while (doingtask == true)
                     {
                         Application.DoEvents();
                     }
-
                     inprogress = false;
-
                     var ctemp = UT.ElapsedTimeToString(DateTime.Now, dStart, true);
                     log($"Processo eseguito in {ctemp}");
                     log("");
                     log($"TIMER END #{cntCicli} --------------------------------------");
                     log("");
                     setPB(0);
-
                 }
-
             }
             catch (Exception ex)
             {
@@ -2534,7 +2146,6 @@ namespace iProdWHSE
                 preload.Visible = false;
                 if (Interactive)
                     MessageBox.Show(log("Errore " + ex.Message + ", " + ex.StackTrace));
-
             }
         }
 
@@ -2557,7 +2168,6 @@ namespace iProdWHSE
                 return;
             }
             var lstc = UT.LoadTextFile(fc);
-
             foreach (var cmd in lstc)
             {
                 if (cmd.StartsWith("@CMD@"))
@@ -2573,22 +2183,15 @@ namespace iProdWHSE
                 sem3 = false;
                 return;
             }
-
             
             File.Delete(fc);
-
             sem3 = false;
-
         }
 
         void parseCommand(string cmd)
         {
-
-        //    log(cmd, true);
-
             var ar = cmd.Split('|');
             if (ar.Length < 1) return;
-            
 
             switch (ar[1])
             {
@@ -2612,34 +2215,25 @@ namespace iProdWHSE
                 default:
                     break;
             }
-
         }
-
-     
 
         void ClearLog()
         {
             var f1 = UT.pathLog + "\\LirecoLog.txt";
             var f2 = UT.pathLog + "\\listenerLog.txt";
-
             var r1 = UT.CopySafe(f1, UT.pathBackups, true, 1000);
             var r2 = UT.CopySafe(f2, UT.pathBackups, true, 1000);
-
             txtlogger.Text = "";
-
             if (r1)
                 log("log salvato in backup e svuotato");
         }
 
         private void btRestart_Click(object sender, EventArgs e)
         {
-
-            
         }
 
         private void btClearLog_Click(object sender, EventArgs e)
         {
-           
         }
 
         private void apriFilePingMPtxtToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2654,14 +2248,9 @@ namespace iProdWHSE
             UT.ShellExec(t);
         }
 
-
-
         public async Task<bool> Autentica_iProd()
         {
             if (UT.iProdConnected) return true;
-
-            //Program.ipUSER= "fabio.guerrazzi@iprod.it";
-            //Program.ipPWD="4321";
 
             SetNetStatus("LEDS-TIMER-ON");
 
@@ -2681,27 +2270,18 @@ namespace iProdWHSE
                     var gf = new frmLogin();
                     gf.Show();
                     SetNetStatus("LEDS-TIMER-OFF");
-
                     return false;
                 }
             }
 
-
             SetNetStatus("LEDS-TIMER-OFF");
-
             if (!UT.iProdConnected) return false;
-
             iproduser = UT.Tenant;
-          
             iprod_loggeduser = iproduser.Customerusers.FirstOrDefault(x => x.Username == Program.ipUSER);
             if (iprod_loggeduser is null) return false;
-
             UT.iprod_loggeduser = iprod_loggeduser;
-
             toolTip1.SetToolTip(btLogin,
                 $"Connesso come {UT.LF}{iprod_loggeduser.Username} {UT.LF}{iprod_loggeduser.Name} {iprod_loggeduser.Surname} {UT.LF}{iproduser.Customerdata.Name}");
-
-
 
             return true;
         }
@@ -2711,15 +2291,12 @@ namespace iProdWHSE
         {
 
             tmrAutoStart.Enabled = false;
-
             if (UT.connecting) return;
-
             if (UT.stringLogin == "SKIP")
             {
                 UT.iProdConnected = true;
                 return;
             }
-
 
             if (!UT.iProdConnected)
             {
@@ -2730,17 +2307,13 @@ namespace iProdWHSE
                     var fs = new frmLogin();
                     fs.Show();
                 }
-
             }
 
             string ipc = "Connessione a iProd FALLITA - OFFLINE ";
-            
 
             // ok, possiamo procedere
-
             if (UT.iProdConnected)
             {
-
                 if (AgentHelper.ConnectToWS())
                 {
                     LEDWSOn.ImageKey = "LEDGON";
@@ -2749,16 +2322,9 @@ namespace iProdWHSE
                     if (!UT.WSConnected) wsc = iProdCFG.MP_Active + " non raggiungibile - OFFLINE";
                     log(wsc);
                 }
-
-
-                //                timerLEDS.Enabled = true;
-
                 Text += " " + iproduser.Customerdata.Name;
-
                 ipc = $"Connessione a iProd effettuata. Tenant '{iproduser.Customerdata.Name}'";
-
                 string imgFile = UT.pathData + "image_avatar.png";
-
                 try
                 {
                     MemoryStream _file = await UT.GetAvatar();
@@ -2775,22 +2341,17 @@ namespace iProdWHSE
 
             log($"      {ipc}", true);
             log(" ", true);
-
             Listener_start();
-
-            //  AvviaTimer();
         }
 
         private void cbotenant_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void btHist_CheckedChanged(object sender, EventArgs e)
         {
             pnlHist.Visible = true;
             pnlEvents.Visible = false;
-
             btHist.Font = FontBold;
             btEvents.Font = FontNormal;
         }
@@ -2799,7 +2360,6 @@ namespace iProdWHSE
         {
             pnlHist.Visible = false;
             pnlEvents.Visible = true;
-
             btHist.Font = FontNormal;
             btEvents.Font = FontBold;
         }
@@ -2814,7 +2374,6 @@ namespace iProdWHSE
         {
             pnlCFG.Visible = false;
             panelHome.Visible = true;
-
         }
 
         private void btSaveCFG_Click(object sender, EventArgs e)
@@ -2849,7 +2408,6 @@ namespace iProdWHSE
                 return;
             }
 
-
             iProdCFG.MP_Active= cboHWModels.Text;
             iProdCFG.MP_IP = txtIP.Text;
             iProdCFG.MP_Port = txtPort.Text;
@@ -2865,12 +2423,10 @@ namespace iProdWHSE
             iProdCFG.SaveSettings(UT.cfgFile);
 
             UT.MsgBox("Impostazioni salvate correttamente su file", "Salva");
-
         }
 
         private void pnlEvents_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void cbControlProcess_SelectedIndexChanged(object sender, EventArgs e)
@@ -2890,7 +2446,6 @@ namespace iProdWHSE
             if (isLoading) return;
 
             string s = cbControlProcess.Text;
-
             noloop = true;
 
             if (s.StartsWith("Fermo"))
@@ -2923,7 +2478,6 @@ namespace iProdWHSE
                 return;
             }
 
-
             if (s.StartsWith("Sospendi"))
             {
                 LEDStock.ImageKey = "LEDRON";
@@ -2932,7 +2486,6 @@ namespace iProdWHSE
                 setSVCStatus("paused");
                 timer1.Enabled = false;
             }
-
          
             noloop = false;
         }
@@ -2940,15 +2493,11 @@ namespace iProdWHSE
         private void cboHWModels_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (isLoading) return;
-
             int i = cboHWModels.SelectedIndex;
             if (i < 0) return;
-
             UT.curMV = UT.HwdSupportedModels[i];
             iProdCFG.MP_Active = UT.curMV.Name;
-
             iProdCFG.SaveSettings(UT.LogFile);
-
         }
 
         private void btLogin_Click(object sender, EventArgs e)
@@ -2962,21 +2511,15 @@ namespace iProdWHSE
 
         private void btCheckMP_Click(object sender, EventArgs e)
         {
-
-
-
             try
             {
                 string a, b, c, d;
-
                 UT.iProdCFG.MP_IP = a = txtIP.Text;
                 UT.iProdCFG.MP_Port = b = txtPort.Text;
                 UT.iProdCFG.MP_Url = c = txtMPUrl.Text;
-                
                 UT.iProdCFG.MP_Url = d = $"https://{a}:{b}/{c}";
                 AgentHelper.BindingEndPoint = d;
                 var ok = AgentHelper.ConnectToWS();
-
                 if(ok)
                 {
                     UT.MsgBox(log("Servizio disponibile"), "Connessione a WS..");
@@ -2988,55 +2531,9 @@ namespace iProdWHSE
                     lbEsitoTestConnessione.Text = log("Web Service OFFLINE");
 
                 }
-                //                if (UT.MockWS)
-                //                {
-
-                //                    MHE.Ping();
-                //                    lbEsitoTestConnessione.Text= log("Servizio attivo.");
-                //                    // si interroga il servizio REST per i test sia soap che REST
-
-                //                    //string url = "hoffmann/reservation";
-
-                //                    //string host = "https://localhost:7147/api/";
-                //                    //HttpClient cli = new HttpClient();
-                //                    //cli.BaseAddress = new Uri(host);
-
-                //                    //var resp = UT.APICall(cli, url).Result;
-                //                    //if (resp.status != "OK")
-                //                    //{
-                //                    //    log("Login iProd fallito");
-                //                    //    mainForm.SetNetStatus("OFFLINE");
-                //                    //    connecting = false;
-                //                    //    return resp;
-                //                    //}
-
-                ////                    Tenant = JsonConvert.DeserializeObject<iProdCustomers>(resp.response);
-
-                //                    //var req = new myEndPoint.deleteJobV01Request();
-                //                    //req.param = new myEndPoint.ParDeleteJobV01();
-                //                    //req.param.jobNumber = "dummy";
-                //                    //var cl = new myEndPoint.ComPortTypeClient();
-                //                    //var t = cl.deleteJobV01(req.param);
-                //                }
-                //                else if(iProdCFG.MP_Active=="HOFFMANN")
-                //                {
-
-
-                //                }
-                //                else // SOAP
-                //                {
-
-                //                    var reqd = new myNameSpace.deleteJobV01Request();
-                //                    reqd.param = new myNameSpace.ParDeleteJobV01();
-                //                    reqd.param.jobNumber = "dummy";
-                //                    var cli = AgentHelper.WSSoapClient;
-                //                    var respd = cli.deleteJobV01(reqd);
-                //                    lbEsitoTestConnessione.Text = log("Servizio attivo.");
-                //                }
             }
             catch (Exception ex)
             {
-
                 UT.MsgBox(log(ex.Message + UT.LF + ex.StackTrace),"Errore");
                 lbEsitoTestConnessione.Text = log("Web Service non connesso");
             }
@@ -3050,7 +2547,6 @@ namespace iProdWHSE
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -3080,9 +2576,7 @@ namespace iProdWHSE
             Random rnd = new Random();
             var i = rnd.Next(1, 4);
             var on = rnd.Next(10, 300);
-
             timerLEDS.Interval = on;
-
             LedIP.ImageKey = "LEDGOFF";
             LedSQL.ImageKey = "LEDGOFF";
 

@@ -30,17 +30,12 @@ namespace iProdWHSE
     public static class AgentHelper
     {
         public static bool shutDownListenerRequest { get; set; }
-
-
         public static HttpClient WSClient { get; set; }
         public static myNameSpace.ComPortTypeClient WSSoapClient { get; set; }
-
         public static string BindingEndPoint { get; set; }  // ip magazzino verticale e url del servizio SOAP
         public static string ListenerEndPoint { get; set; }
         public static string inputXml { get; set; }
-
         public static bool Slow { get; set; }
-
         private static string _resp = "";
         public static bool Processing { get; set; } // richiesta inviata in attesa di risposta
         public static bool Ready { get; set; }  // true se il response xml è arrivato 
@@ -49,67 +44,6 @@ namespace iProdWHSE
         public static DateTime reqTime { get; set; }
         public static reqSchema Request { get; set; }
         public static Form1 Form1 { get; set; }
-
-        public static string OutputResponse
-        {
-            get
-            {
-                Ready = false;
-                return _resp;
-            }
-        }
-
-
-        public static bool httpListenerSupported()
-        {
-            return HttpListener.IsSupported;
-        }
-
-
-
-        public static async Task<HttpClient> createHttpClient(string url, string usr, string pwd)
-        {
-            //setup reusable http client
-            HttpClient client = new HttpClient();
-            try
-            {
-
-                Uri baseUri = new Uri(url);
-                client.BaseAddress = baseUri;
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.ConnectionClose = true;
-                client.Timeout = new TimeSpan(0, 0, 15);
-
-                //Post body content
-                var values = new List<KeyValuePair<string, string>>();
-                values.Add(new KeyValuePair<string, string>("grant_type", "client_credentials"));
-                var content = new FormUrlEncodedContent(values);
-
-                var authenticationString = $"{usr}:{pwd}";
-                var base64EncodedAuthenticationString = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(authenticationString));
-
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/oauth2/token");
-                requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", base64EncodedAuthenticationString);
-                requestMessage.Content = content;
-
-                //make the request
-                var response = await client.SendAsync(requestMessage);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                log($"createHttpClient('{url}','{usr}','{pwd}') ret: {responseBody}");
-
-              //  log(responseBody);
-            }
-            catch (Exception ex)
-            {
-                log($"createHttpClient('{url}','{usr}','{pwd}') ERR: {ex.Message}");
-                throw ex;
-            }
-
-            return client;
-
-        }
 
         /// <summary>
         /// Stabilisce la connessione con il Service SOAP o REST
@@ -126,18 +60,12 @@ namespace iProdWHSE
             // ping (via socket)
             if (!CheckHostAlive(UT.iProdCFG.MP_IP, UT.ToInt(UT.iProdCFG.MP_Port))) return false;
 
-
             // se l'host è UP, tenta di connettersi al servizio
-
-            
             if (UT.curMV.Technology == "REST")
             {
                 try
                 {
                     log("..connessione a WS REST in corso.. ");
-
-                    //WSClient = createHttpClient(BindingEndPoint, "iotuser", "iotuser").Result;
-
 
                     if(WSClient != null)
                     {
@@ -164,9 +92,7 @@ namespace iProdWHSE
             {
                 log("..connessione a WS SOAP in corso.. ");
                 WSSoapClient = new myNameSpace.ComPortTypeClient("ComHttpsSoap11Endpoint", BindingEndPoint);
-
                 UT.WSConnected = WSSoapClient.State != CommunicationState.Faulted;
-
             }
 
             if (UT.WSConnected)
@@ -188,12 +114,10 @@ namespace iProdWHSE
         {
 
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
             var result = socket.BeginConnect(host, port, null, null);
 
             // test the connection for 3 seconds
             bool success = result.AsyncWaitHandle.WaitOne(3000, false);
-
             var resturnVal = socket.Connected;
             if (socket.Connected)
                 socket.Disconnect(true);
@@ -201,7 +125,6 @@ namespace iProdWHSE
             socket.Dispose();
             log($"CheckHostAlive('{host}','{port}') ret: {resturnVal}");
             return resturnVal;
-
         }
 
 
@@ -215,24 +138,13 @@ namespace iProdWHSE
         }
 
 
-        #region NON USATI AL MOMENTO
+
 
         public static bool initWS(string url, bool forzaChiusuraRisorsa = false)
         {
-
-           
-
-
-            // ComHttpsSoap11Endpoint 
-            // var pp =  ComSoap11Binding;
-
             WSSoapClient = new myNameSpace.ComPortTypeClient("ComSoap11Binding",url);
-            
-
-
 
             if (Request is null) return false;
-
             if (Request.Offline) return true;
 
             if (forzaChiusuraRisorsa)
@@ -241,16 +153,12 @@ namespace iProdWHSE
                 Ready = false;
             }
 
-
-
             if (UT.IsNull(url))
             {
                 ErrorText = "Url non valido";
                 Errors = true;
                 return false;
             }
-
-
 
             if (Processing)
             {
@@ -259,252 +167,14 @@ namespace iProdWHSE
                 return false;
             }
 
-            //if (1 == 1) // quando conosceremo l'url questo sparira
-            //{
-            //    ErrorText = "WS offline, impossibile verificare la connessione";
-            //    Errors = true;
-            //    return false;
-            //}
-
-            //if (1 == 2) // esito del test di connessione
-            //{
-            //    ErrorText = "Connessione non riuscita: richiesta scaduta";
-            //    Errors = true;
-            //    return false;
-            //}
-
-
             ListenerEndPoint = url;
             Errors = false;
             ErrorText = "";
             inputXml = "";
             _resp = "";
-
-
-            
-
-
             return true;
         }
- 
-
-
-        internal static void ExecuteLocalWS()
-        {
-            UT.IOLog("run ExecuteLocalWS()");
-
-            var rq = Request;
-
-            if (UT.IsNull(rq.sampleRespFile))
-            {
-                UT.IOLog("Lo schema corrente non ha responses locali di test");
-                return;
-            }
-
-
-            if (!File.Exists(rq.sampleRespFile))
-            {
-                UT.IOLog($"file {rq.sampleRespFile} non trovato.");
-                return;
-            }
-
-            UT.IOLog($"Parsing sample response xml per {rq.dex}, file {rq.sampleRespFile}");
-
-            var lines = UT.LoadTextFile(rq.sampleRespFile);
-
-            UT.IOLog($"Simulata risposta http con {lines.Count} elementi di tipo {rq.responseDefinition.Name}:");
-            _resp = string.Join("", lines.ToArray());
-
-
-            // qui abbiamo finito di interpretare il file di output di simulazione response e lo rendiamo disponibile 
-            // su OutputResponse (_resp) come se fosse stato generato dall'http
-
-        }
-
-        public static void OutputToLog(List<recordSchema> Objects)
-        {
-
-            UT.IOLog("CSV:");
-            int i = 0;
-            string st = "#;";
-            if (Objects.Count > 0)
-            {
-                foreach (var f in Objects[0].Fields)
-                    st += f.Name + ";";
-
-                UT.IOLog(st);
-            }
-
-
-
-            foreach (var rk in Objects)
-            {
-                i++;
-
-                st = $"{i};";
-                foreach (var f in rk.Fields)
-                    st += f.Value + ";";
-                UT.IOLog(st);
-            }
-
-        }
-        /// <summary>
-        /// entry point. assegna inputXml con la richiesta e passa a questa chiamata il metodo da eseguire nell'xml
-        /// </summary>
-        /// <param name="cmd">nome tag del body nell'xml</param>
-        public static void CallWebService(string cmd)
-        {
-            try
-            {
-                Ready = false;
-                Errors = false;
-                ErrorText = "";
-
-                if (Request.Offline || !UT.WSConnected)
-                {
-                    ExecuteLocalWS();
-                    return;
-                }
-
-                if (UT.IsNull(ListenerEndPoint))
-                {
-                    Errors = true;
-                    ErrorText = "Url del webservice mancante";
-                    return;
-                }
-
-                if (UT.IsNull(inputXml))
-                {
-                    Errors = true;
-                    ErrorText = "parametro inputXml assente. Assegnare l'xml della richiesta e riprovare";
-                    return;
-                }
-
-                if (UT.IsNull(cmd))
-                {
-                    Errors = true;
-                    ErrorText = "parametro metodo assente. chiamare la funzione CallWebService passandogli la procedura contenuta nella richiesta xml in main:xxxx. Es: CallWebService(\"sendJobsReqV01\") per la lista prelievi";
-                    return;
-                }
-
-
-                Processing = true;
-                reqTime = DateTime.Now;
-
-                var _url = ListenerEndPoint; //  "http://xxxxxxxxx/Service1.asmx";
-                var _action = $"{ListenerEndPoint}?op={cmd}";  // "http://xxxxxxxx/Service1.asmx?op=HelloWorld";
-
-                XmlDocument soapEnvelopeXml = CreateSoapEnvelope(inputXml);
-                log("Esegue CreateWebRequest:" + inputXml);
-                HttpWebRequest webRequest = CreateWebRequest(_url, _action);
-                log("Esegue InsertSoapEnvelopeIntoWebRequest");
-                InsertSoapEnvelopeIntoWebRequest(soapEnvelopeXml, webRequest);
-
-                log("Esegue BeginGetResponse");
-                // begin async call to web request.
-                IAsyncResult asyncResult = webRequest.BeginGetResponse(null, null);
-
-                log("Esegue WaitOne..");
-                // suspend this thread until call is complete. You might want to
-                // do something usefull here like update your UI.
-                asyncResult.AsyncWaitHandle.WaitOne();
-
-                // get the response from the completed web request.
-                string soapResult;
-                log("Esegue EndGetResponse");
-                using (WebResponse webResponse = webRequest.EndGetResponse(asyncResult))
-                {
-                    using (StreamReader rd = new StreamReader(webResponse.GetResponseStream()))
-                    {
-                        log("Esegue ReadToEnd");
-                        soapResult = rd.ReadToEnd();
-                    }
-
-                    _resp = soapResult; // <---------- qui ha finito e mette il response su OutputResponse
-
-                    log(soapResult);
-                    Processing = false;
-                    Ready = true;
-                    Errors = false;
-                    ErrorText = "";
-                }
-            }
-            catch (Exception ex)
-            {
-                log($"Eccezione: {ex.Message.Replace("\r\n", "")}, Stack: {ex.StackTrace.Replace("\r\n", "")}");
-            }
-        }
-
-        private static HttpWebRequest CreateWebRequest(string url, string action)
-        {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
-            webRequest.Headers.Add("SOAPAction", action);
-            webRequest.ContentType = "text/xml;charset=\"utf-8\"";
-            webRequest.Accept = "text/xml";
-            webRequest.Method = "POST";
-            return webRequest;
-        }
-
-        private static XmlDocument CreateSoapEnvelope(string xml)
-        {
-            XmlDocument soapEnvelopeDocument = new XmlDocument();
-            soapEnvelopeDocument.LoadXml(xml);
-            //        @"<SOAP-ENV:Envelope xmlns:SOAP-ENV=""http://schemas.xmlsoap.org/soap/envelope/"" 
-            //           xmlns:xsi=""http://www.w3.org/1999/XMLSchema-instance"" 
-            //           xmlns:xsd=""http://www.w3.org/1999/XMLSchema"">
-            //    <SOAP-ENV:Body>
-            //        <HelloWorld xmlns=""http://tempuri.org/"" 
-            //            SOAP-ENV:encodingStyle=""http://schemas.xmlsoap.org/soap/encoding/"">
-            //            <int1 xsi:type=""xsd:integer"">12</int1>
-            //            <int2 xsi:type=""xsd:integer"">32</int2>
-            //        </HelloWorld>
-            //    </SOAP-ENV:Body>
-            //</SOAP-ENV:Envelope>");
-            return soapEnvelopeDocument;
-        }
-
-        private static void InsertSoapEnvelopeIntoWebRequest(XmlDocument soapEnvelopeXml, HttpWebRequest webRequest)
-        {
-            using (Stream stream = webRequest.GetRequestStream())
-            {
-                soapEnvelopeXml.Save(stream);
-            }
-        }
-
-
-        public static List<recordSchema> GetXMLResponseObject(recordSchema def, string xml)
-        {
-            var ret = new List<recordSchema>();
-
-            var doc = XDocument.Parse(xml);
-
-
-            if (def.Name == "article")
-            {
-                int n = def.Fields.Count;
-                ret = doc.Descendants().Where(x => x.Name.LocalName == def.Name).Select(x => new recordSchema()
-                {
-                    Name = def.Name,
-                    Fields = new List<fieldSchema>
-                { new fieldSchema(def.Fields[0].Name, (string)x.Element(x.Name.Namespace + def.Fields[0].Name)),
-                  new fieldSchema(def.Fields[1].Name, (string)x.Element(x.Name.Namespace + def.Fields[1].Name)),
-                  new fieldSchema(def.Fields[2].Name, (string)x.Element(x.Name.Namespace + def.Fields[2].Name)),
-                  new fieldSchema(def.Fields[3].Name, (string)x.Element(x.Name.Namespace + def.Fields[3].Name)),
-                  new fieldSchema(def.Fields[4].Name, (string)x.Element(x.Name.Namespace + def.Fields[4].Name)),
-                  new fieldSchema(def.Fields[5].Name, (string)x.Element(x.Name.Namespace + def.Fields[5].Name)),
-                  new fieldSchema(def.Fields[6].Name, (string)x.Element(x.Name.Namespace + def.Fields[6].Name)),
-                  new fieldSchema(def.Fields[7].Name, (string)x.Element(x.Name.Namespace + def.Fields[7].Name)),
-                  new fieldSchema(def.Fields[8].Name, (string)x.Element(x.Name.Namespace + def.Fields[8].Name)),
-                  new fieldSchema(def.Fields[9].Name, (string)x.Element(x.Name.Namespace + def.Fields[9].Name))
-                }
-                }).ToList();
-            }
-
-            return ret;
-        }
-
     }
-    #endregion
 
 
     #region Schema (old ma in uso)
@@ -551,19 +221,14 @@ namespace iProdWHSE
             string ret = "";
             string tagOpen = $"<{NameSpace}{Name}>";
             string tagClose = $"</{NameSpace}{Name}>";
-
             ret = tagOpen;
 
             foreach (var fld in Fields)
             {
                 ret += $"<{NameSpace}{fld.Name}>{fld.Value}</{NameSpace}{fld.Name}>";
             }
-
-
             ret += tagClose;
-
             return ret;
-
         }
     }
 
@@ -577,7 +242,6 @@ namespace iProdWHSE
     public class reqSchema
     {
         public string IDPhaseInstance { get; set; }
-
         public bool Offline { get; set; }
         public string dex { get; set; }  // va sul dropdown a video
         public string mainName { get; set; }
@@ -587,18 +251,11 @@ namespace iProdWHSE
         public string sampleRespFile { get; set; }
         public List<recordSchema> records { get; set; }
         public recordSchema responseDefinition { get; set; }
-
         public reqSchema()
         {
             records = new List<recordSchema>();
             responseDefinition = new recordSchema();
         }
-
-
-
-
-
-
 
         public reqSchema(string n, string progname, string responseFileName)
         {
@@ -610,7 +267,6 @@ namespace iProdWHSE
             baseTemplate = "schema_base.txt";
             initDataResponse();
         }
-
 
         void initDataResponse()
         {
@@ -629,8 +285,6 @@ namespace iProdWHSE
             r.Fields.Add(new fieldSchema("inventoryAtStorageLocation", "string"));  // QUANTITA’
             r.Fields.Add(new fieldSchema("minimumInventory", "string"));            // QUANTITA’ MINIMA
 
-
-
         }
 
         public string getXML(string basePath)
@@ -641,8 +295,6 @@ namespace iProdWHSE
                 return genPrelievo(basePath);
 
             // genera l'xml su schema base da filename in basetemplate
-
-
             var tpl = basePath + "\\xmlTemplates";
             string tpl1 = tpl + "\\" + baseTemplate;     // il template (riprodotto nei commenti sottostanti)
 
@@ -661,44 +313,19 @@ namespace iProdWHSE
                 else
                     ret += line;
             }
-
-
             return ret;
-
-            /*
-
-            il template reale che usa. lo prende da disco per praticità ma potrebbe essere hardcodato non cambia nulla
-
-            <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-            xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
-             <soapenv:Header/>
-             <soapenv:Body>
-                 <main:%method_name%>
-                     <main:param>
-                            %body%
-                     </main:param>
-                 </main:%method_name%>
-             </soapenv:Body>
-            </soapenv:Envelope>
-
-
-
-            */
         }
 
         public string genPrelievo(string basePath)
         {
             string ret = "";
-
             var tpl = basePath + "\\xmlTemplates";
             string tpl1 = tpl + "\\schema_base_lista_prelievi.txt";     // il template (riprodotto nei commenti sottostanti)
-
 
             string xml = "<xsd:job>";
             xml += $"<xsd:jobNumber>{pickUpJobName}</xsd:jobNumber>";  // qui viene generato un job per ogni phaseinstance da prelevare
             xml += getXmlRecords();                                    // e poi risolve tutti i JobPosition per ogni item che compone l'item da produrre 
             xml += "</xsd:job>";
-
 
             // la base del template contiene poche righe fisse
             var righe = UT.LoadTextFile(tpl1);
@@ -710,28 +337,7 @@ namespace iProdWHSE
                 else
                     ret += line;
             }
-
             return ret;
-
-            /*
-                il template reale che usa. lo prende da disco per praticità ma potrebbe essere hardcodato non cambia nulla
-
-                <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
-                xmlns:main="http://main.jws.com.hanel.de" xmlns:xsd="http://main.jws.com.hanel.de/xsd">
-                 <soapenv:Header/>
-                 <soapenv:Body>
-                     <main:sendJobsReqV01>
-                         <main:param>
-	                        %jobs%
-                         </main:param>
-                     </main:sendJobsReqV01>
-                 </soapenv:Body>
-                </soapenv:Envelope>
-
-
-            */
-
-
         }
 
 
@@ -758,9 +364,7 @@ namespace iProdWHSE
         public string userIdentifier { get; set; }
         public int actionType { get; set; }
         public int quantity { get; set; }
-
     }
-
 
     public class RESTStock
     {
@@ -773,7 +377,6 @@ namespace iProdWHSE
         public int reorderQuantity { get; set; }
         public int reservedQuantity { get; set; }
         public int warningQuantity { get; set; }
-
     }
 
 
@@ -808,7 +411,6 @@ namespace iProdWHSE
             HttpListenerResponse response = context.Response;
 
             // Construct a response.
-
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(this);
             string responseString = json;                                               // "<HTML><BODY> Hello world!</BODY></HTML>";
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
@@ -819,7 +421,6 @@ namespace iProdWHSE
                                                                         // You must close the output stream.
             output.Close();
         }
-
     }
 
 
@@ -829,15 +430,11 @@ namespace iProdWHSE
     /// </summary>
     public class ThreadPicker : IDisposable
     {
-
         public static string curBom { get; set; }
         public static string outCSV { get; set; }
         public string EndPoint { get; set; }
 
         #region Private Properties
-
-
-        public bool verbose { get; set; }
 
         private List<reqSchema> Requests { get; set; }
         private bool disposedValue;
@@ -849,13 +446,7 @@ namespace iProdWHSE
 
         #region iProd Objects
 
-
-
         // collections iProd
-
-         
-
-        public iProdCustomers iproduser { get; set; } // viene caricato una volta sola all'inizio e resta per tutta la sessione degli imports 
 
         public List<Warehouse> warehouses { get; set; }
         public List<Customers> iprod_customers { get; set; }
@@ -866,10 +457,6 @@ namespace iProdWHSE
         public List<Bom> iprod_boms { get; set; }
         public List<PhaseInstance> iprod_pi { get; set; }
         public Dictionary<string, string> categories { get; set; }
-
-        public List<OrderedItems> soordereritems { get; set; }
-        public List<SalesOrder> iprod_solist { get; set; }
-        public OrderedItems iprod_orderitem { get; set; }
 
         System.Net.HttpStatusCode isOk = System.Net.HttpStatusCode.OK;
 
@@ -883,18 +470,14 @@ namespace iProdWHSE
         HttpResponseMessage content;
         string dataparameter;
         string customerdata;
-
   
         #endregion
 
-
         #region 1 COSTRUTTORE 
-
 
         public ThreadPicker()
         {
 
-           // ListenerEndPoint = $"http://{UT.iProdCFG.MP_IP}:{UT.iProdCFG.MP_Port}/";
             EndPoint = $"http://{UT.iProdCFG.LocalIP}:8080/";  // non va, quando è sistemato va tolto il localhost
             EndPoint = $"http://127.0.0.1:8098/";  
 
@@ -904,20 +487,7 @@ namespace iProdWHSE
                 return;
             }
 
-
-          //  var t = EseguiPingMP();
-            // if(t.StatusCode != "OK")
-            //if(!CheckConnection())
-            //{
-            //    log("Connessione al magazzino verticale assente. Impossibile avviare servizi in questo momento.");
-            //    return;
-            //}
-
-         //   UT.WSConnected = true;
-
-
             System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-
 
             loadDataObjects();
 
@@ -925,13 +495,6 @@ namespace iProdWHSE
             if (File.Exists(logFile)) File.Delete(logFile);
             cmdFile = UT.pathLog + "\\listenerNotifyer.txt";
             if (File.Exists(cmdFile)) File.Delete(cmdFile);
-
-
-    
-
-           // log("Il Thread parallelo per la lista prelievi è stato avviato regolarmente");
-
-       
 
             UT.AppendToFile(logFile, $"LSNR Listener avviato {DateTime.Now}");
 
@@ -943,9 +506,7 @@ namespace iProdWHSE
 
         #endregion
 
-
         #region Listener handler
-
 
         /// <summary>
         /// Prende la QueryString proveniente dalla richiesta, contiene l'id della phaseinstance da prelevare a magazzino
@@ -954,11 +515,8 @@ namespace iProdWHSE
         /// <returns></returns>
         private ipDispatcher getBodyfromClient(HttpListenerRequest request)
         {
-
-
            
             var cnt = request.QueryString.Count;
-
             var ret = new ipDispatcher();
             if (cnt == 0)
             {
@@ -971,7 +529,6 @@ namespace iProdWHSE
             if (keys.Contains("action"))
             {
                 ret.Action = request.QueryString.Get("action");
-
                 if (ret.Action == "pickerbom")
                 {
                     if (keys.Contains("id"))
@@ -1005,51 +562,36 @@ namespace iProdWHSE
                 if (nome == "Biglia B750") nome = "BigliaB750";
                 log($"Ricevuta richiesta da {nome}");
                 ret.Requester = nome.Replace(" ", "-").Replace("?", "-").Replace(";", "-").Replace("\"", "-");
-               
             }
-
 
             ret.inError = ret.Action.StartsWith("missing");
             if (ret.inError) ret.Message = $"La richiesta ricevuta era incompleta, parametri mancanti: {ret.Action}";
-
             return ret;
-
         }
 
-
         bool listenerRunning = false;
-
         public async Task httpListener()
         {
-
             if (listenerRunning) return;
-
             listenerRunning = true;
-
             if (!httpListenerSupported())
             {
                 log("LSNR Errore Listener: Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
                 return;
             }
-
-            string host = EndPoint; // ConfigurationManager.AppSettings["ListenerURI"];
+            string host = EndPoint;  
 
             // Create a listener.
-
-
             log("LSNR   Richieste ammesse:");
             log($"LSNR   http://{UT.iProdCFG.LocalIP}:8098?action=pickerbom&id=<phaseinstanceid>&sender=<nome macchinario>");
             log($"LSNR   http://{UT.iProdCFG.LocalIP}:8098?action=pickeritem&iditem=<itemid>&qty=<qty>&sender=<nome macchinario>");
             log($"LSNR   http://{UT.iProdCFG.LocalIP}:8098?action=ping&sender=<nome macchinario>");
-
 
             bool skipPing = false;
             int cnt = 0;
             do
             {
                 UT.ListenerUP = false;
-
-
                 if (AH.shutDownListenerRequest) return;
                 
                 if(!skipPing)
@@ -1058,7 +600,6 @@ namespace iProdWHSE
                 using (var listener = new HttpListener())
                 {
                     listener.Prefixes.Add("http://*:8098/");
-
                     try
                     {
                         listener.Start();
@@ -1080,10 +621,10 @@ namespace iProdWHSE
                     UT.ListenerUP = true; 
 
                     // ==========================================================================================
-
                     // Note: The GetContext method blocks while waiting for a request.
+                  
                     HttpListenerContext context = listener.GetContext();   // <-- si ferma qui in attesa di richieste, avanza alla prima che arriva
-
+                   
                     // ==========================================================================================
 
                     if(!UT.iProdConnected)
@@ -1098,21 +639,16 @@ namespace iProdWHSE
                         continue;
                     }
 
-
                     HttpListenerRequest request = context.Request; 
 
                     if (AH.shutDownListenerRequest) break;
 
                     var dsp = getBodyfromClient(request);
-                    //skipPing = (dsp.Requester== "BigliaB750" && dsp.Action == "ping");
-                    //if (skipPing) continue;
-
 
                     string dxa = "";
                     if (dsp.Action == "missing-parms") dxa = $" (ATT!: La richiesta ricevuta non contiene alcuni dei parametri essenziali e viene ignorata. Richiesta: '{request.Url}'. Errore: '{dsp.Message}')";
                     if (dsp.Action == "missing-id" || dsp.Action.Contains("missing-id-item")) dxa = " (ATT!: La richiesta ricevuta non contiene l'ID e viene ignorata)";
                     if (dsp.Action.Contains("missing-qty")) dxa = " (ATT!: La richiesta ricevuta non contiene la quantità desiderata e viene ignorata)";
-
 
                     log($"MACCH - Ricevuta richiesta n.{cnt} di tipo {dsp.Action} dal macchinario {dsp.Requester}. {dxa}");
                     if (!string.IsNullOrEmpty(dsp.AdditionalInfo))
@@ -1142,19 +678,15 @@ namespace iProdWHSE
                     listener.Stop(); // stoppa e a Start() si rimette in ascolto
                     UT.Sleep(3000);
                 }
-                //Busy = false;
             } while (AH.shutDownListenerRequest == false);
 
             log("LSNR Richiesto ShutDown listener..");
             listenerRunning = false;
-
             SendAction("STOP LSTRN");
             UT.Sleep(3000);
-
         }
 
         public bool httpListenerSupported() => HttpListener.IsSupported;
-
 
         void loadDataObjects()
         {
@@ -1164,11 +696,9 @@ namespace iProdWHSE
             Requests.Add(new reqSchema("Prelievo Prodotto", "sendJobsReqV01", "single"));
             Requests.Add(new reqSchema("Azzera Lista di prelievo", "deleteJobReqV01", ""));
             Requests.Add(new reqSchema("Stato MP", "MP-status", ""));
-
         }
 
         #endregion
-
 
         #region ELABORA RICHIESTE
 
@@ -1176,17 +706,14 @@ namespace iProdWHSE
         bool VerboseMax = false;
         public async Task<ipDispatcher> ExecuteProcess(string taskName, string ObjId = "", string richiedente="")
         {
-
             var ret = new ipDispatcher();
             string suffix = "PICK -";
             UT.Contatore CC = null;
             VerboseMax = UT.VerboseMax;
             log($"{suffix} Executeprocess('{taskName}')");
-
            
             try
             {
-
                 // ricarica tutto ad ogni richiesta
                 iprod_items = new List<Items>();
                 iprod_pi = new List<PhaseInstance>();
@@ -1196,7 +723,6 @@ namespace iProdWHSE
 
                 var rq = Requests.FirstOrDefault(x => x.dex == taskName);
                 AH.Request = rq;
-
 
                 #region caricamento dati da iProd
                 
@@ -1208,13 +734,11 @@ namespace iProdWHSE
                 setPB(15, 100);
                 var CB = load_iProd("boms");
 
-
                 // PHASEINSTANCES
                 setPB(30, 100);
                 var CPI = load_iProd("phaseinstances");
 
                 #endregion
-
 
                 // LISTA PRELIEVO
                 if (rq.mainName == "sendJobsReqV01")
@@ -1241,16 +765,9 @@ namespace iProdWHSE
                 UT.Sleep(1000);
                 log("Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
                 AH.shutDownListenerRequest = true;
-
             }
-
-
             return ret;
         }
-
-
-
-
 
         /// <summary>
         /// Controlla lo stato di MP richiedendo le giacenze e valuta i vari comportamenti 
@@ -1274,8 +791,6 @@ namespace iProdWHSE
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
 
-
-
                 log("PING - Connessione a MP..");
                 var req = new myNameSpace.readAllAMDV01Request();
 
@@ -1286,14 +801,10 @@ namespace iProdWHSE
                 }
                 else
                 {
-
-
                     if (UT.curMV.Technology == "SOAP")
                     {
-
                         var cli = AH.WSSoapClient;
                         cli.Open();
-
                         sm = log("PING - Connesso: Invio Ping..");
                         if (VerboseMax)
                             if (!UT.Ask(sm)) return retByUser;
@@ -1311,24 +822,18 @@ namespace iProdWHSE
                             ret.Message = sm;
                             UT.AddRowHist("PING-ERR", $"Rich da {richiedente}: " + sm);
                             return ret;
-
                         }
                         else
                         {
                             resp.@return = new myNameSpace.RetReadAllAMDV01();
                             resp.@return.returnValue = 1;
-
                             sm = log($"MV Operativo e in linea.");
                             UT.AddRowHist("PING-OK", $"Rich da {richiedente}:" + sm);
-                            
                             ret.StatusCode = "ONLINE";
                             ret.Message = sm;
                             return ret;
                         }
                     }
-
-
-
                 }
 
                 if (resp is null)
@@ -1354,27 +859,20 @@ namespace iProdWHSE
                         totArt = listArt.Length;
                     } 
                     // ok, articoli scaricati
-
-              
                     sm = log($"PING - MP Operativo. In uso {totArt} scomparti e {nban} bancali.");
                     UT.AddRowHist("PING-OK", $"Rich da {richiedente}:" + sm);
-
                     UT.AppendToFile(outCSV, $"{DateTime.Now} {sm}");
                     if (VerboseMax)
                         if (!UT.Ask(sm)) return retByUser;
-
                     ret.StatusCode = "ONLINE";
                     ret.Message = sm;
-
                 }
 
                 log("PING");
                 return ret;
-
             }
             catch (Exception ex)
             {
-
                 var sm = log("PING - Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
@@ -1386,8 +884,6 @@ namespace iProdWHSE
                 return ret;
             }
         }
-
-
 
         /// <summary>
         /// Esegue una lista prelievi di un solo prodotto, invece di avere come base una PhaseInstance il tablet chiede direttametne l'item id, il resto funziona uguale alle liste prelievo
@@ -1402,18 +898,14 @@ namespace iProdWHSE
             {
                 var ret = new ipDispatcher();
                 var retByUser = new ipDispatcher();
-
                 retByUser.Action = "pickeritem";
                 retByUser.StatusCode = "ABORTED";
                 retByUser.Message = "L'utente ha scelto annulla a una conferma task";
                 retByUser.Requester = richiedente;
-
                 if (AH.shutDownListenerRequest) return retByUser;
-
                 ret.IdItem = ItemId;
                 ret.StatusCode = "INCOMPLETE";
                 ret.Action = "pickeritem";
-
 
                 outCSV = $"{UT.pathData}\\Requests\\Items_Prelievi_{DateTime.Now:HHmmssfff}_csv.txt";
                 UT.AppendToFile(outCSV, "ID;Codice;Prodotto;Qty;Operazione");
@@ -1422,15 +914,12 @@ namespace iProdWHSE
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
 
-
                 var PI = iprod_items.FirstOrDefault(a => a._id == ItemId);
                 if (PI is null) throw new Exception($"Richiesta non valida: Il parametro ItemId ({ItemId}) non è stato trovato nell'archivio Prodotti.");
-
 
                 sm = log($"PICK -   Elabora ID Prodotto = {ItemId}");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
-
 
                 if (UT.MockWS)
                 {
@@ -1439,46 +928,35 @@ namespace iProdWHSE
                 }
                 else
                 {
-
                     if (UT.curMV.Technology == "SOAP")
                         return PrelievoItemSOAP(PI, qt, ret, retByUser);
                     else if (UT.curMV.Technology == "REST")
                         return await PrelievoItemREST(PI, qt, ret, retByUser);
                     else return ret;
-
                 }
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
 
-
-
         // Elabora BOMS PhaseInstances e Itemss
-
-
         async Task<ipDispatcher> EseguiRichiestaPrelievi(string phaseInstanceId, string richiedente)
         {
             try
             {
                 var ret = new ipDispatcher();
                 var retByUser = new ipDispatcher();
-
                 retByUser.Action = "pickerbom";
                 retByUser.StatusCode = "ABORTED";
                 retByUser.Message = "L'utente ha scelto annulla a una conferma task";
                 retByUser.Requester = richiedente;
-
                 if (AH.shutDownListenerRequest) return retByUser;
-
                 ret.IdPhaseInstance = phaseInstanceId;
                 ret.StatusCode = "INCOMPLETE";
                 ret.Action = "pickerbom";
-
 
                 outCSV = $"{UT.pathData}\\Requests\\Lista_Prelievi_{DateTime.Now:HHmmssfff}_csv.txt";
                 UT.AppendToFile(outCSV, "Codice;Prodotto;BOM;Qty;Operazione");
@@ -1487,15 +965,12 @@ namespace iProdWHSE
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
 
-
                 var PI = iprod_pi.FirstOrDefault(a => a._id == phaseInstanceId);
                 if (PI is null) throw new Exception($"Richiesta non valida: Il parametro phaseInstanceId ({phaseInstanceId}) non è stato trovato nell'archivio PhaseInstances.");
-
 
                 sm = log($"PICK -   Elabora IDPhaseInstance = {phaseInstanceId}");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
-
 
                 if (UT.MockWS)
                 {
@@ -1503,38 +978,30 @@ namespace iProdWHSE
                 }
                 else
                 {
-
                     if (UT.curMV.Technology == "SOAP")
                         return PrelievoSOAP(PI, ret, retByUser);
                     else if (UT.curMV.Technology == "REST")
                         return await PrelievoREST(PI, ret, retByUser);
                     else return ret;
-
                 }
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
         ipDispatcher PrelievoMOCK(Items PI, ipDispatcher ret, ipDispatcher retByUser)
         {
-
             try
             {
-
                 string sm = "";
                 string st = "";
                 string qt = ret.Qty;
-
                 var req = new myNameSpace.sendJobsV01Request();
-
                 req.param = new myNameSpace.JobTypeV01[1];
                 var x = new myNameSpace.JobTypeV01();
                 x.jobNumber = "jobitem";
-
                 var jobs = new List<reqSchema>();
                 var prelievi = new List<itemToGet>();
                 var pi = PI;
@@ -1545,16 +1012,12 @@ namespace iProdWHSE
                     qty = Convert.ToDouble(qt)
                 });
 
-
                 x.JobPosition = new myNameSpace.JobPositionTypeV01[1];
-
                 sm = $"PICK-ITEM -         ... {pi.name}, {qt}...jobNumber {x.jobNumber}, jobTime {x.jobTime}, jobDate {x.jobDate}, jobStatus {x.jobStatus}";
                 log(sm);
-
                 int nl = x.JobPosition.Length;
                 x.JobPosition[0] = new myNameSpace.JobPositionTypeV01();
                 var jb = x.JobPosition[0];
-
 
                 // store cod o nome se null, se entrambi null non li gestisce e prosegue
                 if (UT.NotNull(pi.code))
@@ -1564,14 +1027,10 @@ namespace iProdWHSE
 
                 jb.operation = "-";
                 jb.nominalQuantity = $"{qt}";
-
                 UT.AppendToFile(outCSV, $"{pi._id};{pi.code};{pi.name};{qt};Scarico");
-
                 sm = $"PICK-ITEM -  articleNumber {jb.articleNumber}, actualQuantity {jb.actualQuantity}, nominalQuantity {jb.nominalQuantity}, positionStatus {jb.positionStatus}";
                 log(sm);
-
                 setPB(0);
-
                 req.param[0] = x;
                 var resp = MockHelper.GetPickResponse(req);
                 if (resp is null) throw new Exception("PICK - ***ERRORE*** sendJobsV01 (Prelievo item) non eseguito: la funzione ha restituito il response nullo");
@@ -1597,7 +1056,6 @@ namespace iProdWHSE
             }
             catch (Exception ex)
             {
-
                 var sm = log("PICK - ***ERRORE** Eccezione " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
@@ -1609,21 +1067,17 @@ namespace iProdWHSE
                 UT.AddRowHist("PICK-ERR", $"Rich da {retByUser.Requester}:" + sm);
 
                 return ret;
-
             }
 
         }
 
         ipDispatcher PrelievoMOCK(PhaseInstance PI, ipDispatcher ret, ipDispatcher retByUser)
         {
-
             try
             {
-
                 string sm = "";
                 string st = "";
                 var req = new myNameSpace.sendJobsV01Request();
-                //var cli = AH.WSSoapClient;
 
                 req.param = new myNameSpace.JobTypeV01[1];
                 var x = new myNameSpace.JobTypeV01();
@@ -1631,7 +1085,6 @@ namespace iProdWHSE
 
                 var jobs = new List<reqSchema>();
                 var prelievi = new List<itemToGet>();
-
 
                 int xi = 0;
                 var pi = PI;
@@ -1653,7 +1106,6 @@ namespace iProdWHSE
                 }
                 if (prelievi.Count == 0)
                 {
-
                     sm = log($"PICK -  ... richiesto prelievo per {item.code} {item.name} ma non risultano giacenze consistenti per poter essere prelevato dal magazzino");
                     if (VerboseMax)
                         if (!UT.Ask(sm)) return retByUser;
@@ -1666,7 +1118,6 @@ namespace iProdWHSE
                 }
 
                 x.JobPosition = new myNameSpace.JobPositionTypeV01[prelievi.Count()];
-
 
                 sm = $"PICK -             ...jobNumber {x.jobNumber}, jobTime {x.jobTime}, jobDate {x.jobDate}, jobStatus {x.jobStatus}, tot. prelievi {prelievi.Count}";
                 log(sm);
@@ -1681,11 +1132,9 @@ namespace iProdWHSE
                         if (!UT.Ask(sm)) return retByUser;
 
                     int nl = x.JobPosition.Length;
- 
 
                     x.JobPosition[xi] = new myNameSpace.JobPositionTypeV01();
                     var jb = x.JobPosition[xi];
-
 
                     // store cod o nome se null, se entrambi null non li gestisce e prosegue
                     if (UT.NotNull(item.code))
@@ -1697,7 +1146,6 @@ namespace iProdWHSE
 
                     jb.operation = "-";
                     jb.nominalQuantity = $"{pr.qty}";
-
                    
                     UT.AppendToFile(outCSV, $"{item.code};{item.name};{curBom};{pr.qty};Scarico");
                     xi++;
@@ -1706,19 +1154,11 @@ namespace iProdWHSE
                     UT.AddRowHist("PICK-OK", $"Rich da {retByUser.Requester}:" + sm);
                 }
 
-
                 setPB(0);
 
-                //sm = log("PICK -   Risorse caricate da iProd, invio richiesta prelievi al M.V. ");
-                //if (VerboseMax)
-                //    if (!UT.Ask(sm)) return retByUser;
-
-
                 req.param[0] = x;
-                var resp = MockHelper.GetPickResponse(req); //  ; // cli.sendJobsV01(req);
+                var resp = MockHelper.GetPickResponse(req); 
                 if (resp is null) throw new Exception("PICK - ***ERRORE*** sendJobsV01 (Prelievi) non eseguito: la funzione ha restituito il response nullo");
-
-            //    sm = log($"PICK -  ..response: {resp.@return.returnValue}");
 
                 if (UT.NotNull(resp.@return.returnErrorMessage))
                 {
@@ -1753,24 +1193,19 @@ namespace iProdWHSE
                 UT.AddRowHist("PICK-ERR", $"Rich da {retByUser.Requester}:" + sm);
 
                 return ret;
-
             }
 
         }
 
         ipDispatcher PrelievoItemSOAP(Items PI, string qt, ipDispatcher ret, ipDispatcher retByUser)
         {
-
             try
             {
-
                 string sm = "";
                 string st = "";
                 var req = new myNameSpace.sendJobsV01Request();
                 var cli = AH.WSSoapClient;
-
                 req.param = new myNameSpace.JobTypeV01[1];
-
                 var x = new myNameSpace.JobTypeV01();
                 x.jobNumber = "JobItem";  // uso sempre lo stesso, lo cancello dal MV prima di richiederlo di nuovo
 
@@ -1780,21 +1215,15 @@ namespace iProdWHSE
                 var reqd = new myNameSpace.deleteJobV01Request();
                 reqd.param = new myNameSpace.ParDeleteJobV01();
                 reqd.param.jobNumber = x.jobNumber;
-
                 var respd = cli.deleteJobV01(reqd);
-
-                //   sm = log($"Response MP: {respd.@return.returnValue}");
 
                 if (UT.NotNull(respd.@return.returnErrorMessage))
                     ret.AdditionalInfo = "Esito cancellazione job già presente: " + respd.@return.returnErrorMessage;
-                //else
-                //    ret.AdditionalInfo = "Il Job era già stato inviato ed è stato eliminato per il reinvio";
 
                 #endregion
 
                 var jobs = new List<reqSchema>();
                 var prelievi = new List<itemToGet>();
-
                 var pi = PI;
                 prelievi = new List<itemToGet>();
                 prelievi.Add(new itemToGet
@@ -1804,18 +1233,14 @@ namespace iProdWHSE
                     qty = Convert.ToDouble(qt)
                 });
 
-
                 x.JobPosition = new myNameSpace.JobPositionTypeV01[1];
 
                 sm = $"PICK -         ... {pi.name}, {qt}...jobNumber {x.jobNumber}, jobTime {x.jobTime}, jobDate {x.jobDate}, jobStatus {x.jobStatus}";
                 log(sm);
 
-
-
                 int nl = x.JobPosition.Length;
                 x.JobPosition[0] = new myNameSpace.JobPositionTypeV01();
                 var jb = x.JobPosition[0];
-
 
                 // store cod o nome se null, se entrambi null non li gestisce e prosegue
                 if (UT.NotNull(pi.code))
@@ -1832,20 +1257,11 @@ namespace iProdWHSE
                 log(sm);
                 UT.AddRowHist("PICK-ITEM", $"Rich da {retByUser.Requester}:" + sm);
 
-
-
                 setPB(0);
-
-                //sm = log("PICK -   Risorse caricate da iProd, invio richiesta prelievi al M.V. ");
-                //if (VerboseMax)
-                //    if (!UT.Ask(sm)) return retByUser;
-
 
                 req.param[0] = x;
                 var resp = cli.sendJobsV01(req);
                 if (resp is null) throw new Exception("sendJobsV01 (Prelievo) non eseguito: la funzione ha restituito il response nullo");
-
-                //   sm = log($"Response MP: {resp.@return.returnValue}");
 
                 if (UT.NotNull(resp.@return.returnErrorMessage))
                 {
@@ -1868,7 +1284,6 @@ namespace iProdWHSE
             }
             catch (Exception ex)
             {
-
                 var sm = log("Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
@@ -1880,7 +1295,6 @@ namespace iProdWHSE
                 return ret;
 
             }
-
         }
 
 
@@ -1905,24 +1319,14 @@ namespace iProdWHSE
 
             */
 
-
             try
             {
 
                 string sm = "";
                 string st = "";
-
-                //string apiHost = $"https://{UT.iProdCFG.MP_IP}:{UT.iProdCFG.MP_Port}/";
-
-                //HttpClient httpClient = new HttpClient();
-                //httpClient.BaseAddress = new Uri(apiHost);
-
                 var job = new RESTReservation();
-
                 var jobs = new List<reqSchema>();
                 var prelievi = new List<itemToGet>();
-
-
                 var pi = PI;
                 prelievi = new List<itemToGet>();
                 prelievi.Add(new itemToGet
@@ -1931,8 +1335,6 @@ namespace iProdWHSE
                     name = pi.name,
                     qty = Convert.ToDouble(qt)
                 });
-
-
 
                 sm = log($"PICK-ITEM -     .... caricamento richiesta http a HOFFMANN per prelievo articolo.");
                 if (VerboseMax)
@@ -1952,7 +1354,6 @@ namespace iProdWHSE
                 else if (!pi.name.IsNull())
                     job.articleNumber = pi.name;
 
-
                 var json = JsonConvert.SerializeObject(job);
                 StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
                 string APIurl = "reservation";
@@ -1971,9 +1372,7 @@ namespace iProdWHSE
                     sm = $"PICK-ITEM -  articleNumber {job.articleNumber}, quantity {job.quantity}";
                     log(sm);
                     UT.AddRowHist("PICK-OK", $"Rich da {retByUser.Requester}:" + sm);
-
                 }
-
 
                 if (!errors.IsNull())
                 {
@@ -1988,12 +1387,10 @@ namespace iProdWHSE
                     ret.Message = sm;
                     ret.StatusCode = "COMPLETED";
                 }
-
                 return ret;
             }
             catch (Exception ex)
             {
-
                 var sm = log("Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
@@ -2001,29 +1398,20 @@ namespace iProdWHSE
                 ret.inError = true;
                 ret.StatusCode = "OFFLINE";
                 ret.Message = sm;
-
                 return ret;
-
             }
-
         }
-
-
 
 
         ipDispatcher PrelievoSOAP(PhaseInstance PI, ipDispatcher ret, ipDispatcher retByUser)
         {
-
             try
             {
-
                 string sm = "";
                 string st = "";
                 var req = new myNameSpace.sendJobsV01Request();
                 var cli = AH.WSSoapClient;
-
                 req.param = new myNameSpace.JobTypeV01[1];
-
                 var x = new myNameSpace.JobTypeV01();
                 x.jobNumber = PI.Summarydata.Wordordername;
 
@@ -2033,27 +1421,19 @@ namespace iProdWHSE
                 var reqd = new myNameSpace.deleteJobV01Request();
                 reqd.param = new myNameSpace.ParDeleteJobV01();
                 reqd.param.jobNumber = x.jobNumber;
-
                 var respd = cli.deleteJobV01(reqd);
-
-                //   sm = log($"Response MP: {respd.@return.returnValue}");
 
                 if (UT.NotNull(respd.@return.returnErrorMessage))
                     ret.AdditionalInfo = "Esito cancellazione job già presente: " + respd.@return.returnErrorMessage;
-                //else
-                //    ret.AdditionalInfo = "Il Job era già stato inviato ed è stato eliminato per il reinvio";
 
                 #endregion
 
                 var jobs = new List<reqSchema>();
                 var prelievi = new List<itemToGet>();
-
-
                 int xi = 0;
                 var pi = PI;
                 prelievi = new List<itemToGet>();
                 prelievi = fetchItemsToGet(pi);
-
                 st = pi.Linkeddata.Itemid;
                 var item = findItem(st);
                 if (item is null)
@@ -2063,37 +1443,29 @@ namespace iProdWHSE
                         if (!UT.Ask(sm)) return retByUser;
 
                     UT.AppendToFile(outCSV, $"ID ITEM={st};null;{curBom};0;ITEM-NOT-FOUND");
-
                     ret.Message = sm;
                     return ret;
                 }
                 if (prelievi.Count == 0)
                 {
-
                     sm = log($"PICK -  ... richiesto prelievo per {item.code} {item.name} ma non risultano giacenze consistenti per poter essere prelevato dal magazzino");
                     if (VerboseMax)
                         if (!UT.Ask(sm)) return retByUser;
 
                     // generiamo comunque il record csv con qty = 0,  non lo invieremo a soap ma noi possiamo sapere cosa non ha trovato
                     UT.AppendToFile(outCSV, $"{item.code};{item.name};{curBom};0;ND");
-
                     ret.Message = sm;
                     return ret;
                 }
 
                 x.JobPosition = new myNameSpace.JobPositionTypeV01[prelievi.Count()];
-
-
                 sm = $"PICK -             ...jobNumber {x.jobNumber}, jobTime {x.jobTime}, jobDate {x.jobDate}, jobStatus {x.jobStatus}, tot. prelievi {prelievi.Count}";
                 log(sm);
-
-
 
                 foreach (var pr in prelievi)
                 {
                     if (AH.shutDownListenerRequest) return retByUser;
                     item = findItem(pr.itemid);
-
                     sm = log($"PICK -  Da prelevare {pr.qty} pezzi di {item.name} per la produzione di {curBom}");
                     if (VerboseMax)
                         if (!UT.Ask(sm)) return retByUser;
@@ -2101,7 +1473,6 @@ namespace iProdWHSE
                     int nl = x.JobPosition.Length;
                     x.JobPosition[xi] = new myNameSpace.JobPositionTypeV01();
                     var jb = x.JobPosition[xi];
-
 
                     // store cod o nome se null, se entrambi null non li gestisce e prosegue
                     if (UT.NotNull(item.code))
@@ -2121,20 +1492,12 @@ namespace iProdWHSE
                     UT.AddRowHist("PICK-OK", $"Rich da {retByUser.Requester}:" + sm);
                 }
 
-
-
                 setPB(0);
-
-                //sm = log("PICK -   Risorse caricate da iProd, invio richiesta prelievi al M.V. ");
-                //if (VerboseMax)
-                //    if (!UT.Ask(sm)) return retByUser;
 
 
                 req.param[0] = x;
                 var resp = cli.sendJobsV01(req);
                 if (resp is null) throw new Exception("sendJobsV01 (Prelievi) non eseguito: la funzione ha restituito il response nullo");
-
-                //   sm = log($"Response MP: {resp.@return.returnValue}");
 
                 if (UT.NotNull(resp.@return.returnErrorMessage))
                 {
@@ -2152,12 +1515,10 @@ namespace iProdWHSE
                     ret.StatusCode = "COMPLETED";
                     UT.AddRowHist("PICK-OK", $"Rich da {retByUser.Requester}:" + sm);
                 }
-
                 return ret;
             }
             catch (Exception ex)
             {
-
                 var sm = log("Errore " + ex.Message.Replace("\r\n", "") + ", " + ex.StackTrace.Replace("\r\n", ""));
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
@@ -2165,11 +1526,8 @@ namespace iProdWHSE
                 ret.inError = true;
                 ret.StatusCode = "OFFLINE";
                 ret.Message = sm;
-
                 return ret;
-
             }
-
         }
 
 
@@ -2199,23 +1557,13 @@ namespace iProdWHSE
 
                 string sm = "";
                 string st = "";
-
-                //string apiHost = $"https://{UT.iProdCFG.MP_IP}:{UT.iProdCFG.MP_Port}/";
-
-                //HttpClient httpClient = new HttpClient();
-                //httpClient.BaseAddress = new Uri(apiHost);
-
                 var job = new RESTReservation();
-              
                 var jobs = new List<reqSchema>();
                 var prelievi = new List<itemToGet>();
-
-
                 int xi = 0;
                 var pi = PI;
                 prelievi = new List<itemToGet>();
                 prelievi = fetchItemsToGet(pi);
-
                 st = pi.Linkeddata.Itemid;
                 var item = findItem(st);
                 if (item is null)
@@ -2225,30 +1573,25 @@ namespace iProdWHSE
                         if (!UT.Ask(sm)) return retByUser;
 
                     UT.AppendToFile(outCSV, $"ID ITEM={st};null;{curBom};0;ITEM-NOT-FOUND");
-
                     ret.Message = sm;
                     return ret;
                 }
 
                 if (prelievi.Count == 0)
                 {
-
                     sm = log($"PICK -  ... richiesto prelievo per {item.code} {item.name} ma non risultano giacenze consistenti per poter essere prelevato dal magazzino");
                     if (VerboseMax)
                         if (!UT.Ask(sm)) return retByUser;
 
                     // generiamo comunque il record csv con qty = 0,  non lo invieremo a soap ma noi possiamo sapere cosa non ha trovato
                     UT.AppendToFile(outCSV, $"{item.code};{item.name};{curBom};0;ND");
-
                     ret.Message = sm;
                     return ret;
                 }
-
              
                 sm = log($"PICK -     .... caricamento richieste http a HOFFMANN per un totale di {prelievi.Count} prelievi.");
                 if (VerboseMax)
                     if (!UT.Ask(sm)) return retByUser;
-
 
                 string errors = "";
                 foreach (var pr in prelievi)
@@ -2285,7 +1628,6 @@ namespace iProdWHSE
                         errors += sm;
                         UT.AppendToFile(outCSV, $"{item.code};{item.name};{curBom};{pr.qty};**SCARICO IN ERRORE**");
                         UT.AddRowHist("PICK-ERR", $"Rich da {retByUser.Requester}:" + sm);
-
                     }
                     else
                     {
@@ -2293,12 +1635,9 @@ namespace iProdWHSE
                         sm = $"PICK -  #{xi} articleNumber {job.articleNumber}, quantity {job.quantity}";
                         log(sm);
                         UT.AddRowHist("PICK-OK", $"Rich da {retByUser.Requester}:" + sm);
-
                     }
-
                     xi++;
                 }
-
 
                 if (!errors.IsNull())
                 {
@@ -2313,7 +1652,6 @@ namespace iProdWHSE
                     ret.Message = sm;
                     ret.StatusCode = "COMPLETED";
                 }
-
                 return ret;
             }
             catch (Exception ex)
@@ -2326,11 +1664,8 @@ namespace iProdWHSE
                 ret.inError = true;
                 ret.StatusCode = "OFFLINE";
                 ret.Message = sm;
-
                 return ret;
-
             }
-
         }
 
 
@@ -2341,8 +1676,6 @@ namespace iProdWHSE
 
         List<itemToGet> fetchItemsToGet(PhaseInstance pi)
         {
-            //log($"fetchItemsToGet pi._id = {pi._id} ");
-            //log($"fetchItemsToGet pi.Phaseid = {pi.Phaseid} ");
             var ret = new List<itemToGet>();
 
             // find bom
@@ -2350,35 +1683,22 @@ namespace iProdWHSE
             // get id item
             var itm = pi.Linkeddata.Itemid;
 
-            //log($"fetchItemsToGet pi.Linkeddata.Itemid = {pi.Linkeddata.Itemid} ");
             // get 1° bom che ha l'esponente con un produceditem = all'item
             var bom = iprod_boms.FirstOrDefault(a => a.exponents.FirstOrDefault(x => x.produceditems.FirstOrDefault(y => y.itemid == itm) != null) != null);
             if (bom is null) return ret;
-
             curBom = $"{bom.code}\\{bom.name}";
-
-            //log($"fetchItemsToGet bom found = {curBom}, bom._id {bom._id} ");
 
             // get obj exponent
             var exp = bom.exponents.FirstOrDefault(x => x.produceditems.FirstOrDefault(y => y.itemid == itm) != null);
             if (exp is null) return ret;
+
             // get 1° nodo con phaseid = Phaseinstance.Phaseid
-            //    var btree = exp.bomtree.FirstOrDefault(x => x.type == 0 && x.typeid == pi.Phaseid);
-
-            //  if (btree is null) return 0;
             // somma la qta di tutti i figli di tipo item * la qua de phaseinstance
-
-        //    log($"fetchItemsToGet exp._id = {exp._id}");
-
 
             foreach (var btree in exp.bomtree)
             {
-          //      log($"fetchItemsToGet foreach.exp.bomtree.type = {btree.type}, typeid = {btree.typeid}");
-
                 if (btree.type == 0 && btree.typeid == pi.Phaseid)
                 {
-                  //  log($"fetchItemsToGet foreach.exp.bomtree.typeid = {btree.typeid} FOUND (deve essere uguale alla id fase)");
-
                     foreach (var s in btree.sons)
                     {
                         if (s.type == 1 || s.type == 5 || s.type == 6)
@@ -2388,51 +1708,36 @@ namespace iProdWHSE
                                 itemid = s.typeid,
                                 qty = (s.qty * pi.Performancedata.Totalqty)
                             });
-                        //    log($"fetchItemsToGet foreach.exp.btree.sons s = ADDED itemid = {s.typeid}, giacenza {(s.qty * pi.Performancedata.Totalqty)}, prelievi.Count = {ret.Count}");
-
                         }
-
                         ret = fetchSons(s, pi, ret);
                     }
                 }
             }
-
             return ret;
         }
-
 
 
         List<itemToGet> fetchSons(BomTreeNode n, PhaseInstance pi, List<itemToGet> lista)
         {
             var ret = new List<itemToGet>();
-
-            
             foreach (var s in n.sons)
             {
                 if (s.type == 1 || s.type == 5 || s.type == 6)
                 {
-                   // log($"fetchSons foreach.exp.btree.sons s = ADDED itemid = {s.typeid}, giacenza {(s.qty * pi.Performancedata.Totalqty)}");
                     lista.Add(new itemToGet
                     {
                         itemid = s.typeid,
                         qty = (s.qty * pi.Performancedata.Totalqty)
                     });
                 }
-               
-
                 lista = fetchSons(s, pi, lista);
-
             }
-
             return lista;
         }
-
-
 
         double sumson(BomTreeNode n, PhaseInstance pi)
         {
             double ret = 0;
-
             foreach (var s in n.sons)
             {
                 if (s.type == 0 && s.typeid == pi.Phaseid)
@@ -2456,13 +1761,10 @@ namespace iProdWHSE
                 ret += sumson(s, pi);
                 if (ret > 0) return ret;   // se ha trovato qualcosa non deve cercare altro
             }
-
             return ret;
         }
 
         #endregion
-
-     
 
 
         /// <summary>
@@ -2473,77 +1775,18 @@ namespace iProdWHSE
         /// <returns>true</returns>
         public UT.Contatore load_iProd(string what)
         {
-
             string txtContatore = "";
             var dStart = DateTime.Now;
             string prevWhat = what;
             string curWhat = what;
             string msg = "";
-
             bool isEmpty = false;
             var CC = new UT.Contatore(what); // avvia timer 
-
             Application.DoEvents();
-
             try
             {
                 var httpClient = new HttpClient();
                 httpClient.BaseAddress = new Uri(UT.EndPointIPROD);
-
-
-                // AUTENTICA SE NON L'AVEVA GIA FATTO
-                //if (string.IsNullOrEmpty(usertoken) || what == "login")
-                //{
-
-                //    log($"ACCS - Login a iProd in corso..");
-
-                //    curWhat = "iproduser";
-                //    dataparameter = "iProdAuthentication/GetToken?username=" + username + "&password=" + password;
-                //    httpClient.BaseAddress = new Uri(UT.EndPointIPROD);
-                //    content = httpClient.GetAsync(dataparameter).Result;
-
-                //    if (content.StatusCode != isOk)
-                //    {
-                //        msg = content.Content.ReadAsStringAsync().Result;
-                //        UT.httpErr objErr = Newtonsoft.Json.JsonConvert.DeserializeObject<UT.httpErr>(msg);
-                //        var st = log($"ACCS - Wrong API response. Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
-
-                //        throw new Exception(st);
-                //    }
-
-                //    usertoken = content.Content.ReadAsStringAsync().Result;
-                //    log($"ACCS -  Autenticazione effettuata con successo: token {usertoken}");
-                //    log($"ACCS -  Connesso ad iProd. Get Profilo");
-                //    // AUTENTICAZIONE OK
-
-                //    // GET Profilo
-                //    dataparameter = "Account/GetIprodCustomer?token=" + usertoken;
-                //    content = httpClient.GetAsync(dataparameter).Result;
-                //    log($"ACCS -  API Account/GetIprodCustomer eseguita");
-                //    customerdata = content.Content.ReadAsStringAsync().Result;
-                //    iproduser = Newtonsoft.Json.JsonConvert.DeserializeObject<iProdCustomers>(customerdata);
-                //    if (iproduser is null)
-                //        log($"ACCS - oggetto iprod user nullo");
-                //    else
-                //    {
-                //        var loggedUser = iproduser.Customerusers.Find(x => x.Username == username);
-                //        if (loggedUser != null)
-                //        {
-                //            userguid = loggedUser._id;
-                //            NameSurname = loggedUser.Name + " " + loggedUser.Surname;
-                //        }
-                //    }
-                //}
-
-                //if (what == "login")
-                //{
-                //    CC.RowCount = 1;
-                //    CC.ProcessCompleted(true);
-                //    return CC;
-                //}
-
-
-
                 curWhat = prevWhat;
 
                 /* ==============================================================================================================
@@ -2555,13 +1798,11 @@ namespace iProdWHSE
 
                 // scarica la lista richiesta 
 
-
                 switch (curWhat)
                 {
                     case "customers":
 
                         // GET Clienti
-
                         isEmpty = (iprod_customers is null || iprod_customers.Count == 0);
                         if (!isEmpty)
                         {
@@ -2573,7 +1814,6 @@ namespace iProdWHSE
 
                         iprod_customers = new List<Customers>();
 
-
                         dataparameter = "Customers/GetCustomersTable?token=" + Program.ipTOKEN;
                         log($"GET - download Clienti in corso.. (url: ../{dataparameter.Substring(0, dataparameter.Length - 15)}**********)");
                         content = httpClient.GetAsync(dataparameter).Result;
@@ -2582,7 +1822,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = Newtonsoft.Json.JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"GET -  Wrong API response. download iprod_customers, Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -2593,11 +1832,9 @@ namespace iProdWHSE
 
                         txtContatore = $"                   ....scaricati da iProd {iprod_customers.Count} clienti ";
                         CC.read = iprod_customers.Count;
-
                         break;
 
                     //  I T E M S =================================================================================================================================
-
                     case "items":
 
                         Application.DoEvents();
@@ -2610,20 +1847,16 @@ namespace iProdWHSE
                             CC.ProcessCompleted(true, true);
                             return CC;
                         }
-
                         iprod_items = new List<Items>();
-
 
                         // GET Articoli
                         dataparameter = "Items/GetItemsTable?token=" + Program.ipTOKEN;
                         log($"GET -  download Articoli in corso.. (url: ../{dataparameter.Substring(0, dataparameter.Length - 15)}**********)");
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
-
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = Newtonsoft.Json.JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"GET -  Wrong API response. Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -2637,11 +1870,9 @@ namespace iProdWHSE
                         break;
 
                     // P H A S E I N S T A N C E S *****************************************************************************************************************************************************
-
                     case "phaseinstances":
 
                         Application.DoEvents();
-
                         isEmpty = (iprod_pi is null || iprod_pi.Count == 0);
                         if (!isEmpty)
                         {
@@ -2653,17 +1884,14 @@ namespace iProdWHSE
 
                         iprod_pi = new List<PhaseInstance>();
 
-
                         // GET Phaseinstances table
                         dataparameter = "PhasesInstances/GetPhaseInstancesTable?token=" + Program.ipTOKEN;
                         log($"GET - download Istanze di fase (tutte) in corso.. (url: {dataparameter.Substring(0, dataparameter.Length - 15)}**********)");
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
-
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = Newtonsoft.Json.JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"GET -  Wrong API response. Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -2676,16 +1904,9 @@ namespace iProdWHSE
                         CC.read = iprod_pi.Count;
                         break;
 
-
-
                     // P H A S E S  ==================================================================================================================================
-
-
                     case "phases":
-
-
                         // GET fasi (Phases) e macchines
-
                         isEmpty = (iprod_phases is null || iprod_phases.Count == 0);
                         if (!isEmpty)
                         {
@@ -2696,7 +1917,6 @@ namespace iProdWHSE
                         }
                         iprod_phases = new List<Phase>();
 
-
                         dataparameter = "Phases/GetPhaseTable?token=" + Program.ipTOKEN;
                         log($"GET - download Fasi in corso..  (url: ../{dataparameter.Substring(0, dataparameter.Length - 15)}**********)");
                         content = httpClient.GetAsync(dataparameter).Result;
@@ -2704,7 +1924,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = Newtonsoft.Json.JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"GET -  Wrong API response. carica iprod_phases, Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -2718,9 +1937,7 @@ namespace iProdWHSE
                         break;
 
                     // P O S T S ==================================================================================================================================
-
                     case "posts":
-
                         isEmpty = (iprod_posts is null || iprod_posts.Count == 0);
                         if (!isEmpty)
                         {
@@ -2729,8 +1946,6 @@ namespace iProdWHSE
                             return CC;
                         }
                         iprod_posts = new List<Posts>();
-
-
                         if (UT.IsNull(tipoPost)) tipoPost = "1";
                         dataparameter = $"Posts/GetPosts?token={Program.ipTOKEN}&type={tipoPost}";
                         log($"GET - download Posts di tipo 1 in corso.. (url: ../{dataparameter.Substring(0, dataparameter.Length - 15)}**********)");
@@ -2739,7 +1954,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = Newtonsoft.Json.JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($"GET -  Wrong API response. carica iprod_phases, Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -2748,19 +1962,13 @@ namespace iProdWHSE
                         else
                             iprod_posts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Posts>>(customerdata);
 
-
-
                         txtContatore = $"                   ....scaricati da iProd {iprod_posts.Count} POST ";
                         CC.read = iprod_posts.Count;
-
                         break;
 
 
                     // C A T E G O R I E S  ==================================================================================================================================
-
                     case "categories":
-
-
                         isEmpty = (categories is null || categories.Count == 0);
                         if (!isEmpty)
                         {
@@ -2770,15 +1978,11 @@ namespace iProdWHSE
                             return CC;
                         }
                         categories = new Dictionary<string, string>();
-
-
                         log($"GET -  download categorie in corso..");
-
 
                         dataparameter = "Home/GetCategories?token=" + Program.ipTOKEN;
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
-
                         if (content.StatusCode != isOk)
                         {
                             MessageBox.Show("Errore durante il download delle categorie");
@@ -2789,16 +1993,12 @@ namespace iProdWHSE
                         else
                             categories = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(customerdata);
 
-
                         txtContatore = $"                   ....scaricate da iProd {categories.Count} categorie ";
-
                         break;
 
+
                     // W A R E H O U S E S  ==================================================================================================================================
-
-
                     case "warehouses":
-
                         isEmpty = (warehouses is null || warehouses.Count == 0);
                         if (!isEmpty)
                         {
@@ -2808,17 +2008,10 @@ namespace iProdWHSE
                             return CC;
                         }
                         warehouses = new List<Warehouse>();
-
-
-
-                        warehouses = new List<Warehouse>();
-
                         dataparameter = "WareHouses/GetWareHousesTable?token=" + Program.ipTOKEN;
                         log($"GET - download Magazzini in corso.. (url ../{dataparameter.Substring(0, dataparameter.Length-15)}**********)");
-
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
-
                         if (content.StatusCode != isOk)
                         {
                             MessageBox.Show("Errore durante il download dei magazzini");
@@ -2834,10 +2027,7 @@ namespace iProdWHSE
                         break;
 
                     // M A C H I N E S ==================================================================================================================================
-
-
                     case "machines":
-
                         isEmpty = (iprod_machines is null || iprod_machines.Count == 0);
                         if (!isEmpty)
                         {
@@ -2847,8 +2037,6 @@ namespace iProdWHSE
                             return CC;
                         }
                         iprod_machines = new List<Customermachine>();
-
-
                         dataparameter = "Machines/GetMachineTable?token=" + Program.ipTOKEN;
                         log($"GET -  download Macchinari in corso.. (url ../{dataparameter.Substring(0, dataparameter.Length - 15)}**********)");
                         content = httpClient.GetAsync(dataparameter).Result;
@@ -2856,7 +2044,6 @@ namespace iProdWHSE
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
-
                             msg = content.Content.ReadAsStringAsync().Result;
                             UT.httpErr objErr = Newtonsoft.Json.JsonConvert.DeserializeObject<UT.httpErr>(msg);
                             log($" Wrong API response. carica MACHINES, Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {dataparameter} ");
@@ -2869,9 +2056,8 @@ namespace iProdWHSE
                         CC.read = iprod_machines.Count;
                         break;
 
+
                     // B O M S ==================================================================================================================================
-
-
                     case "boms":
 
                         isEmpty = (iprod_boms is null || iprod_boms.Count == 0);
@@ -2883,13 +2069,10 @@ namespace iProdWHSE
                             return CC;
                         }
                         iprod_boms = new List<Bom>();
-
-
                         dataparameter = "Boms/GetBomsTable?token=" + Program.ipTOKEN;
                         log($"GET - download Distinte in corso.. (url ../{dataparameter.Substring(0, dataparameter.Length - 15)}**********)");
                         content = httpClient.GetAsync(dataparameter).Result;
                         customerdata = content.Content.ReadAsStringAsync().Result;
-
                         if (content.StatusCode != isOk)
                         {
                             CC.Witherror++;
@@ -2910,10 +2093,6 @@ namespace iProdWHSE
                         throw new Exception($"Attenzione, parametro 'what' sconosciuto: {what}");
                 }
 
-
-
-                //setFASE();
-
                 if (CC.RowCount == 0)
                     CC.RowCount = Convert.ToInt32(CC.read);
 
@@ -2925,13 +2104,10 @@ namespace iProdWHSE
                 string mm = $"load_iprod('{curWhat}') Err: {ex.Message.Replace("\r\n", "")}, stack {ex.StackTrace.Replace("\r\n", "")} ";
                 CC.inError = true;
                 CC.ErrorText = mm;
-
                 log("GET - " +mm);
-
                 return CC;
             }
         }
-
  
 
 
@@ -2948,11 +2124,8 @@ namespace iProdWHSE
         private string log(string m)
         {
             // standard log
-
             logCnt++;
-           // UT.AppendToFile(logFile, logCnt + "| " + m);
             UT.AppendToFile(logFile, m);
-            //   Application.DoEvents();
             return m;
         }
 
@@ -2961,12 +2134,10 @@ namespace iProdWHSE
         private string SendAction(string cmd)
         {
             log("@CMD@|" + cmd);
-
             return cmd;
         }
 
         #endregion
-
 
         #region Dispose memory
 
@@ -2978,9 +2149,6 @@ namespace iProdWHSE
                 {
                     // TODO: eliminare lo stato gestito (oggetti gestiti)
                 }
-
-
-
                 // TODO: liberare risorse non gestite (oggetti non gestiti) ed eseguire l'override del finalizzatore
                 // TODO: impostare campi di grandi dimensioni su Null
                 disposedValue = true;
@@ -3002,7 +2170,6 @@ namespace iProdWHSE
         }
 
         #endregion
-
     }
 
     public class ServiceClientFactory<TChannel> : ClientBase<TChannel> where TChannel : class

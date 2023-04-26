@@ -10,16 +10,12 @@ namespace iProdWHSE
 {
     public static class MockHelper
     {
-
         static Form1 mainForm { get; set; }
-        
         public static bool Slow { get; set; }
-
         public static void Init()
         {
             if (mainForm is null) mainForm = UT.mainForm; 
         }
-
         
         static string log(string st)
         {
@@ -29,14 +25,10 @@ namespace iProdWHSE
         public static bool Ping()
         {
             Init();
-
             log("Pinging Web Service..");
             UT.Sleep(1000);   // 1 secondo
-
             return true;
         }
-
-
 
         public static myNameSpace.sendJobsV01Response GetPickResponse(myNameSpace.sendJobsV01Request req)
         {
@@ -53,34 +45,21 @@ namespace iProdWHSE
                 if (Slow) UT.Sleep(700);
             }
 
-
             return resp;
-
         }
 
         public static myNameSpace.readAllAMDV01Response GetStockResponse(List<Items> items, int num)
         {
-
-
-
             var resp = new myNameSpace.readAllAMDV01Response();
             resp.@return = new myNameSpace.RetReadAllAMDV01();
-
             var ret = resp.@return;
-
-
-
             var arts = new List<myNameSpace.AMDTypeV01>();
-
-
             
             for (int i = 0; i <= num; i++)
             {
                 if (Slow) UT.Sleep(700);
                 var rand = new Random();
-
                 int j = rand.Next(items.Count-1);
-
                 var a = new myNameSpace.AMDTypeV01();
 
                 a.articleName = items[j].name;
@@ -100,11 +79,7 @@ namespace iProdWHSE
 
             ret.returnValue = 1;
             ret.article = arts.ToArray();
-          
-
-
             return resp;
         }
-
     }
 }

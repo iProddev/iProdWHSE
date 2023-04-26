@@ -15,14 +15,11 @@ using System.Globalization;
 using System.Xml;
 using System.Drawing.Imaging;
 using System.Drawing;
-//using Newtonsoft.Json;
 using MongoDB.Bson;
 using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
 using iProdDataModel.Models;
 using MongoDB.Driver;
-//using MySql.Data.MySqlClient;
-//using MySqlX.XDevAPI;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
@@ -42,7 +39,8 @@ namespace iProdWHSE
         #region DICHIARAZIONI
 
 
-        public static string Versione { get; set; } = "4.1.18@17.4.23"; // versione iprod @ data
+        public static string Versione { get; set; } = "4.1.19@26.4.23"; // versione iprod @ data
+        
         // note relative al commit e/o modifiche rilevanti
         public static string Versione_Commit { get; set; } = "";
         public static Form1 mainForm { get; set; }
@@ -84,7 +82,6 @@ namespace iProdWHSE
 
         // non tracciate
 
-
        
         public static string pathApp { get; set; }
         public static string pathData { get; set; }
@@ -101,7 +98,6 @@ namespace iProdWHSE
         public static string EndPointKey { get; set; }  // dev, test, prod, localhost
         public static string iProdUsername { get; set; }
         public static string iProdPassword { get; set; }
-
         public static bool CacheEnabled { get; set; }
         public static bool CacheRefresh { get; set; }
         public static bool EnableLogToDisk { get; set; }
@@ -111,30 +107,26 @@ namespace iProdWHSE
         public static int MaxDelayInMinutes { get; set; }
         public static int TimerIdleFromHour { get; set; }
         public static int TimerIdleToHour { get; set; }
-
         public static bool TermsAccepted { get; set; }
-      
         public static bool iProdConnected { get; set; }
         public static bool WSConnected { get; set; }
         public static bool ListenerUP { get; set; }
-        public static bool checkBackup { get; set; }        // true se in config c'è backup=true controlla i servizi di backup prima di avviare il processo di sync
+        public static bool checkBackup { get; set; }            // true se in config c'è backup=true controlla i servizi di backup prima di avviare il processo di sync
         public static int MaxHistoryCount { get; set; }
         public static int MaxProcessCount { get; set; }
         public static bool SlowRun { get; set; }
         public static bool StopAtError { get; set; }
-        public static bool Interactive { get; set; }  // deve o non deve emettere messaggi a video
+        public static bool Interactive { get; set; }            // deve o non deve emettere messaggi a video
         public static string runningmode { get; set; }
-        public static bool Simulating { get; set; }  // true se è attiva una simulazione
-        public static bool SimAlertDone { get; set; } // true se ha gia avvertito l'utente sulla configurazione ottimale per una simulazione
+        public static bool Simulating { get; set; }             // true se è attiva una simulazione
+        public static bool SimAlertDone { get; set; }           // true se ha gia avvertito l'utente sulla configurazione ottimale per una simulazione
         public static bool isStartingUp { get; set; }
-        public static string FileSpy { get; set; }  // semaforo
+        public static string FileSpy { get; set; }              // semaforo
 
 
         #region APPLICATION OBJECTS
 
-
-
-        public static iProdCustomers iprod_user { get; set; } // viene caricato una volta sola all'inizio e resta per tutta la sessione degli imports 
+        public static iProdCustomers iprod_user { get; set; }       // viene caricato una volta sola all'inizio e resta per tutta la sessione degli imports 
         public static List<Customers> iprod_customers { get; set; }
         public static List<Phase> iprod_phases { get; set; }
         public static List<PhaseInstance> iprod_phaseinstances { get; set; }
@@ -183,7 +175,6 @@ namespace iProdWHSE
             SharedFile = pathData + "semaforo.txt"; // non usato
             FileSpy = pathData + "iprodwhse-semaphore.spy";
 
-
             if (!FileExists(cfgFile)) createInitialConfig();
 
         }
@@ -202,7 +193,6 @@ namespace iProdWHSE
                 bool open = false;
                 string fn = "snippets.txt";
                 if (!File.Exists(fn)) throw new Exception($"Errore grave in loadSnippet: non trovato il file snippets.txt per key '{key}'");
-
 
                 var ls = LoadTextFile(fn);
 
@@ -236,20 +226,15 @@ namespace iProdWHSE
 
         public static void createInitialConfig()
         {
-
             var c0 = loadSnippet("default-config");
             var lst = c0.Split('\n').ToList();
             parseConfig(lst);
             iProdCFG.SaveSettings(UT.cfgFile);
-
         }
 
 
         public static string GetLocalIP()
         {
-
-
-
 
             string strHostName = string.Empty;
             // Getting Ip address of local machine...
@@ -272,40 +257,16 @@ namespace iProdWHSE
                 }
             }
 
-         
-
-
-
-
-
-
-
-
-
-
-
-            //IPAddress[] addresses = Dns.GetHostAddresses("localhost");
-
-            //foreach (IPAddress addr in addresses)
-            //{
-            //    if (addr.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-            //    {
-            //        return addr.ToString();
-            //    }
-            //}
-
             return "127.0.0.1";
         }
 
         public static void parseConfig(List<string> lst)
         {
 
-
             // imposta i defaults. se non trova le chiavi scritte sul file
             // tiene questi valori
 
             iProdCFG = new WHSEInfo();
-
          
             EnableLogToDisk = true; // default, se non c'è la key resta questa
 
@@ -318,13 +279,11 @@ namespace iProdWHSE
 
             EndPointCOMPANY = iProdCFG.Ambiente;
 
-
         }
 
 
         public static string MyDecrypt(string v)
         {
-
             // sottrae 5 alla sequenza ascii della stringa
             // se l'operazione genera un ; lo sostituisce con § perche schianterebbe, essendo il separatore
             string ret = "";
@@ -336,7 +295,6 @@ namespace iProdWHSE
                 var t = (int)a;
                 char character = (char)(t - factorial);
                 ret += character.ToString();
-
             }
 
             return ret;
@@ -353,21 +311,16 @@ namespace iProdWHSE
                 var t = (int)a;
                 char character = (char)(t + 5);
                 ret += character.ToString();
-
             }
 
             return ret.Replace(";", "§");
         }
 
 
-
-
-
         public static void MsgBoxToUser()
         {
             if (Interactive)
                 MsgBox("SYNC al momento non disponibile. Controlla i log per maggiori informazioni", "ATTENZIONE", "e");
-
         }
 
         /// <summary>
@@ -407,9 +360,7 @@ namespace iProdWHSE
             mainForm.stopTimers();
             ok = MessageBox.Show(msg, title, b, ic);
 
-
             return ok;
-
         }
 
 
@@ -491,15 +442,11 @@ namespace iProdWHSE
         {
 
             // inizializzazioni varie
-            
             // lettura configurazione e settings
             // inizializzazioni varie
 
             string fn = cfgFile;
             string cfg = fn;
-            
-
-         
 
             if (!pathData.IsNull() && !Directory.Exists(pathData))
             {
@@ -507,12 +454,8 @@ namespace iProdWHSE
                 return false;
             }
 
-
-
             if (!File.Exists(cfg))
                 createInitialConfig();
-          
-
 
             // imposta i defaults. se non trova le chiavi scritte sul file
             // tiene questi valori
@@ -520,11 +463,7 @@ namespace iProdWHSE
             {
                 var lista = LoadTextFile(cfg, true);
                 parseConfig(lista);
-            
-
-
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -538,10 +477,7 @@ namespace iProdWHSE
 
                 return false;
             }
-
-
         }
-
 
         #region CAST
 
@@ -551,14 +487,9 @@ namespace iProdWHSE
             return Convert.ToInt32(v);
         }
 
-
-
         #endregion
 
-
         #region HTTP
-
-
 
 
         public static async Task<bool> PingWithHttpClient(string hostUrl)
@@ -580,14 +511,12 @@ namespace iProdWHSE
                 // Discard PingExceptions and return false;
                 UT.IOLog($"Errore in PingWithHttp Eccezione '{ex.Message}'");
                 return false;
-
             }
         }
 
 
         public static bool PingHost(string nameOrAddress)
         {
-            // ping.SendPingAsync(hostUrl);
             bool pingable = false;
             Ping pinger = null;
 
@@ -604,7 +533,6 @@ namespace iProdWHSE
 
                 if (pinger != null) pinger.Dispose();
                 return false;
-
             }
             finally
             {
@@ -633,7 +561,6 @@ namespace iProdWHSE
 
                 if (pinger != null) pinger.Dispose();
                 return false;
-
             }
             finally
             {
@@ -644,12 +571,8 @@ namespace iProdWHSE
         }
 
 
-
-
-
         public static async Task<httpResponse> APICall(HttpClient httpClient, string APIurl)
         {
-
             var hr = new httpResponse();
             string m = "";
             string resp = "";
@@ -657,13 +580,11 @@ namespace iProdWHSE
 
             try
             {
-                
                 WriteToEventLog(mainForm, "httpGet API: " + APIurl);
                 content = await httpClient.GetAsync(APIurl).ConfigureAwait(false);
                 resp = await content.Content.ReadAsStringAsync().ConfigureAwait(false); ;
                 if (content.StatusCode != isOk)
                 {
-
                     if (IsNull(resp))
                     {
                         m = $"Wrong API response. Err Code: {content.StatusCode}, msg: esecuzione api fallita, API: {APIurl}";
@@ -672,13 +593,11 @@ namespace iProdWHSE
                         return hr;
                     }
 
-
                     httpErr objErr = JsonConvert.DeserializeObject<httpErr>(resp);
                     m = $"Wrong API response. Err Code: {objErr.status} - {content.StatusCode}, msg: {objErr.title}, API: {APIurl}";
                     hr = new httpResponse { status = "ERR", response = m, statusCode = content.StatusCode };
                     WriteToEventLog(mainForm, m);
                     return hr;
-
                 }
             }
             catch (Exception ex)
@@ -695,6 +614,7 @@ namespace iProdWHSE
 
         }
 
+
         public static async Task<httpResponse> APICall(HttpClient httpClient, string APIurl, HttpContent requestContent)
         {
             var hr = new httpResponse();
@@ -706,8 +626,6 @@ namespace iProdWHSE
 
             try
             {
-
-               // IOLog("httpPost API: " + APIurl);
                 responseContent = await httpClient.PostAsync(APIurl, requestContent);
                 resp = await responseContent.Content.ReadAsStringAsync();
                 if (responseContent.StatusCode != isOk)
@@ -720,19 +638,14 @@ namespace iProdWHSE
                         return hr;
                     }
 
-
                     httpErr objErr = JsonConvert.DeserializeObject<httpErr>(resp);
                     m = $"Wrong API response. Err Code: {objErr.status} - {responseContent.StatusCode}, msg: {objErr.title}, API: {APIurl}";
                     hr = new httpResponse { status = "ERR", response = m, statusCode = responseContent.StatusCode };
                     mainForm.log(m);
                     return hr;
-
                 }
-
-                //IOLog("httpPost API: OK");
                 hr = new httpResponse { status = "OK", response = resp, statusCode = responseContent.StatusCode, content = responseContent };
                 return hr;
-
             }
             catch (Exception ex)
             {
@@ -741,21 +654,16 @@ namespace iProdWHSE
                 mainForm.log(m);
                 return hr;
             }
-
         }
 
         public static async Task<HttpResponseMessage> httppostcall(string EndPoint, string dataparameter, StringContent dataupdate)
         {
-
             using (var httpClient = new HttpClient())
             {
-                //  httpClient.Timeout = Timeout.InfiniteTimeSpan;
                 httpClient.BaseAddress = new Uri(EndPoint);
                 var result = await httpClient.PostAsync(dataparameter, dataupdate).ConfigureAwait(false);
-                //    result.Wait();
                 return result;
             }
-            //.Result;
         }
 
         #endregion
@@ -773,13 +681,9 @@ namespace iProdWHSE
 
         public static async Task<httpResponse> iProdLogin(string url, string usr, string pwd, bool silent = false)
         {
-
-
             string sm = "";
             var hr = new httpResponse();
             if (connecting) return hr;  // qui non deve arrivarci mai, se si, c'è un problema di logica di programmazione
-
-           
 
             if (Program.UrlGate.Key == "prod") url = "https://app.iprod.it/api/";
 
@@ -788,7 +692,6 @@ namespace iProdWHSE
             {
                 HttpClient httpClient = new HttpClient();
                 httpClient.BaseAddress = new Uri(url);
-                //httpClient.Timeout=new TimeSpan(0, 0, 30);
 
                 iProdConnected = false;
 
@@ -816,8 +719,6 @@ namespace iProdWHSE
                 Program.ipTOKEN = resp.response;
 
                 // AUTENTICAZIONE OK
-         
-
                 APIurl = "Account/GetIprodCustomer?token=" + Program.ipTOKEN;
 
                 resp = await APICall(httpClient, APIurl);
@@ -839,11 +740,9 @@ namespace iProdWHSE
                 mainForm.SetNetStatus("IP-ONLINE", "iProd CONNESSO");
                 connecting = false;
                 return resp;
-
             }
             catch (Exception ex)
             {
-
                 connecting = false;
                 if (!silent)
                 {
@@ -859,10 +758,7 @@ namespace iProdWHSE
                     hr = new httpResponse { status = "ERR", response = "Utente o Password non riconosciuti", statusCode = HttpStatusCode.Unauthorized };
                 return hr;
             }
-
         }
-
-
 
 
         public async static Task<MemoryStream> downloadfile(string uri)
@@ -904,7 +800,6 @@ namespace iProdWHSE
 
                 if (!IsNull(usr.Imgurl))
                 {
-
                     var b = await downloadfile(usr.Imgurl);
                     return b;
                 }
@@ -927,7 +822,6 @@ namespace iProdWHSE
                     bitmap.Save(memStream, System.Drawing.Imaging.ImageFormat.Png);
                     return memStream;
                 }
-
             }
             catch (Exception)
             {
@@ -938,7 +832,6 @@ namespace iProdWHSE
 
         public static bool DeleteSpyFile()
         {
-
             FileDelete(FileSpy);
             return true;
         }
@@ -952,7 +845,6 @@ namespace iProdWHSE
         /// <returns></returns>
         public static bool CreateSpyFile(string f, string content, bool replace = true)
         {
-
             try
             {
                 if (FileExists(f))
@@ -963,7 +855,6 @@ namespace iProdWHSE
 
                 if (content == "*binary*")
                 {
-
                     // crea un file che assomiglia a un binary, con contenuto random 
                     // questo file fa da spia ad altri metodi
 
@@ -1016,7 +907,6 @@ namespace iProdWHSE
         /// </summary>
         public static async Task ManageDataEventAsync(string title, string action, string data, Dictionary<string, string> diz = null)
         {
-
             if (Simulating ) return;
 
             try
@@ -1026,8 +916,6 @@ namespace iProdWHSE
                   action:     READ, INS, UPD, DEL, UNDO
                 */
 
-                //       iprod_loggeduser.Username} {UT.LF}{iprod_loggeduser.Name} {iprod_loggeduser.Surname} {UT.LF}{iprod_user.Customerdata.Name}");
-
                 string authorName = $"{iprod_loggeduser.Name} {iprod_loggeduser.Surname}";
                 string authorid = iprod_loggeduser._id;
 
@@ -1035,7 +923,6 @@ namespace iProdWHSE
 
                 EventLog eventlog = new EventLog();
                 eventlog._id = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-                //    eventlog._id = MongoDB.Bson.ObjectId.GenerateNewId();
 
                 int type = 10;
 
@@ -1055,11 +942,9 @@ namespace iProdWHSE
                 eventlog.Textvalue = data;
                 eventlog.Tag = "sync-event";
                 eventlog.Lastupdate = DateTime.UtcNow;
-                //eventlog.Iprodcustomerid = MongoDB.Bson.ObjectId.Parse(iprod_user._id);
                 eventlog.Iprodcustomerid = iprod_user._id;
                 eventlog.deleted = false;
                 eventlog.Creationdate = DateTime.UtcNow;
-                //eventlog.AuthorId = MongoDB.Bson.ObjectId.Parse(authorid);
                 eventlog.AuthorId = authorid;
                 eventlog.AuthorName = authorName;
                 eventlog.Additionaldata = new Dictionary<string, string>();
@@ -1067,9 +952,7 @@ namespace iProdWHSE
                 eventlog.Additionaldata = diz; // assegna le key arrivate dall'esterno
 
                 // x visualizzazione su grid
-
                 eventlog.Additionaldata["Action"] = action;
-
 
                 await SendEvent(eventlog);
 
@@ -1098,35 +981,25 @@ namespace iProdWHSE
 
                 var tokens = Program.UrlGate.SvcGetTokens();
                 var body = (tokens.Item1, tokens.Item2, evt);
-
                 var json = JsonConvert.SerializeObject(body);
                 StringContent requestContent = new StringContent(json, Encoding.UTF8, "application/json");
-
                 resp = await SvcCall(hc, gate.svcSendEventLog, requestContent);
-
 
                 if (resp.status != "OK")
                 {
                     mainForm.log($"323. SendEvent(evt). Errore di invio richiesta POST al servizio 'Eventi' di iProd. Evento: '{evt.Textvalue}'. Response: '{resp.response}'");
                     MsgBoxToUser();
-
                     return false;
                 }
-
-
             }
             catch (Exception ex)
             {
-
                 string m = $"324. SendEvent(evt). Rilevata eccezione durante l'invio di una richiesta in POST al servizio 'Eventi' di iProd. Eccezione: '{ex.Message}', StackTrace: '{ex.StackTrace}', Stato richiesta: '{resp.status}', Evento: '{evt.Textvalue}', Response: '{resp.response}'";
                 mainForm.log(m);
                 MsgBoxToUser();
-
                 return false;
             }
-
             return true;
-
         }
 
 #endregion
@@ -1150,10 +1023,9 @@ namespace iProdWHSE
                 var resp = new httpResponse();
                 DateTime utcSvc = DateTime.UtcNow;
 
-                var hc = GetHttpClient(gate.home); // get httpClient
+                var hc = GetHttpClient(gate.home);                      // get httpClient
 
-
-                resp = await SvcCall(hc, gate.svcGetSystemTimestamp); // chiamo l'api al servizio che mi restituisce la data di sistema di iProd Web
+                resp = await SvcCall(hc, gate.svcGetSystemTimestamp);   // chiamo l'api al servizio che mi restituisce la data di sistema di iProd Web
                 if (resp.status == "OK")
                 {
                     // Remove leading and trailing quotes (").
@@ -1165,7 +1037,6 @@ namespace iProdWHSE
                     else
                     {
                         // verifico la differenza con quella locale
-
                         var fd = new TimeSpan();  // fault diff
                         if (utcSvc > DateTime.UtcNow)
                             fd = utcSvc.Subtract(DateTime.UtcNow);
@@ -1194,14 +1065,12 @@ namespace iProdWHSE
                 string m = "Un eccezione ha interrotto la funzione SvcUtcValid() di controllo tolleranza tra data del Server iProd e quella locale: Il messaggio è " + ex.Message;
                 mainForm.log(m);
                 MsgBoxToUser();
-
                 return false;
             }
         }
 
         public static async Task<bool> SvcIsServerBusy()
         {
-
             var gate = Program.UrlGate;
             var resp = new httpResponse();
 
@@ -1216,17 +1085,13 @@ namespace iProdWHSE
 
                 if (resp.status != "OK")
                 {
-
                     mainForm.log(resp.response);
                     MsgBoxToUser();
-
                     return true;
                 }
-
             }
             catch (Exception ex)
             {
-
                 string m = $" SvcIsServerBusy: Rilevata Eccezione " + ex.Message + "|" + ex.StackTrace;
                 if (resp.status == "OK")
                     resp.response = m;
@@ -1235,13 +1100,9 @@ namespace iProdWHSE
 
                 mainForm.log(resp.response);
                 MsgBoxToUser();
-
                 return true;
             }
-
-
             return false;
-
         }
 
 
@@ -1296,42 +1157,32 @@ namespace iProdWHSE
             var resp = new httpResponse();
             var dstart = DateTime.Now;
             string m = "";
-
             mainForm.log("Esecuzione backup su iProd.. attendere");
-
             string backupName = $"backup.fromsync.{DateTime.UtcNow:yyyyMMddhhmmss}.bak";
             try
             {
                 await ManageDataEventAsync("iProdSync.SvcDoBackup", "INF", "SYNC ha richiesto l'avvio del backup", new Dictionary<string, string>());
-
                 var hc = GetHttpClient(gate.home);
                 resp = await SvcCall(hc, gate.svcDoBackup + backupName);
-
                 if (resp.status != "OK")
                 {
                     mainForm.log($"321. SvcDoBackup(). Errore di invio richiesta al servizio di backup di iProd. Response: '{resp.response}'");
                     MsgBoxToUser();
-
                     return false;
                 }
-
                 string runningTime = ElapsedTimeToString(DateTime.Now.Subtract(dstart));
                 m = $"Backup {backupName} completato in {runningTime}";
                 mainForm.log(m);
                 await ManageDataEventAsync("iProdSync.SvcDoBackup", "INF", m, new Dictionary<string, string>());
-
             }
             catch (Exception ex)
             {
                 m = $"322. SvcDoBackup(). Rilevata eccezione durante l'invio di una richiesta al servizio di backup di iProd. Eccezione: '{ex.Message}', StackTrace: '{ex.StackTrace}', Stato richiesta: '{resp.status}', Response: '{resp.response}'";
                 mainForm.log(m);
                 MsgBoxToUser();
-
                 await ManageDataEventAsync("iProdSync.SvcDoBackup", "ERR", m, new Dictionary<string, string>());
                 return false;
             }
-
-
             return true;
         }
 
@@ -1339,7 +1190,6 @@ namespace iProdWHSE
         {
             var gate = Program.UrlGate;
             var resp = new httpResponse();
-
             mainForm.log("Verifico se l'ultimo backup del tenant è scaduto e va rifatto prima di avviare il sync.. attendere");
 
             try
@@ -1348,20 +1198,14 @@ namespace iProdWHSE
 
                 var hc = GetHttpClient(gate.home);
                 resp = await SvcCall(hc, gate.svcGetBackups);
-
                 if (resp.status != "OK") throw new Exception(resp.response);
-
                 List<Posts> backups = JsonConvert.DeserializeObject<List<Posts>>(resp.response);
                 if (backups is null) return true;
                 if (backups.Count == 0) return true;
-
                 var last = backups.OrderBy(x => x.Creationdate).ToList().Last();  // prende il post con la data piu alta.
-
                 mainForm.log($"Ultimo backup eseguito il {last.Creationdate}: {last.Textvalue}");
-
                 var fd = new TimeSpan();  // fault diff
                 fd = DateTime.UtcNow.Subtract(last.Creationdate);
-
                 if (!gate.isValidBackupTime(fd))
                 {
                     mainForm.log($"Il backup va rifatto. L'ultimo era stato fatto il {last.Creationdate} e da adesso sono passate {string.Format("{0:%h} ore {0:%m} minuti, {0:%s} secondi", fd)}, mentre la validità massima di un backup è di {string.Format("{0:%h} ore {0:%m} minuti, {0:%s} secondi", gate.svcBackupValidityTime)}");
@@ -1372,8 +1216,6 @@ namespace iProdWHSE
             {
                 throw ex;
             }
-
-
             return false;
         }
 
@@ -1389,22 +1231,17 @@ namespace iProdWHSE
 
             try
             {
-                //    if (!await SvcUtcValid()) return true;  // <--- questa l'ho gia fatta prima nella richiesta SvcIsServerBusy
-
                 var hc = GetHttpClient(gate.home);
                 resp = await SvcCall(hc, gate.svcSetSyncOp + operation);
-
                 if (resp.status != "OK")
                 {
                     mainForm.log("321. Errore di invio richiesta a servizio iProd " + resp.response);
                     MsgBoxToUser();
                     return false;
                 }
-
             }
             catch (Exception ex)
             {
-
                 string m = $"320. SvcSetOperation: Rilevata Eccezione " + ex.Message + "|" + ex.StackTrace;
                 if (resp.status == "OK")
                     resp.response = m;
@@ -1413,11 +1250,8 @@ namespace iProdWHSE
 
                 mainForm.log(resp.response);
                 MsgBoxToUser();
-
                 return false;
             }
-
-
             return true;
         }
 
@@ -1433,7 +1267,6 @@ namespace iProdWHSE
         {
 
             var hr = new httpResponse();
-
             try
             {
                 if (IsNull(url))
@@ -1443,10 +1276,7 @@ namespace iProdWHSE
                     return hr;
                 }
 
-
-
                 var tokens = Program.UrlGate.SvcGetTokens();
-
                 if (IsNull(tokens.Item1) || IsNull(tokens.Item2))
                 {
                     hr.status = "ERR";
@@ -1487,22 +1317,16 @@ namespace iProdWHSE
                     }
                 }
 
-
                 hr = new httpResponse { status = "OK", response = resp, statusCode = responseContent.StatusCode, content = responseContent };
                 return hr;
             }
             catch (Exception ex)
             {
-
                 hr.status = "ERR";
                 hr.response = "359. SvcCall in errore:una Eccezione ha interrotto l'esecuzione della funzione. Messaggio: " + ex.Message;
                 return hr;
             }
-
         }
-
-
-
 
         /// <summary>
         /// Funzione condivisa da tutte le funzioni sul servizio http dedicato ai backups di iProd. call in POST
@@ -1512,9 +1336,7 @@ namespace iProdWHSE
         /// <returns></returns>
         public static async Task<httpResponse> SvcCall(HttpClient httpClient, string url, HttpContent requestContent)
         {
-
             var hr = new httpResponse();
-
             try
             {
                 if (IsNull(url))
@@ -1524,12 +1346,8 @@ namespace iProdWHSE
                     return hr;
                 }
 
-                //    mainForm.Log(".. esecuzione httpPost SvcCall(). url: " + url);
-
-
                 HttpResponseMessage responseContent = await httpClient.PostAsync(url, requestContent);
                 string resp = await responseContent.Content.ReadAsStringAsync();
-
                 string m = "";
                 if (responseContent.StatusCode != isOk)
                 {
@@ -1557,21 +1375,16 @@ namespace iProdWHSE
                         return hr;
                     }
                 }
-
-                //   mainForm.Log("httpPost SvcCall result: OK");
                 hr = new httpResponse { status = "OK", response = resp, statusCode = responseContent.StatusCode, content = responseContent };
                 return hr;
             }
             catch (Exception ex)
             {
-
                 hr.status = "ERR";
                 hr.response = "359. SvcCall in errore:una Eccezione ha interrotto l'esecuzione della funzione. Messaggio: " + ex.Message;
                 return hr;
             }
-
         }
-
 
 #endregion
 
@@ -1590,7 +1403,6 @@ namespace iProdWHSE
                 mainForm.log($"Errore in FileDelete: {ex.Message}");
                 return false;
             }
-
             return true;
         }
 
@@ -1601,21 +1413,15 @@ namespace iProdWHSE
         /// <returns></returns>
         public static List<FileSystemInfo> DirSearchExt(string sDir)
         {
-
             List<FileSystemInfo> ret = new List<FileSystemInfo>();
-
-
 
             try
             {
                 FileSystemInfo dExt = new DirectoryInfo(sDir);
-
                 if (!Directory.Exists(sDir)) throw new Exception("Directory " + sDir + " not found.");
-
                 foreach (string f in Directory.GetFiles(sDir))
                 {
                     FileSystemInfo FileExt = new FileInfo(f);
-
                     ret.Add(FileExt);
                 }
 
@@ -1628,7 +1434,6 @@ namespace iProdWHSE
             {
                 throw excpt;
             }
-
         }
 
         /// <summary>
@@ -1642,7 +1447,6 @@ namespace iProdWHSE
             try
             {
                 if (!File.Exists(srcFile)) return false;
-
                 File.Copy(srcFile, destFile, true);
                 FileDelete(srcFile);
                 return true;
@@ -1683,16 +1487,12 @@ namespace iProdWHSE
 
             if (!ok) return "*ERR*";
             return f2;
-
-
         }
 
 
         public static string cutString(string v, int xLeft, int xRight)
         {
-
             string ret = v;
-
             int mx = xLeft + xRight + 3;
             int xLen = v.Length;
             if (xLen > mx)
@@ -1700,9 +1500,7 @@ namespace iProdWHSE
                 string Sx = v.Substring(0, xLeft);
                 string Dx = v.Substring(xLen - xRight, xRight);
                 ret = Sx + "..." + Dx;
-
             }
-
             return ret;
         }
 
@@ -1714,8 +1512,6 @@ namespace iProdWHSE
                     FileCopy(f1, f2, true);
                 else
                     FileMove(f1, f2);
-
-                // File.Copy(f1, f2, true);
                 return true;
             }
             catch { return false; }
@@ -1746,11 +1542,9 @@ namespace iProdWHSE
         /// <returns></returns>
         public static bool WasAcceptedTerms()
         {
-
             string f = "libzstdip.dll";
             if (File.Exists(f)) TermsAccepted = true;
             return TermsAccepted;
-
         }
 
         public static string Log(string m)
@@ -1761,16 +1555,11 @@ namespace iProdWHSE
             return m;
         }
 
-      
-
-
-
 
 #endregion
 
 
 #region da iProd
-
 
         private static CultureInfo _culture;
         public static CultureInfo culture
@@ -1807,7 +1596,6 @@ namespace iProdWHSE
                 }
                 AppendToFile(fn, head);
 
-
                 foreach (var r in obj)
                 {
                     var lsr = ipGetPropertyNames(r);
@@ -1839,15 +1627,11 @@ namespace iProdWHSE
             var lst = new List<FieldDescriptor>();
             try
             {
-
                 var pi_List = obj.GetType().GetProperties();
-
                 var objtype = obj.GetType();
-
                 foreach (System.Reflection.PropertyInfo pi in pi_List)
                 {
                     var v = pi.GetValue(obj);
-
                     var fl = new FieldDescriptor(
                         pi.Name,
                         pi.PropertyType.Name,
@@ -1855,7 +1639,6 @@ namespace iProdWHSE
                         );
                     fl.ObjName = objtype.Name;
                     lst.Add(fl);
-
                 }
             }
             catch (Exception)
@@ -1877,12 +1660,10 @@ namespace iProdWHSE
         public static int RandomInt(int from = int.MinValue, int soglia = int.MaxValue)
         {
             var random = new Random();
-
             // uncheck disabilita il controllo overflow sulle operazioni numeriche
             unchecked
             {
                 var n = from + random.Next(soglia);
-                // Console.WriteLine($"RandomInt: {n}");
                 return n;
             }
 
@@ -1904,7 +1685,6 @@ namespace iProdWHSE
             {
                 for (int i = from - 1; i >= 0; i--)
                 {
-
                     foreach (var s in strs)
                     {
                         int lc = s.Length;
@@ -1913,9 +1693,7 @@ namespace iProdWHSE
                             if (st.Substring(i, lc) == s)
                                 return i;
                         }
-
                     }
-
                 }
             }
             else
@@ -1930,7 +1708,6 @@ namespace iProdWHSE
                             if (st.Substring(i, lc) == s)
                                 return i;
                         }
-
                     }
                 }
             }
@@ -1953,9 +1730,6 @@ namespace iProdWHSE
             }
             return t;
         }
-
-
-
 
 
 
@@ -1990,8 +1764,6 @@ namespace iProdWHSE
         }
 
 
-
-
         public static void storeIamRunning(bool silent = true, bool forza = false)
         {
             // me= AGENT
@@ -2003,9 +1775,7 @@ namespace iProdWHSE
             string controller = "controller;";
             var items = new List<string>();
             int cnt = 0;
-         
             bool isC = false;
-
 
             try
             {
@@ -2033,13 +1803,9 @@ namespace iProdWHSE
                             isC = true;
                             // ci rimette quello che c'era perche non è roba nostra
                             controller += ar[1];
-
                         }
-                      
-
                     }
                 }
-
 
 
                 // aggiorna il file condiviso con la nuova data per noi e abbiamo verificato il controller
@@ -2054,15 +1820,11 @@ namespace iProdWHSE
                 }
 
                 WriteToEventLog(mainForm, $"MONITOR  XiAgent.exe scrive: Sono in esecuzione");
-
-
             }
             catch (Exception ex)
             {
                 WriteToEventLog(mainForm, "Errore in storeIamRunnin: " + ex.Message);
             }
-
-
         }
 
 
@@ -2100,10 +1862,8 @@ namespace iProdWHSE
             }
         }
 
-
         public static void SaveMemoryStream(MemoryStream ms, string FileName)
         {
-
             using (FileStream file = new FileStream(FileName, FileMode.Create, System.IO.FileAccess.Write))
             {
                 byte[] bytes = new byte[ms.Length];
@@ -2111,7 +1871,6 @@ namespace iProdWHSE
                 file.Write(bytes, 0, bytes.Length);
                 ms.Close();
                 ms.Dispose();
-
             }
         }
 
@@ -2121,7 +1880,6 @@ namespace iProdWHSE
         {
             // me= AGENT
             // lui= CONTROLLER
-
 
             string luiNome = "XAgentController.exe";
             string meNome = "XipeAgent.exe";
@@ -2138,7 +1896,6 @@ namespace iProdWHSE
             bool isC = false;
             DateTime dNew;
           
-
             try
             {
                 if (File.Exists(SharedFile))
@@ -2156,33 +1913,25 @@ namespace iProdWHSE
                 {
                     if (!string.IsNullOrEmpty(e))
                     {
-
                         cnt++;
                         var ar = e.Split(';');
-
                         // ci assicuriamo che il controller sia su, perche i due si controllano a vicenda
                         if (ar[0] == "controller")
                         {
                             isC = true;
-
                             if (!DateTime.TryParse(ar[1], out dNew))
                                 err = 1;
                             else
                             {
                                 ControlledLastActivity = dNew;
-
                                 if ((DateTime.Now - dNew).TotalMinutes > MaxDelayInMinutes)
                                     err = 2;  // Ecceduto il tempo limite che il controller non logga piu, sicuro è spento o bloccato in errore
-                               
                             }
                             // ci rimette quello che c'era perche non è roba nostra
                             controller += ar[1];
                         }
-                       
                     }
                 }
-
-
 
                 // aggiorna il file condiviso con la nuova data per noi e abbiamo verificato il controller
                 if (isC)
@@ -2204,7 +1953,6 @@ namespace iProdWHSE
             }
 
 
-
             string te = ElapsedTimeToString(DateTime.Now, ControlledLastActivity, false, 1, "past");
 
             if (err == 0)
@@ -2215,23 +1963,17 @@ namespace iProdWHSE
                     MessageBox.Show(textLog);
 
                 WriteToEventLog(mainForm, textLog);
-
                 return 0;
             }
 
             string sub = $"MONITOR  ALERT da {meNome}, ha rilevato anomalie a carico del Controller {luiNome}";
             string body = "";
-
-          
             string lui2 = "il controller";
             string lui3 = "del controller";
-
             string me1 = "L'agent";
             string me2 = "l'agent";
             string me3 = "dell'agent";
-
             string valo = controller;
-
 
             if (err == 1)
             {
@@ -2248,7 +1990,6 @@ namespace iProdWHSE
                 WriteToEventLog(mainForm, $"Err01: { me1} ha rilevato una data non valida scritta {lui3} {luiNome}. ");
                 WriteToEventLog(mainForm, "(formato o valore) e non è possibile verificarne l'inattività.");
                 WriteToEventLog(mainForm, $"E' richiesto un intervento manuale sul file  {SharedFile}  al fine di individuare le cause dell'anomalia.");
-
             }
 
             if (err == 2)
@@ -2262,7 +2003,6 @@ namespace iProdWHSE
                 t2.Add("Esso deve contenere max due linee, una scritta dall'agent e una dal controller");
                 t2.Add($"Attraverso questo file si controllano a vicenda, verificare che non ci siano anomalie nel file e ripristinare i due servizi");
                 t2.Add(" ");
-
 
                 // costruzione body
                 bool ff = true;
@@ -2278,7 +2018,6 @@ namespace iProdWHSE
 
                     WriteToEventLog(mainForm, ee);
                 }
-
             }
 
             if (err == 3)
@@ -2287,13 +2026,10 @@ namespace iProdWHSE
                 body += $"{Eccezione} il {DateTime.Now}";
                 body += LF + $"Dopo l'invio di questa segnalazione {me2} si è chiuso autonomamente, ";
                 body += $"Individuare le cause dell'errore e ripristinare il servizio quanto prima {me3} ";
-
                 body += LF + $"Il file condiviso dall'agent e dal controller è {SharedFile}. ";
                 body += "Esso deve contenere max due linee, una scritta dall'agent e una dal controller";
                 body += LF + $"Attraverso questo file si controllano a vicenda, verificare che non ci siano anomalie nel file e ripristinare i due servizi";
-
             }
-
 
             body += LF + LF + "Questa email non sarà inviata piu di una volta al giorno e sarà comprensiva ";
             body += "di tutte le anomalie pregresse non ancora notificate.";
@@ -2301,9 +2037,7 @@ namespace iProdWHSE
             WriteToEventLog(mainForm, $" ");
             InviaSegnalazione(sub, body, silent);
             WriteToEventLog(mainForm, $" ");
-
             return err;
-
         }
 
 
@@ -2320,7 +2054,6 @@ namespace iProdWHSE
         {
             //  var p = new System.Diagnostics.Process();
             System.Diagnostics.Process.Start("notepad", fl);
-
         }
 
 
@@ -2351,31 +2084,22 @@ namespace iProdWHSE
                     File.Delete(ef);
                 }
                 // sostituisci il msg con l'invio mail
-
                 eMailFile = pathLog + "\\mail.txt";
-
                 if (alreadysent)
                     body += LF + LF + $"NELLA GIORNATA DI OGGI UNA MAIL E' GIA STATA INVIATA E QUESTO TESTO NON E' STATO RECAPITATO";
 
                 AppendToFile(eMailFile, subject, true, true);
                 AppendToFile(eMailFile, body);
-
                 lastMailSent = DateTime.Now;
-
-         
                 iProdCFG.SaveSettings(cfgFile);
-                
-
                 string txtFinal = $"Agent e Controller ALERT: Controlla il file {eMailFile}, contiene informazioni sull'anomalia riscontrata";
-
                 if (alreadysent)
-                    if (!silent) MessageBox.Show(txtFinal);
+                    if (!silent) 
+                        MessageBox.Show(txtFinal);
                     else
                     {
-
                         lastMailSent = DateTime.Now;
                         iProdCFG.SaveSettings(cfgFile);
-
                         if (!IsNull(eMailNotifiche))
                             SendMailOneAttachment(mainForm, "info@pieraccimeccanica.it", eMailNotifiche, subject, body);
 
@@ -2384,16 +2108,12 @@ namespace iProdWHSE
             }
             catch (Exception ex)
             {
-
                 WriteToEventLog(mainForm, "Errore in InvioSegnalazione (monitoraggio): " + ex.Message);
             }
-
         }
-
 
         public static void SendMailOneAttachment(Form1 parent, string da, string sendTo, string Subject, string messaggio, string AttachmentFile = "", string CC = "", string BCC = "", string SMTPServer = "")
         {
-
             var m = new MailMessage(da, sendTo);
             m.Subject = Subject;
             if (!string.IsNullOrEmpty(AttachmentFile))
@@ -2413,28 +2133,18 @@ namespace iProdWHSE
 
             if (CC != "") m.CC.Add(CC);
             if (BCC != "") m.Bcc.Add(BCC);
-
-
             var invio = new System.Net.Mail.SmtpClient(SMTPServer);
 
             try
             {
-
                 invio.Send(m);
                 WriteToEventLog(parent, "Invio email a " + sendTo);
-
-
             }
             catch (Exception Err)
             {
                 WriteToEventLog(parent, $"Errore invio email a {sendTo}: {Err.Message}");
             }
-
-
         }
-
-
-     
 
 #region Operazioni sui nomi di File
 
@@ -2448,9 +2158,7 @@ namespace iProdWHSE
             var timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss-fffff");
             var extOnly = FileGetExtOnly(file);
             var noExt = FileGetNoExt(file);
-            
             var newFile = $"{noExt}-{timestamp}.{extOnly}";
-
 
             return newFile;
         }
@@ -2479,7 +2187,6 @@ namespace iProdWHSE
             var nameOnly = FileGetNameOnly(file);
             var pathOnly = file.Substring(0, file.Length - (nameOnly.Length + 1));
             return pathOnly;
-
         }
 
         /// <summary>
@@ -2545,9 +2252,7 @@ namespace iProdWHSE
                 File.Copy(f, newFile);
 
             return true;
-
         }
-
 
 
         /// <summary>
@@ -2618,7 +2323,6 @@ namespace iProdWHSE
         {
             if (string.IsNullOrEmpty(LogFile)) throw new Exception("Tentativo di utilizzare il file di log senza nome");
 
-
             if (renamefirst || (init && File.Exists(LogFile)))
             {
                 // se esiste il log lo rinomino
@@ -2636,33 +2340,12 @@ namespace iProdWHSE
             int hh = DateTime.Now.Hour;
             int m = DateTime.Now.Minute;
             int s = DateTime.Now.Second;
-
             string str = "";
-            //if (lastlog > DateTime.MinValue)
-            //{
-            //    if (lastlog.Hour != hh)
-            //        str = hh.ToString("00") + ":";
-            //    else
-            //        str = "  :";
-
-            //    if (lastlog.Minute != m)
-            //        str += m.ToString("00") + ":";
-            //    else
-            //        str += " :";
-
-            //    if (lastlog.Second != s)
-            //        str += s.ToString("00");
-            //    else
-            //        str += " :";
-            //}
-            //else
             str = DateTime.Now.ToString("HH:mm:ss.ffff");
-
             lastlog = DateTime.Now;
             string v = $"{str} | {msg}";
             AppendToFile(LogFile, v, true, init);
             return v;
-
         }
 
 
@@ -2692,11 +2375,9 @@ namespace iProdWHSE
             Button okButton = new Button();
             okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             okButton.Name = "okButton";
-            //okButton.Size = new System.Drawing.Size(75, 23);
             okButton.Size = new System.Drawing.Size(75, 50);
             okButton.Text = "&OK";
             okButton.Location = new System.Drawing.Point(size.Width - 80 - 120, 60);
-            //okButton.Location = new System.Drawing.Point(size.Width - 80 - 80, 39);
             inputBox.Controls.Add(okButton);
 
             Button cancelButton = new Button();
@@ -2704,7 +2385,6 @@ namespace iProdWHSE
             cancelButton.Name = "cancelButton";
             cancelButton.Size = new System.Drawing.Size(90, 50);
             cancelButton.Text = "&Annulla";
-            //cancelButton.Location = new System.Drawing.Point(size.Width - 80, 39);
             cancelButton.Location = new System.Drawing.Point(size.Width - 120, 60);
             inputBox.Controls.Add(cancelButton);
 
@@ -2731,7 +2411,6 @@ namespace iProdWHSE
             if (what == "orders") cacheFile = "ordini.dat";
             if (what == "categories") cacheFile = "categories.dat";
 
-
             if (string.IsNullOrEmpty(cacheFile)) throw new Exception($"Richiesta cache di tipo sconosciuto: {cacheFile}");
 
             return utility.pathCache + "\\" + cacheFile;
@@ -2744,10 +2423,9 @@ namespace iProdWHSE
 
             if (!File.Exists(FileName)) return default(T);
 
-            // Progetto = new List<ProjectFile>();
             FileStream stream = new FileStream(FileName, FileMode.Open);
             BinaryFormatter formatter = new BinaryFormatter();
-            var data = (T)formatter.Deserialize(stream); // as typeof(obj);
+            var data = (T)formatter.Deserialize(stream);  
             stream.Dispose();
             stream = null;
             return data;
@@ -2767,13 +2445,11 @@ namespace iProdWHSE
                     stream.Close();
                     formatter = null;
                 }
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
         private static SemaphoreSlim semaphore = new SemaphoreSlim(1);
@@ -2814,7 +2490,6 @@ namespace iProdWHSE
 
             if (!File.Exists(FileName)) return default(T);
 
-            //throw new Exception("Tentativo di salvataggio in cac")
             T ddi;
             await semaphore.WaitAsync();
             try
@@ -2845,88 +2520,6 @@ namespace iProdWHSE
         }
         
 #endregion
-
-        // non è utilizzato
-        public static class html
-        {
-
-            // get nome del tag, from è la posizione del carattere < che apre il tag
-            public static string getTag(string str, int from = 0)
-            {
-                int i = from + 1;
-                var s = ScrollTo(str, i, ">");
-                if (s < from) return "";
-                var t = str.Substring(i, str.Length - i);
-
-                return "";
-            }
-
-            public static string cleanConst(string str, int from = 0, int len = 0)
-            {
-                if (len == 0) len = str.Length - from;
-                if (len <= 0) return "";
-
-                int i1 = 0;
-                int i2 = 0;
-
-                for (int i = from; i < i + len; i++)
-                {
-                    string ap = str.Substring(i, 1);
-                    if (ap == "\"")
-                    {
-                        if (i1 == 0)
-                        {
-                            i1 = i;
-                            i2 = 0;
-                        }
-                        else
-                        {
-                            i2 = i - i1;
-                        }
-
-
-                    }
-                }
-
-
-                return "";
-            }
-
-
-            public static int ClosingIndex(string str, string tag, int from = 0)
-            {
-                int c = from;
-                int cs = c;
-           
-                string ct = ""; // chiusura tag
-
-                if (tag == "input")
-                    ct = "/>";
-                else
-                    ct = "</" + tag + ">";
-
-                do
-                {
-                    c = ScrollTo(str, c, "/");
-                    if (c > 0)
-                    {
-                        string c0 = str.Substring(c - 1, 1);
-                        string c2 = str.Substring(c + 1, 1);
-                        //if (c0 == "<")
-
-                        //    else if (c2 == ">")
-
-
-
-
-                    }
-                } while (c >= 0);
-
-                return 1;
-            }
-
-        }
-
 
 
 #endregion
@@ -2984,7 +2577,6 @@ namespace iProdWHSE
                     return m;
                 }
 
-
                 if (manuale)
                 {
                     Elapsed = ElapsedTime();
@@ -3002,7 +2594,6 @@ namespace iProdWHSE
                 ErrFile = $"{pathLog}\\{entity}ERRORS{DateTime.Now:MMddhhmm}.txt";
                 AppendToFile(ErrFile, $" Log Errori {entity} processo avviato {DateTime.Now:F}");
                 AppendToFile(ErrFile, $" ");
-
             }
 
             public void LogErr(string msg)
@@ -3025,9 +2616,7 @@ namespace iProdWHSE
                 Skipped = 0;
                 Completed = false;
                 Step = "";
-
                 dStart = DateTime.Now;
-
             }
 
             public bool isNotEmpty() => Added > 0 || Updated > 0;
@@ -3047,9 +2636,7 @@ namespace iProdWHSE
                 Updated += b.Updated;
                 Witherror += b.Witherror;
                 Skipped += b.Skipped;
-
                 return this;
-
             }
 
 
@@ -3109,19 +2696,13 @@ namespace iProdWHSE
                 var st = "Tutte le sequenze di dati sono stati migrati senza interruzioni";
                 if (!ART.Completed) intr.Add("Elaborazione articoli non completata");
 
-
                 if (intr.Count > 0)
                 {
                     st = "Non tutte le attività sono andate a buon fine. Segue il dettaglio dei processi interrotti:";
                     st += LF + string.Join(LF, intr.ToArray());
-
                 }
-
-
                 return st;
-
             }
-
         }
 
         public static Contatore cntGlobale = new Contatore("Totali");
@@ -3187,8 +2768,6 @@ namespace iProdWHSE
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             Version version = assembly.GetName().Version;
 
-            //  string myVer = $"{version.Major}.{version.Minor}.{version.Revision}";
-
             var descriptionAttribute = assembly
                                     .GetCustomAttributes(typeof(System.Reflection.AssemblyDescriptionAttribute), false)
                                     .OfType<System.Reflection.AssemblyDescriptionAttribute>()
@@ -3205,8 +2784,7 @@ namespace iProdWHSE
             var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(EndPointIPROD);
             var result = await httpClient.DeleteAsync(dataparameter);
-            //result.Wait();
-            return result; //.Result;
+            return result;  
         }
 
         public static bool VerboseMax { get; set; }
@@ -3221,8 +2799,6 @@ namespace iProdWHSE
 
         public static HttpResponseMessage httppostcall(string dataparameter, StringContent dataupdate)
         {
-
-
             using (var Client = new HttpClient())
             {
                 Client.Timeout = Timeout.InfiniteTimeSpan;
@@ -3230,13 +2806,6 @@ namespace iProdWHSE
                 var result = Client.PostAsync(dataparameter, dataupdate).Result;
                 return result;
             }
-
-
-            //var httpClient = new HttpClient();
-            //httpClient.Timeout = Timeout.InfiniteTimeSpan;
-            //httpClient.BaseAddress = new Uri(EndPointIPROD);
-            //var result = httpClient.PostAsync(dataparameter, dataupdate).Result;
-            //return result; 
         }
 
 
@@ -3266,12 +2835,8 @@ namespace iProdWHSE
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
-
-
         }
 
         private static bool IsFileLocked(FileInfo file)
@@ -3336,19 +2901,15 @@ namespace iProdWHSE
 
         public static string ElapsedTimeToString(DateTime recent, DateTime past, bool Formattato = false, int Details = 0, string direction = "neutral")
         {
-
             if (past > recent) // WriteToEventLog(mainForm, $"ATTENZIONE!!  Errore in ElapsedTimeToString(): Date Errate, la prima passata {recent} alla funzione non è piu recente della seconda {past}");
                 return ElapsedTimeToString(past - recent, Formattato, Details, "future");
             else
                 return ElapsedTimeToString(recent - past, Formattato, Details, direction);
-
         }
 
 
         public static string ElapsedTimeToString(TimeSpan t, bool Formattato = false, int Details = 0, string direction = "neutral")
         {
-
-
 
             /*   NUOVA VERSIONE v3.1.0121
 
@@ -3429,35 +2990,23 @@ namespace iProdWHSE
                 //double th = 3600; // 1 ora
                 //double tM = 60;   // 1 min
 
-
-
                 // si calcola tutto dalla scomposizione dei secondi
-
-
-
-
 
                 _a = "";
                 _m = "";
                 _g = "";
                 _mn = "";
                 _s = "";
-               
                 _h = "";
-                
               
                 aa = 0;
                 mm = 0;
-
-
-
 
                 double ta = 0;
                 double tm = 0;
                 double td = 0;
                 double th = 0;
                 double tM = 0;
-              
 
                 double ca = 0;
                 double cm = 0;
@@ -3465,11 +3014,9 @@ namespace iProdWHSE
                 double ch = 0;
                 double cM = 0;
                
-
                 double se = t.TotalSeconds;
 
                 // individuazione soglia
-
                  
                 tM = 60;
                 th = tM * 60;
@@ -3536,8 +3083,6 @@ namespace iProdWHSE
                 // per debug
                 var sRet = $"y{aa}.m{mm}.d{dd}.h{h}.M{m}.s{s}";
                 var sFormattato = $"{aa}/{mm}/{dd}/ {h}:{m}:{s}";
-
-
           
                 bool mmS = false;
                 bool ddS = false;
@@ -3549,7 +3094,6 @@ namespace iProdWHSE
 
                 if (aa > 0)
                 {
-                
                     string anni = "anni";
                     if (aa == 1) anni = "anno";
 
@@ -3557,7 +3101,6 @@ namespace iProdWHSE
                         _a = $"{aa} {anni}";
                     else
                     {
-
                         if (mm > 6)
                         {
                             if (mm < 11)
@@ -3577,7 +3120,6 @@ namespace iProdWHSE
                     // con questa distanza di tempo non ci interessa il dettaglio
                     return _a;
                 }
-
 
                 // calcolo mesi trascorsi (qui il dettaglio ci puo stare, andremo avanti)
 
@@ -3608,7 +3150,6 @@ namespace iProdWHSE
                     if (dd == 1) giorni = "giorno";
 
                     _g = $"{dd} {giorni}";
-
                 }
 
                 if (h > 0)
@@ -3710,16 +3251,10 @@ namespace iProdWHSE
 
         public static bool WriteToEventLog(Form1 forma, string Entry, bool ShowUI = true)
         {
-
             try
             {
-
-                //EventLog objEventLog = new EventLog();
-
          
                 IOLog(Entry);
-
-                //    if (!mainForm.isLogDetailed()) return true;
 
                 if (forma != null && ShowUI)
                 { 
@@ -3732,18 +3267,8 @@ namespace iProdWHSE
             catch (Exception Ex)
             {
                 UT.IOLog($"Errore in WriteEventToLog Eccezione '{Ex.Message}'");
-
-                //if (forma != null)
-                //{
-                //    IOLog(Entry);
-
-                //    forma.txtlogger.Text += Entry + Environment.NewLine;
-                //    forma.txtlogger.SelectionStart = forma.txtlogger.Text.Length;
-                //    forma.txtlogger.ScrollToCaret();
-                //}
                 return false;
             }
-
         }
 
         public static bool isNumeric(string str) 
@@ -3759,7 +3284,6 @@ namespace iProdWHSE
 
     public class UrlGateway
     {
-
         public string Key { get; set; }
         public string idTenant { get; set; }
         public string idUser { get; set; }
@@ -3805,8 +3329,6 @@ namespace iProdWHSE
                     api = "https://alpha.iprod.it/api/";
                     WebUser = "info@iprod.it";
                     WebPassword = "1234";
-                    dbConnectionString = "mongodb+srv://iprod_alpha:gecFfIZukhgSDfrg@iprod-alpha.ebktt.mongodb.net";
-                    storageConn = "DefaultEndpointsProtocol=https;AccountName=iproddevelopment;AccountKey=wOadQhvMOfS8vssHCrUSBdHpztaxNpyxiqAIL8yeZUve5aoZTg4p5pPmudS8vaCsGolo38/ZAhhKlflvaW/rHw==;EndpointSuffix=core.windows.net";
                     TenantName = "iProd s.r.l. ALPHA";
                     idUser = "5dad8954b42e7703f47add22";
                     idTenant = "5dad8954b42e7703f47add21";
@@ -3822,8 +3344,6 @@ namespace iProdWHSE
                     api = "https://iprod-test.azurewebsites.net/api/";
                     WebUser = "info@iprod.it";
                     WebPassword = "1234";
-                    dbConnectionString = "mongodb+srv://iprodoutsourcing:Uw5IvFe5qg6F2hMj@developercluster-llkcs.azure.mongodb.net/admin?authSource=admin&replicaSet=developercluster-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true";
-                    storageConn = "DefaultEndpointsProtocol=https;AccountName=iproddevelopment;AccountKey=wOadQhvMOfS8vssHCrUSBdHpztaxNpyxiqAIL8yeZUve5aoZTg4p5pPmudS8vaCsGolo38/ZAhhKlflvaW/rHw==;EndpointSuffix=core.windows.net";
                     TenantName = "iProd s.r.l.";
                     idUser = "5dad8954b42e7703f47add22";
                     idTenant = "5dad8954b42e7703f47add21";
@@ -3836,7 +3356,6 @@ namespace iProdWHSE
                     lostpassword = "https://localhost:44375/Login/ForgotPassword";
                     iProdData = "https://iproddeveloperapi.azurewebsites.net/iProdData/";
                     api = "https://localhost:44375/api/";
-                    storageConn = "DefaultEndpointsProtocol=https;AccountName=iproddevelopment;AccountKey=wOadQhvMOfS8vssHCrUSBdHpztaxNpyxiqAIL8yeZUve5aoZTg4p5pPmudS8vaCsGolo38/ZAhhKlflvaW/rHw==;EndpointSuffix=core.windows.net";
                     break;
                 default:
                     WebUser = "info@test.iprod.it";
@@ -3849,9 +3368,6 @@ namespace iProdWHSE
                     lostpassword = "https://app.iprod.it/Login/ForgotPassword";
                     iProdData = "https://iprodapiv3.azurewebsites.net/iProdData/";
                     api = "https://app.iprod.it/api/";
-                    //             api = "https://localhost:5001/api/";
-                    dbConnectionString = "mongodb+srv://iproddbuser:ojT7As66QgivDd2T@iprodcluster-prva6.azure.mongodb.net/test?retryWrites=true";
-                    storageConn = "DefaultEndpointsProtocol=https;AccountName=iprodv1;AccountKey=HToDsHkHk0wSOFKylK1kw2eBR01dW0zcl8D/k6LsGJmpMuzbfbzKl/608WQS5VEzZx66pOwjkypAxDwRRGX+hQ==;EndpointSuffix=core.windows.net";
                     break;
             }
 
@@ -3863,7 +3379,6 @@ namespace iProdWHSE
             svcGetSystemTimestamp = "/Service/GetSystemTimestamp";
             svcDoBackup = "/Service/TenantBackup?backupname=";
             svcSendEventLog = "/Service/SendEventLog";
-
 
             // init parametri di tolleranza tempi e scadenza backups
             // tolleranza differenza date server/client, default 15 secondi
@@ -3883,7 +3398,6 @@ namespace iProdWHSE
 
             svcTimeFaultTolerance = new TimeSpan(h, m, s);
 
-
             // validita backup
             // tempo in cui considerare un backp valido e quindi non va rifatto (default 24 ore)
             ft = ConfigurationManager.AppSettings["BackupValidityTime"];
@@ -3901,7 +3415,6 @@ namespace iProdWHSE
             s = Convert.ToInt32(ar[2]);
 
             svcBackupValidityTime = new TimeSpan(h, m, s);
-
 
         }
 
@@ -3923,7 +3436,6 @@ namespace iProdWHSE
         public bool isValidUtcTolerance(TimeSpan calculated)
         {
             return svcTimeFaultTolerance <= calculated;
-
         }
 
         /// <summary>
@@ -3937,40 +3449,26 @@ namespace iProdWHSE
         }
     }
 
-    public class AzureOptions
-    {
-        public AzureOptions()
-        {
-            StorageConnectionString = "DefaultEndpointsProtocol=https;AccountName=iproddevelopment;AccountKey=wOadQhvMOfS8vssHCrUSBdHpztaxNpyxiqAIL8yeZUve5aoZTg4p5pPmudS8vaCsGolo38/ZAhhKlflvaW/rHw==;EndpointSuffix=core.windows.net";
-            //  "DefaultEndpointsProtocol=https;AccountName=iprodv1;AccountKey=HToDsHkHk0wSOFKylK1kw2eBR01dW0zcl8D/k6LsGJmpMuzbfbzKl/608WQS5VEzZx66pOwjkypAxDwRRGX+hQ==;EndpointSuffix=core.windows.net";
-        }
-
-        public string StorageConnectionString { get; set; }
-    }
-
+     
 
     public class WordyFormatProvider : IFormatProvider, ICustomFormatter
     {
 
         /* 
-         *
-        //    esempio:
+        
+          esempio:
 
             double n = -123.45;
             IFormatProvider fp = new WordyFormatProvider();
             Console.WriteLine (string.Format (fp, "{0:C} in words is {0:W}", n));
 
-            // -$123.45 in words is minus one two three point four five
+            $123.45 in words is minus one two three point four five
 
-        int i = "0123456789-.".IndexOf(digit);
+            int i = "0123456789-.".IndexOf(digit);
 
         */
 
-
-
-
-        static readonly string[] _numberWords =
-        "zero one two three four five six seven eight nine minus point".Split();
+        static readonly string[] _numberWords = "zero one two three four five six seven eight nine minus point".Split();
         IFormatProvider _parent; // Allows consumers to chain format providers
         public WordyFormatProvider() : this(CultureInfo.CurrentCulture) { }
         public WordyFormatProvider(IFormatProvider parent)
@@ -3978,11 +3476,14 @@ namespace iProdWHSE
             _parent = parent;
         }
 
+
         public object GetFormat(Type formatType)
         {
             if (formatType == typeof(ICustomFormatter)) return this;
             return null;
         }
+
+
         public string Format(string format, object arg, IFormatProvider prov)
         {
             // If it's not our format string, defer to the parent provider:
@@ -4122,8 +3623,6 @@ namespace iProdWHSE
 
             extrn = new List<List<FieldDescriptor>>();
             Enabled = true;
-
-
         }
     }
 
@@ -4142,9 +3641,7 @@ namespace iProdWHSE
         public HttpStatusCode statusCode
         {
             get; set;
-
         }
-
     }
 
 
@@ -4155,7 +3652,6 @@ namespace iProdWHSE
         public string Tipo { get; set; }
         public DateTime Data { get; set; }
         public string Dex { get; set; }
-
 
         public RowHist(string st)
         {
@@ -4172,7 +3668,5 @@ namespace iProdWHSE
             }
             catch { }
         }
-
     }
-
 }
